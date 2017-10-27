@@ -11,5 +11,10 @@
             "email": "info@freshbits.in"
         }
     ],
+    "autoload": {
+        "psr-4": {
+            "Freshbitsweb\\Laratables\\": "src/"
+        }
+    },
     "minimum-stability": "dev"
 }
