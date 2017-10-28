@@ -4,23 +4,67 @@ namespace Freshbitsweb\Laratables;
 
 class Laratables
 {
-    public $foo;
+    protected $query;
 
-    public function __construct()
+    protected $columnManager;
+
+    protected $filterAgent;
+
+    /**
+     * Declare objects
+     *
+     * @param \Illuminate\Database\Eloquent\Model The model to work on
+     * @return void
+     */
+    public function __construct($model)
     {
-        $this->foo = 'Bar';
+        $this->query = new Query($model);
+        $this->columnManager = new ColumnManager($model);
+        $this->filterAgent = new FilterAgent($model);
     }
 
     /**
-     * undocumented function summary
+     * Accepts datatables ajax request and returns table data
      *
-     * Undocumented function long description
-     *
-     * @param type var Description
-     * @return return type
+     * @return array Table data
      */
-    public function getFoo()
+    public static function recordsOf($model)
     {
-        return $this->foo;
+        $instance = new static($model);
+
+        $this->applyFilters();
+
+        return $instance->tableData();
+    }
+
+    /**
+     * Applies conditions to the query if search is performed in datatables
+     *
+     * @return void
+     */
+    protected function applyFiltersTo()
+    {
+        $searchValue = request('search')['value'];
+
+        if ($searchValue) {
+            $this->query = $instance->applyFiltersTo($this->query, $this->columnManager->getSearchColumns(), $searchValue);
+        }
+    }
+
+    /**
+     * Prepares and returns data for the datatables
+     *
+     * @return array
+     */
+    protected function tableData()
+    {
+        return [
+            'draw' => $this->model,
+            'recordsTotal' => 10,
+            'recordsFiltered' => 10,
+            'data' => [
+                'a' => 'b'
+            ],
+        ];
     }
 }

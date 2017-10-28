@@ -14,7 +14,10 @@
     "autoload": {
         "psr-4": {
             "Freshbitsweb\\Laratables\\": "src/"
-        }
+        },
+        "files": [
+            "src/helpers.php"
+        ]
     },
     "minimum-stability": "dev"
 }
