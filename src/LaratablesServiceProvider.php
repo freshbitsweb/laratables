@@ -2,6 +2,8 @@
 
 namespace Freshbitsweb\Laratables;
 
+use Illuminate\Support\ServiceProvider;
+
 class LaratablesServiceProvider extends ServiceProvider
 {
     /**
