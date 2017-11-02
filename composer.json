@@ -19,5 +19,12 @@
             "src/helpers.php"
         ]
     },
-    "minimum-stability": "dev"
+    "minimum-stability": "dev",
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Freshbitsweb\\Laratables\\LaratablesServiceProvider"
+            ]
+        }
+    },
 }

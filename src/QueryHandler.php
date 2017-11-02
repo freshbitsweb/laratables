@@ -2,7 +2,7 @@
 
 namespace Freshbitsweb\Laratables;
 
-class Query
+class QueryHandler
 {
     protected $query;
 
@@ -38,12 +38,44 @@ class Query
     }
 
     /**
-     * Sets the filtered count value after filters are applied
+     * Updates the filtered count value after filters are applied
      *
      * @return void
      */
-    protected function setFilteredCount()
+    protected function updateFilteredCount()
     {
         $this->filteredCount = $this->query->count();
+
+        return $this;
+    }
+
+    /**
+     * Returns the query object
+     *
+     * @return int
+     */
+    public function getQuery()
+    {
+        return $this->query;
+    }
+
+    /**
+     * Returns total records of the table
+     *
+     * @return int
+     */
+    public function getRecordsCount()
+    {
+        return $this->recordsCount;
+    }
+
+    /**
+     * Returns total records of the table
+     *
+     * @return int
+     */
+    public function getFilteredCount()
+    {
+        return $this->filteredCount;
     }
 }

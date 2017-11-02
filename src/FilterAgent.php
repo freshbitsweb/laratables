@@ -18,21 +18,19 @@ class FilterAgent
     }
 
     /**
-     * Applies where conditions to the query according to search value
+     * Applies where conditions to the query according to search value and updates the filter count
      *
      * @param \Freshbitsweb\Laratables\Query Query object
      * @param array Columns to be searched
-     * @return void
+     * @return \Freshbitsweb\Laratables\Query Query object
      */
-    protected function applyFiltersTo($query, $searchColumns, $searchValue)
+    public function applyFiltersTo($query, $searchColumns, $searchValue)
     {
-        $query = $query->where(function ($query) use ($searchColumns, $searchValue) {
+        return $query->where(function ($query) use ($searchColumns, $searchValue) {
             foreach ($searchColumns as $columnName) {
                 $query = $this->applyFilter($query, $columnName, $searchValue);
             }
-        });
-
-        $query->setFilteredCount();
+        })->updateFilteredCount();
     }
 
     /**
@@ -49,7 +47,7 @@ class FilterAgent
             return $this->model::$methodName($query, $searchValue);
         }
 
-        if ($this->isRelationColumn($column)) {
+        if (isRelationColumn($column)) {
             return $this->applyRelationFilter($query, $column, $searchValue);
         }
 
@@ -72,5 +70,27 @@ class FilterAgent
         }
 
         return false;
+    }
+
+    /**
+     * Applies filter condition for the relation column
+     *
+     * @param \Freshbitsweb\Laratables\Query Query object
+     * @param string Column name
+     * @param string Search string
+     * @return \Freshbitsweb\Laratables\Query Query object
+     */
+    protected function applyRelationFilter($query, $column, $searchValue)
+    {
+        if ($methodName = $this->hasCustomSearch(str_replace('.', '_', $column))) {
+            return $this->model::$methodName($query, $searchValue);
+        }
+
+        list($relationName, $relationColumnName) = getRelationDetails($column);
+        $searchValue = '%'.$searchValue.'%';
+
+        return $query->orWhereHas($relationName, function ($query) use ($relationColumnName, $searchValue) {
+            $query->where($relationColumnName, 'like', "$searchValue");
+        });
     }
 }

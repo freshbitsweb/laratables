@@ -10,7 +10,13 @@ class ColumnManager
 
     protected $primaryColumn;
 
+    protected $requestedColumns;
+
     protected $selectColumns;
+
+    protected $searchColumns;
+
+    protected $relationshipsManager;
 
     /**
      * Initialize properties
@@ -20,6 +26,7 @@ class ColumnManager
      */
     public function __construct($model)
     {
+        $this->relationshipsManager = new RelationshipsManager();
         $this->initializeProperties($model);
         $this->setColumnProperties();
     }
@@ -76,8 +83,8 @@ class ColumnManager
         }
 
         if (isRelationColumn($columnName)) {
-            $this->addRelation($columnName);
-            $this->addRelationSelectColumns($columnName);
+            $this->relationshipsManager->addRelation($columnName);
+            array_push($this->selectColumns, ...$this->relationshipsManager->getRelationSelectColumns($columnName));
 
             return;
         }
@@ -91,7 +98,7 @@ class ColumnManager
      * @param string Name of the column
      * @return boolean|string
      */
-    protected function isCustomColumn($columnName)
+    public function isCustomColumn($columnName)
     {
         $methodName = camel_case('datatables_custom_' . $columnName);
 
@@ -103,75 +110,42 @@ class ColumnManager
     }
 
     /**
-     * Adds the relation to be loaded with the query
-     *
-     * @param string Name of the column
-     * @return void
-     */
-    protected function addRelation($columnName)
-    {
-        list($relationName, $relationColumnName) = getRelationDetails($columnName);
-
-        $this->relations[$relationName] = $this->getRelationQuery($relationColumnName);
-    }
-
-    /**
-     * Returns a closure for fetching relation table data
-     *
-     * @param string Name of the relation table column
-     * @return \Closure
-     */
-    protected function getRelationQuery($relationColumnName)
-    {
-        return function($query) use ($relationColumnName) {
-            $query->select($query->getOtherKey(), $relationColumnName);
-        };
-    }
-
-    /**
-     * Appends the (foreign key) column(s) to be selected for the relation table
-     *
-     * @param string Name of the column
-     * @return void
-     */
-    protected function addRelationSelectColumns($columnName)
-    {
-        $relationName = $this->getRelationName($columnName);
-
-        // https://stackoverflow.com/a/25472778/3113599
-        $relationType = (new \ReflectionClass($this->modelObject->$relationName()))->getShortName();
-
-        switch ($relationType) {
-            case 'BelongsTo':
-                $this->selectColumns[] = $this->modelObject->$relationName()->getForeignKey();
-                break;
-            case 'MorphTo':
-                $this->selectColumns[] = $this->modelObject->$relationName()->getForeignKey();
-                $this->selectColumns[] = $this->modelObject->$relationName()->getMorphType();
-                break;
-        }
-    }
-
-    /**
-     * Returns the name of the relation for the column specified
-     *
-     * @param string Name of the column
-     * @return string
-     */
-    protected function getRelationName($columnName)
-    {
-        list($relationName, $relationColumnName) = getRelationDetails($columnName);
-
-        return $relationName;
-    }
-
-    /**
      * Returns the list of searchable columns
      *
      * @return array
      */
-    protected function getSearchColumns()
+    public function getSearchColumns()
     {
         return $this->searchColumns;
+    }
+
+    /**
+     * Returns the relations to be loaded by query
+     *
+     * @return array
+     */
+    public function getRelations()
+    {
+        return $this->relationshipsManager->getRelations();
+    }
+
+    /**
+     * Returns the list of request columns
+     *
+     * @return array
+     */
+    public function getRequestedColumnNames()
+    {
+        return $this->requestedColumns->pluck('name');
+    }
+
+    /**
+     * Returns the list of select columns
+     *
+     * @return array
+     */
+    public function getSelectColumns()
+    {
+        return $this->selectColumns;
     }
 }

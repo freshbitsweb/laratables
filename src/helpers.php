@@ -28,3 +28,18 @@ if (! function_exists('getRelationDetails')) {
         return [$relationName, $relationColumnName];
     }
 }
+
+if (! function_exists('getRelationName')) {
+    /**
+     * Returns the name of the relation for the column specified
+     *
+     * @param string Name of the column
+     * @return string
+     */
+    function getRelationName($columnName)
+    {
+        list($relationName, $relationColumnName) = getRelationDetails($columnName);
+
+        return $relationName;
+    }
+}
