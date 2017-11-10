@@ -15,6 +15,6 @@ class LaratablesServiceProvider extends ServiceProvider
     {
         $this->publishes([
             __DIR__.'/config/laratables.php' => config_path('laratables.php')
-        ], 'config');
+        ], 'laratables_config');
     }
 }

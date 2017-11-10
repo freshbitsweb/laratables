@@ -32,21 +32,22 @@ class QueryHandler
     {
         $this->query = new $model;
 
-        if (method_exists($model, 'datatablesQueryConditions')) {
-            $this->query = $model::datatablesQueryConditions($this->query);
+        if (method_exists($model, 'laratablesQueryConditions')) {
+            $this->query = $model::laratablesQueryConditions($this->query);
         }
     }
 
     /**
-     * Updates the filtered count value after filters are applied
+     * Applies where conditions to the query according to search value
      *
-     * @return void
+     * @param array Columns to be searched
+     * @param string Search value
+     * @return \Illuminate\Database\Query\Builder Query object
      */
-    protected function updateFilteredCount()
+    public function applyFilters($searchColumns, $searchValue)
     {
+        $this->query = FilterAgent::applyFiltersTo($this->query, $searchColumns, $searchValue);
         $this->filteredCount = $this->query->count();
-
-        return $this;
     }
 
     /**

@@ -85,7 +85,7 @@ class RecordsTransformer
      */
     protected function customisesColumnValue($columnName)
     {
-        $methodName = camel_case('datatables_' . $columnName);
+        $methodName = camel_case('laratables_' . $columnName);
 
         if (method_exists($this->model, $methodName)) {
             return $methodName;

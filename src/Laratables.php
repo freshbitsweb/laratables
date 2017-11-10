@@ -2,13 +2,15 @@
 
 namespace Freshbitsweb\Laratables;
 
+use Freshbitsweb\Laratables\Exceptions\IncorrectOrderColumn;
+
 class Laratables
 {
     protected $queryHandler;
 
     protected $columnManager;
 
-    protected $filterAgent;
+    protected $recordsTransformer;
 
     /**
      * Declare objects
@@ -20,7 +22,6 @@ class Laratables
     {
         $this->queryHandler = new QueryHandler($model);
         $this->columnManager = new ColumnManager($model);
-        $this->filterAgent = new FilterAgent($model);
         $this->recordsTransformer = new RecordsTransformer($model, $this->columnManager);
     }
 
@@ -52,7 +53,7 @@ class Laratables
         $searchValue = request('search')['value'];
 
         if ($searchValue) {
-            $this->queryHandler = $this->filterAgent->applyFiltersTo($this->queryHandler, $this->columnManager->getSearchColumns(), $searchValue);
+            $this->queryHandler->applyFilters($this->columnManager->getSearchColumns(), $searchValue);
         }
     }
 
@@ -68,22 +69,9 @@ class Laratables
         return $query->with($this->columnManager->getRelations())
             ->offset(request('start'))
             ->limit(request('length'))
-            ->orderBy(...$this->getOrderBy())
+            ->orderBy(...$this->columnManager->getOrderBy())
             ->get($this->columnManager->getSelectColumns())
         ;
-    }
-
-    /**
-     * Returns the values for order by clause of the query
-     *
-     * @return array
-     */
-    protected function getOrderBy()
-    {
-        $requestedColumnNames = $this->columnManager->getRequestedColumnNames()->toArray();
-        $order = request('order');
-
-        return [$requestedColumnNames[$order[0]['column']], $order[0]['dir']];
     }
 
     /**

@@ -26,9 +26,10 @@ class ColumnManager
      */
     public function __construct($model)
     {
-        $this->relationshipsManager = new RelationshipsManager();
         $this->initializeProperties($model);
+        $this->relationshipsManager = new RelationshipsManager($model, $this->modelObject);
         $this->setColumnProperties();
+        $this->addAdditionalColumns();
     }
 
     /**
@@ -59,6 +60,7 @@ class ColumnManager
             $this->selectColumns[] = $this->primaryColumn;
         }
 
+
         $this->requestedColumns->each(function ($column) {
             $this->setColumnPropertiesFor($column);
         });
@@ -74,17 +76,20 @@ class ColumnManager
     {
         $columnName = $column['name'];
 
+        if ($column['searchable'] == 'true') {
+            $this->searchColumns[] = $columnName;
+        }
+
         if ($this->isCustomColumn($columnName)) {
             return;
         }
 
-        if ($column['searchable']) {
-            $this->searchColumns[] = $columnName;
-        }
-
         if (isRelationColumn($columnName)) {
             $this->relationshipsManager->addRelation($columnName);
-            array_push($this->selectColumns, ...$this->relationshipsManager->getRelationSelectColumns($columnName));
+
+            if ($foreignKeys = $this->relationshipsManager->getRelationSelectColumns($columnName)) {
+                array_push($this->selectColumns, ...$foreignKeys);
+            }
 
             return;
         }
@@ -100,7 +105,75 @@ class ColumnManager
      */
     public function isCustomColumn($columnName)
     {
-        $methodName = camel_case('datatables_custom_' . $columnName);
+        $methodName = camel_case('laratables_custom_' . $columnName);
+
+        if (method_exists($this->model, $methodName)) {
+            return $methodName;
+        }
+
+        return false;
+    }
+
+    /**
+     * Adds additional select and search columns to the array from the model, if any
+     *
+     * @return void
+     */
+    protected function addAdditionalColumns()
+    {
+        if (method_exists($this->model, 'laratablesAdditionalColumns')) {
+            array_push($this->selectColumns, ...$this->model::laratablesAdditionalColumns());
+            array_push($this->searchColumns, ...$this->model::laratablesAdditionalColumns());
+        }
+    }
+
+    /**
+     * Returns the values for order by clause of the query
+     *
+     * @throws IncorrectOrderColumn
+     *
+     * @return array
+     */
+    public function getOrderBy()
+    {
+        $orderColumn = $this->getOrderColumn();
+        $selectedColumnNames = $this->getSelectColumns();
+        if (! in_array($orderColumn, $selectedColumnNames)) {
+            throw IncorrectOrderColumn::name($orderColumn);
+        }
+
+        $order = request('order');
+        return [$orderColumn, $order[0]['dir']];
+    }
+
+    /**
+     * Returns the name of the column for ordering
+     *
+     * @return string
+     */
+    public function getOrderColumn()
+    {
+        $requestedColumnNames = $this->getRequestedColumnNames()->toArray();
+
+        $order = request('order');
+        $orderColumn = $requestedColumnNames[$order[0]['column']];
+
+        if ($methodName = $this->hasCustomOrdering($orderColumn)) {
+            $orderColumn = $this->model::$methodName($orderColumn);
+        }
+
+        return $orderColumn;
+    }
+
+    /**
+     * Decides weather there is a custom ordering for the specified column name. Returns method name if yes
+     *
+     * @param string Name of the column
+     * @return boolean|string
+     */
+    public function hasCustomOrdering($orderColumn)
+    {
+        $methodName = camel_case('laratables_order_' . $orderColumn);
 
         if (method_exists($this->model, $methodName)) {
             return $methodName;

@@ -4,7 +4,23 @@ namespace Freshbitsweb\Laratables;
 
 class RelationshipsManager
 {
+    protected $model;
+
+    protected $modelObject;
+
     protected $relations = [];
+
+    /**
+     * Initialize properties
+     *
+     * @param \Illuminate\Database\Eloquent\Model The model object to work on
+     * @return void
+     */
+    public function __construct($model, $modelObject)
+    {
+        $this->model = $model;
+        $this->modelObject = $modelObject;
+    }
 
     /**
      * Adds the relation to be loaded with the query
@@ -12,23 +28,33 @@ class RelationshipsManager
      * @param string Name of the column
      * @return void
      */
-    protected function addRelation($columnName)
+    public function addRelation($columnName)
     {
-        list($relationName, $relationColumnName) = getRelationDetails($columnName);
+        $relationName = getRelationName($columnName);
 
-        $this->relations[$relationName] = $this->getRelationQuery($relationColumnName);
+        if (! array_key_exists($relationName, $this->relations)) {
+            $this->relations[$relationName] = $this->getRelationQuery($columnName);
+        }
     }
 
     /**
      * Returns a closure for fetching relation table data
      *
-     * @param string Name of the relation table column
+     * @param string Name of the column
      * @return \Closure
      */
-    protected function getRelationQuery($relationColumnName)
+    protected function getRelationQuery($columnName)
     {
-        return function($query) use ($relationColumnName) {
-            $query->select($query->getOwnerKey(), $relationColumnName);
+        list($relationName, $requestedColumn) = getRelationDetails($columnName);
+
+        $methodName = camel_case('laratables_' . $relationName . 'relation_query');
+        if (method_exists($this->model, $methodName)) {
+            return $this->model::$methodName();
+        }
+
+        $foreignKeyColumn = $this->modelObject->$relationName()->getForeignKeyName();
+        return function($query) use ($foreignKeyColumn, $requestedColumn) {
+            $query->select($foreignKeyColumn, $requestedColumn);
         };
     }
 
@@ -36,24 +62,34 @@ class RelationshipsManager
      * Returns the (foreign key) column(s) to be selected for the relation table
      *
      * @param string Name of the column
-     * @param \Illuminate\Database\Eloquent\Model The object of the model
      * @return array
      */
-    protected function getRelationSelectColumns($columnName, $modelObject)
+    public function getRelationSelectColumns($columnName)
     {
         $relationName = getRelationName($columnName);
 
+        return $this->decideRelationColumns($relationName);
+    }
+
+    /**
+     * Decides the columns to be used based on the relationship
+     *
+     * @param string Name of the relation
+     * @return array
+     */
+    protected function decideRelationColumns($relationName)
+    {
         // https://stackoverflow.com/a/25472778/3113599
-        $relationType = (new \ReflectionClass($modelObject->$relationName()))->getShortName();
+        $relationType = (new \ReflectionClass($this->modelObject->$relationName()))->getShortName();
         $selectColumns = [];
 
         switch ($relationType) {
             case 'BelongsTo':
-                $selectColumns[] = $modelObject->$relationName()->getForeignKey();
+                $selectColumns[] = $this->modelObject->$relationName()->getForeignKey();
                 break;
             case 'MorphTo':
-                $selectColumns[] = $modelObject->$relationName()->getForeignKey();
-                $selectColumns[] = $modelObject->$relationName()->getMorphType();
+                $selectColumns[] = $this->modelObject->$relationName()->getForeignKey();
+                $selectColumns[] = $this->modelObject->$relationName()->getMorphType();
                 break;
         }
 
