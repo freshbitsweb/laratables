@@ -42,10 +42,13 @@ class RecordsTransformer
     protected function transformRecord($record)
     {
         $columnNames = $this->columnManager->getRequestedColumnNames();
-
-        return $columnNames->map(function ($item) use ($record) {
+        $columnNames->transform(function ($item) use ($record) {
             return $this->getColumnValue($item, $record);
-        })->toArray();
+        });
+
+        $datatableParameters = $this->getDatatableParameters($record);
+
+        return array_merge($datatableParameters, $columnNames->toArray());
     }
 
     /**
@@ -127,5 +130,24 @@ class RecordsTransformer
         return is_object($columnValue) &&
             $columnValue instanceof \Illuminate\Support\Carbon
         ;
+    }
+
+    /**
+     * Returns the datatable specific parameters for the record
+     *
+     * @param \Illuminate\Database\Eloquent\Model Eloquent object
+     * @return array
+     */
+    public function getDatatableParameters($record)
+    {
+        $datatableParameters = [
+            'DT_RowId' => config('laratables.row_id_prefix', 'laratables_row_') . $record->{$record->getKeyName()}
+        ];
+
+        if (method_exists($this->model, 'laratablesRowClass')) {
+            $datatableParameters['DT_RowClass'] = $record->laratablesRowClass();
+        }
+
+        return $datatableParameters;
     }
 }

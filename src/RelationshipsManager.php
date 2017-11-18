@@ -52,7 +52,7 @@ class RelationshipsManager
             return $this->model::$methodName();
         }
 
-        $foreignKeyColumn = $this->modelObject->$relationName()->getForeignKeyName();
+        $foreignKeyColumn = $this->modelObject->$relationName()->getOwnerKey();
         return function($query) use ($foreignKeyColumn, $requestedColumn) {
             $query->select($foreignKeyColumn, $requestedColumn);
         };
