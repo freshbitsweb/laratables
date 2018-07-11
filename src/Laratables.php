@@ -2,8 +2,6 @@
 
 namespace Freshbitsweb\Laratables;
 
-use Freshbitsweb\Laratables\Exceptions\IncorrectOrderColumn;
-
 class Laratables
 {
     protected $queryHandler;

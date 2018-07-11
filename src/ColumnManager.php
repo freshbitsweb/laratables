@@ -2,6 +2,8 @@
 
 namespace Freshbitsweb\Laratables;
 
+use Freshbitsweb\Laratables\Exceptions\IncorrectOrderColumn;
+
 class ColumnManager
 {
     protected $model;
@@ -138,6 +140,7 @@ class ColumnManager
     {
         $orderColumn = $this->getOrderColumn();
         $selectedColumnNames = $this->getSelectColumns();
+
         if (! in_array($orderColumn, $selectedColumnNames)) {
             throw IncorrectOrderColumn::name($orderColumn);
         }
@@ -156,6 +159,7 @@ class ColumnManager
         $requestedColumnNames = $this->getRequestedColumnNames()->toArray();
 
         $order = request('order');
+
         $orderColumn = $requestedColumnNames[$order[0]['column']];
 
         if ($methodName = $this->hasCustomOrdering($orderColumn)) {
