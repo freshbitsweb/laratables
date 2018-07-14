@@ -82,7 +82,7 @@ class ColumnManager
             $this->searchColumns[] = $columnName;
         }
 
-        if ($this->isCustomColumn($columnName)) {
+        if ($this->isCustomColumn($columnName) && ! isRelationColumn($columnName)) {
             return;
         }
 
@@ -107,6 +107,7 @@ class ColumnManager
      */
     public function isCustomColumn($columnName)
     {
+        $columnName = str_replace('.', '_', $columnName);
         $methodName = camel_case('laratables_custom_' . $columnName);
 
         if (method_exists($this->model, $methodName)) {
