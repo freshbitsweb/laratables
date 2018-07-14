@@ -32,30 +32,19 @@ class RelationshipsManager
     {
         $relationName = getRelationName($columnName);
 
-        if (! array_key_exists($relationName, $this->relations)) {
-            $this->relations[$relationName] = $this->getRelationQuery($columnName);
+        if (
+            ! array_key_exists($relationName, $this->relations) &&
+            ! in_array($relationName, $this->relations)
+        ) {
+            $methodName = camel_case('laratables_' . $relationName . 'relation_query');
+            if (method_exists($this->model, $methodName)) {
+                $this->relations[$relationName] = $this->model::$methodName();
+
+                return;
+            }
+
+            $this->relations[] = $relationName;
         }
-    }
-
-    /**
-     * Returns a closure for fetching relation table data
-     *
-     * @param string Name of the column
-     * @return \Closure
-     */
-    protected function getRelationQuery($columnName)
-    {
-        list($relationName, $requestedColumn) = getRelationDetails($columnName);
-
-        $methodName = camel_case('laratables_' . $relationName . 'relation_query');
-        if (method_exists($this->model, $methodName)) {
-            return $this->model::$methodName();
-        }
-
-        $foreignKeyColumn = $this->modelObject->$relationName()->getOwnerKey();
-        return function($query) use ($foreignKeyColumn, $requestedColumn) {
-            $query->select($foreignKeyColumn, $requestedColumn);
-        };
     }
 
     /**
