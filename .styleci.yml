@@ -1,0 +1,7 @@
+preset: laravel
+
+risky: false
+
+disabled:
+  - no_multiline_whitespace_before_semicolons
+  - no_singleline_whitespace_before_semicolons
