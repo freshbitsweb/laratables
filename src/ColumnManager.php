@@ -21,9 +21,10 @@ class ColumnManager
     protected $relationshipsManager;
 
     /**
-     * Initialize properties
+     * Initialize properties.
      *
      * @param \Illuminate\Database\Eloquent\Model The model to work on
+     *
      * @return void
      */
     public function __construct($model)
@@ -35,15 +36,16 @@ class ColumnManager
     }
 
     /**
-     * Initializes class properties
+     * Initializes class properties.
      *
      * @param \Illuminate\Database\Eloquent\Model The model to work on
+     *
      * @return void
      */
     protected function initializeProperties($model)
     {
         $this->model = $model;
-        $this->modelObject = new $model;
+        $this->modelObject = new $model();
         $this->primaryColumn = $this->modelObject->getKeyName();
 
         $requestData = collect(request()->all());
@@ -51,17 +53,16 @@ class ColumnManager
     }
 
     /**
-     * Set column properties from the request data
+     * Set column properties from the request data.
      *
      * @return void
      */
     protected function setColumnProperties()
     {
         // First of all, add the id (or any other primary key), if not available
-        if (! $this->requestedColumns->contains('name', $this->primaryColumn)) {
+        if (!$this->requestedColumns->contains('name', $this->primaryColumn)) {
             $this->selectColumns[] = $this->primaryColumn;
         }
-
 
         $this->requestedColumns->each(function ($column) {
             $this->setColumnPropertiesFor($column);
@@ -69,9 +70,10 @@ class ColumnManager
     }
 
     /**
-     * Set column properties from the specified column data
+     * Set column properties from the specified column data.
      *
      * @param array column details
+     *
      * @return void
      */
     protected function setColumnPropertiesFor($column)
@@ -82,7 +84,7 @@ class ColumnManager
             $this->searchColumns[] = $columnName;
         }
 
-        if ($this->isCustomColumn($columnName) && ! isRelationColumn($columnName)) {
+        if ($this->isCustomColumn($columnName) && !isRelationColumn($columnName)) {
             return;
         }
 
@@ -100,15 +102,16 @@ class ColumnManager
     }
 
     /**
-     * Decides wether specified column name is custom column. Returns method name if yes
+     * Decides wether specified column name is custom column. Returns method name if yes.
      *
      * @param string Name of the column
-     * @return boolean|string
+     *
+     * @return bool|string
      */
     public function isCustomColumn($columnName)
     {
         $columnName = str_replace('.', '_', $columnName);
-        $methodName = camel_case('laratables_custom_' . $columnName);
+        $methodName = camel_case('laratables_custom_'.$columnName);
 
         if (method_exists($this->model, $methodName)) {
             return $methodName;
@@ -118,7 +121,7 @@ class ColumnManager
     }
 
     /**
-     * Adds additional select and search columns to the array from the model, if any
+     * Adds additional select and search columns to the array from the model, if any.
      *
      * @return void
      */
@@ -131,7 +134,7 @@ class ColumnManager
     }
 
     /**
-     * Returns the values for order by clause of the query
+     * Returns the values for order by clause of the query.
      *
      * @throws IncorrectOrderColumn
      *
@@ -142,16 +145,17 @@ class ColumnManager
         $orderColumn = $this->getOrderColumn();
         $selectedColumnNames = $this->getSelectColumns();
 
-        if (! in_array($orderColumn, $selectedColumnNames)) {
+        if (!in_array($orderColumn, $selectedColumnNames)) {
             throw IncorrectOrderColumn::name($orderColumn);
         }
 
         $order = request('order');
+
         return [$orderColumn, $order[0]['dir']];
     }
 
     /**
-     * Returns the name of the column for ordering
+     * Returns the name of the column for ordering.
      *
      * @return string
      */
@@ -171,14 +175,15 @@ class ColumnManager
     }
 
     /**
-     * Decides weather there is a custom ordering for the specified column name. Returns method name if yes
+     * Decides weather there is a custom ordering for the specified column name. Returns method name if yes.
      *
      * @param string Name of the column
-     * @return boolean|string
+     *
+     * @return bool|string
      */
     public function hasCustomOrdering($orderColumn)
     {
-        $methodName = camel_case('laratables_order_' . $orderColumn);
+        $methodName = camel_case('laratables_order_'.$orderColumn);
 
         if (method_exists($this->model, $methodName)) {
             return $methodName;
@@ -188,7 +193,7 @@ class ColumnManager
     }
 
     /**
-     * Returns the list of searchable columns
+     * Returns the list of searchable columns.
      *
      * @return array
      */
@@ -198,7 +203,7 @@ class ColumnManager
     }
 
     /**
-     * Returns the relations to be loaded by query
+     * Returns the relations to be loaded by query.
      *
      * @return array
      */
@@ -208,7 +213,7 @@ class ColumnManager
     }
 
     /**
-     * Returns the list of request columns
+     * Returns the list of request columns.
      *
      * @return array
      */
@@ -218,7 +223,7 @@ class ColumnManager
     }
 
     /**
-     * Returns the list of select columns
+     * Returns the list of select columns.
      *
      * @return array
      */

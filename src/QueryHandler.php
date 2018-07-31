@@ -11,9 +11,10 @@ class QueryHandler
     protected $filteredCount;
 
     /**
-     * Initialize properties
+     * Initialize properties.
      *
      * @param \Illuminate\Database\Eloquent\Model The model to work on
+     *
      * @return void
      */
     public function __construct($model)
@@ -23,14 +24,15 @@ class QueryHandler
     }
 
     /**
-     * Initialises Query object
+     * Initialises Query object.
      *
      * @param \Illuminate\Database\Eloquent\Model The model to work on
+     *
      * @return void
      */
     protected function setQuery($model)
     {
-        $this->query = new $model;
+        $this->query = new $model();
 
         if (method_exists($model, 'laratablesQueryConditions')) {
             $this->query = $model::laratablesQueryConditions($this->query);
@@ -38,10 +40,11 @@ class QueryHandler
     }
 
     /**
-     * Applies where conditions to the query according to search value
+     * Applies where conditions to the query according to search value.
      *
      * @param array Columns to be searched
      * @param string Search value
+     *
      * @return \Illuminate\Database\Query\Builder Query object
      */
     public function applyFilters($searchColumns, $searchValue)
@@ -51,7 +54,7 @@ class QueryHandler
     }
 
     /**
-     * Returns the query object
+     * Returns the query object.
      *
      * @return int
      */
@@ -61,7 +64,7 @@ class QueryHandler
     }
 
     /**
-     * Returns total records of the table
+     * Returns total records of the table.
      *
      * @return int
      */
@@ -71,7 +74,7 @@ class QueryHandler
     }
 
     /**
-     * Returns total records of the table
+     * Returns total records of the table.
      *
      * @return int
      */

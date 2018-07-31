@@ -11,9 +11,10 @@ class Laratables
     protected $recordsTransformer;
 
     /**
-     * Declare objects
+     * Declare objects.
      *
      * @param \Illuminate\Database\Eloquent\Model The model to work on
+     *
      * @return void
      */
     protected function __construct($model)
@@ -24,7 +25,7 @@ class Laratables
     }
 
     /**
-     * Accepts datatables ajax request and returns table data
+     * Accepts datatables ajax request and returns table data.
      *
      * @return array Table data
      */
@@ -42,7 +43,7 @@ class Laratables
     }
 
     /**
-     * Applies conditions to the query if search is performed in datatables
+     * Applies conditions to the query if search is performed in datatables.
      *
      * @return void
      */
@@ -56,7 +57,7 @@ class Laratables
     }
 
     /**
-     * Fetches records from the database
+     * Fetches records from the database.
      *
      * @return \Illuminate\Support\Collection Records of the table
      */
@@ -68,23 +69,23 @@ class Laratables
             ->offset(request('start'))
             ->limit(request('length'))
             ->orderBy(...$this->columnManager->getOrderBy())
-            ->get($this->columnManager->getSelectColumns())
-        ;
+            ->get($this->columnManager->getSelectColumns());
     }
 
     /**
-     * Prepares and returns data for the datatables
+     * Prepares and returns data for the datatables.
      *
      * @param \Illuminate\Support\Collection Records of the table
+     *
      * @return array
      */
     protected function tableData($records)
     {
         return [
-            'draw' => request('draw') + 1,
-            'recordsTotal' => $this->queryHandler->getRecordsCount(),
+            'draw'            => request('draw') + 1,
+            'recordsTotal'    => $this->queryHandler->getRecordsCount(),
             'recordsFiltered' => $this->queryHandler->getFilteredCount(),
-            'data' => $records->toArray(),
+            'data'            => $records->toArray(),
         ];
     }
 }

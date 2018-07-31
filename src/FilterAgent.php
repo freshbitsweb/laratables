@@ -7,11 +7,12 @@ class FilterAgent
     private static $model;
 
     /**
-     * Applies where conditions to the query according to search value
+     * Applies where conditions to the query according to search value.
      *
      * @param \Illuminate\Database\Query\Builder Query object
      * @param array Columns to be searched
      * @param string Search value
+     *
      * @return \Illuminate\Database\Query\Builder Query object
      */
     public static function applyFiltersTo($query, $searchColumns, $searchValue)
@@ -28,11 +29,12 @@ class FilterAgent
     }
 
     /**
-     * Applies filter condition for the table column
+     * Applies filter condition for the table column.
      *
      * @param \Freshbitsweb\Laratables\QueryHandler Query object
      * @param string Column name
      * @param string Search string
+     *
      * @return \Freshbitsweb\Laratables\QueryHandler Query object
      */
     protected static function applyFilter($query, $column, $searchValue)
@@ -46,18 +48,20 @@ class FilterAgent
         }
 
         $searchValue = '%'.$searchValue.'%';
+
         return $query->orWhere($column, 'like', "$searchValue");
     }
 
     /**
-     * Decides whether column has custom search method defined in the model and returns method name if yes
+     * Decides whether column has custom search method defined in the model and returns method name if yes.
      *
      * @param string Name of the column
-     * @return boolean|string
+     *
+     * @return bool|string
      */
     protected static function hasCustomSearch($columnName)
     {
-        $methodName = camel_case('laratables_search_' . $columnName);
+        $methodName = camel_case('laratables_search_'.$columnName);
 
         if (method_exists(self::$model, $methodName)) {
             return $methodName;
@@ -67,11 +71,12 @@ class FilterAgent
     }
 
     /**
-     * Applies filter condition for the relation column
+     * Applies filter condition for the relation column.
      *
      * @param \Freshbitsweb\Laratables\QueryHandler Query object
      * @param string Column name
      * @param string Search string
+     *
      * @return \Freshbitsweb\Laratables\QueryHandler Query object
      */
     protected static function applyRelationFilter($query, $column, $searchValue)
