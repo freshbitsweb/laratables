@@ -14,13 +14,14 @@ class LaratablesException extends Exception
     }
 
     /**
-     * Returns the error to datatables when exception is thrown
+     * Returns the error to datatables when exception is thrown.
      *
      * @return array
      */
-    public function render() {
+    public function render()
+    {
         return [
-            'error' => $this->error
+            'error' => $this->error,
         ];
     }
 }
