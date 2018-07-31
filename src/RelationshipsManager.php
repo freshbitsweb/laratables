@@ -11,9 +11,10 @@ class RelationshipsManager
     protected $relations = [];
 
     /**
-     * Initialize properties
+     * Initialize properties.
      *
      * @param \Illuminate\Database\Eloquent\Model The model object to work on
+     *
      * @return void
      */
     public function __construct($model, $modelObject)
@@ -23,9 +24,10 @@ class RelationshipsManager
     }
 
     /**
-     * Adds the relation to be loaded with the query
+     * Adds the relation to be loaded with the query.
      *
      * @param string Name of the column
+     *
      * @return void
      */
     public function addRelation($columnName)
@@ -33,10 +35,10 @@ class RelationshipsManager
         $relationName = getRelationName($columnName);
 
         if (
-            ! array_key_exists($relationName, $this->relations) &&
-            ! in_array($relationName, $this->relations)
+            !array_key_exists($relationName, $this->relations) &&
+            !in_array($relationName, $this->relations)
         ) {
-            $methodName = camel_case('laratables_' . $relationName . 'relation_query');
+            $methodName = camel_case('laratables_'.$relationName.'relation_query');
             if (method_exists($this->model, $methodName)) {
                 $this->relations[$relationName] = $this->model::$methodName();
 
@@ -48,9 +50,10 @@ class RelationshipsManager
     }
 
     /**
-     * Returns the (foreign key) column(s) to be selected for the relation table
+     * Returns the (foreign key) column(s) to be selected for the relation table.
      *
      * @param string Name of the column
+     *
      * @return array
      */
     public function getRelationSelectColumns($columnName)
@@ -61,9 +64,10 @@ class RelationshipsManager
     }
 
     /**
-     * Decides the columns to be used based on the relationship
+     * Decides the columns to be used based on the relationship.
      *
      * @param string Name of the relation
+     *
      * @return array
      */
     protected function decideRelationColumns($relationName)
@@ -86,7 +90,7 @@ class RelationshipsManager
     }
 
     /**
-     * Returns the relations to be loaded by query
+     * Returns the relations to be loaded by query.
      *
      * @return array
      */
