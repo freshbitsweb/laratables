@@ -1,6 +1,6 @@
 <?php
 
-if (!function_exists('isRelationColumn')) {
+if (! function_exists('isRelationColumn')) {
     /**
      * Decides whether specified column is a relation table column.
      *
@@ -14,7 +14,7 @@ if (!function_exists('isRelationColumn')) {
     }
 }
 
-if (!function_exists('getRelationDetails')) {
+if (! function_exists('getRelationDetails')) {
     /**
      * Returns the relation details from the specified column.
      *
@@ -31,7 +31,7 @@ if (!function_exists('getRelationDetails')) {
     }
 }
 
-if (!function_exists('getRelationName')) {
+if (! function_exists('getRelationName')) {
     /**
      * Returns the name of the relation for the column specified.
      *
