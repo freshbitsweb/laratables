@@ -155,6 +155,10 @@ class RecordsTransformer
             $datatableParameters['DT_RowClass'] = $record->laratablesRowClass();
         }
 
+        if (method_exists($this->model, 'laratablesRowData')) {
+            $datatableParameters['DT_RowData'] = $record->laratablesRowData();
+        }
+
         return $datatableParameters;
     }
 }
