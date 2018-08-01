@@ -35,8 +35,8 @@ class RelationshipsManager
         $relationName = getRelationName($columnName);
 
         if (
-            !array_key_exists($relationName, $this->relations) &&
-            !in_array($relationName, $this->relations)
+            ! array_key_exists($relationName, $this->relations) &&
+            ! in_array($relationName, $this->relations)
         ) {
             $methodName = camel_case('laratables_'.$relationName.'relation_query');
             if (method_exists($this->model, $methodName)) {

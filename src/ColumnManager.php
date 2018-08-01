@@ -60,7 +60,7 @@ class ColumnManager
     protected function setColumnProperties()
     {
         // First of all, add the id (or any other primary key), if not available
-        if (!$this->requestedColumns->contains('name', $this->primaryColumn)) {
+        if (! $this->requestedColumns->contains('name', $this->primaryColumn)) {
             $this->selectColumns[] = $this->primaryColumn;
         }
 
@@ -84,7 +84,7 @@ class ColumnManager
             $this->searchColumns[] = $columnName;
         }
 
-        if ($this->isCustomColumn($columnName) && !isRelationColumn($columnName)) {
+        if ($this->isCustomColumn($columnName) && ! isRelationColumn($columnName)) {
             return;
         }
 
@@ -145,7 +145,7 @@ class ColumnManager
         $orderColumn = $this->getOrderColumn();
         $selectedColumnNames = $this->getSelectColumns();
 
-        if (!in_array($orderColumn, $selectedColumnNames)) {
+        if (! in_array($orderColumn, $selectedColumnNames)) {
             throw IncorrectOrderColumn::name($orderColumn);
         }
 
