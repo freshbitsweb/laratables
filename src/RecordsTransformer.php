@@ -93,7 +93,7 @@ class RecordsTransformer
      */
     protected function customisesColumnValue($columnName)
     {
-        $methodName = camel_case('laratables_'.$columnName);
+        $methodName = camel_case('laratables_' . $columnName);
 
         if (method_exists($this->model, $methodName)) {
             return $methodName;
@@ -135,7 +135,8 @@ class RecordsTransformer
     protected function isCarbonInstance($columnValue)
     {
         return is_object($columnValue) &&
-            $columnValue instanceof \Illuminate\Support\Carbon;
+            $columnValue instanceof \Illuminate\Support\Carbon
+        ;
     }
 
     /**
@@ -148,7 +149,7 @@ class RecordsTransformer
     public function getDatatableParameters($record)
     {
         $datatableParameters = [
-            'DT_RowId' => config('laratables.row_id_prefix', 'laratables_row_').$record->{$record->getKeyName()},
+            'DT_RowId' => config('laratables.row_id_prefix') . $record->{$record->getKeyName()},
         ];
 
         if (method_exists($this->model, 'laratablesRowClass')) {

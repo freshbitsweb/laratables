@@ -47,7 +47,7 @@ class FilterAgent
             return self::applyRelationFilter($query, $column, $searchValue);
         }
 
-        $searchValue = '%'.$searchValue.'%';
+        $searchValue = '%' . $searchValue . '%';
 
         return $query->orWhere($column, 'like', "$searchValue");
     }
@@ -61,7 +61,7 @@ class FilterAgent
      */
     protected static function hasCustomSearch($columnName)
     {
-        $methodName = camel_case('laratables_search_'.$columnName);
+        $methodName = camel_case('laratables_search_' . $columnName);
 
         if (method_exists(self::$model, $methodName)) {
             return $methodName;
@@ -86,7 +86,7 @@ class FilterAgent
         }
 
         list($relationName, $relationColumnName) = getRelationDetails($column);
-        $searchValue = '%'.$searchValue.'%';
+        $searchValue = '%' . $searchValue . '%';
 
         return $query->orWhereHas($relationName, function ($query) use ($relationColumnName, $searchValue) {
             $query->where($relationColumnName, 'like', "$searchValue");

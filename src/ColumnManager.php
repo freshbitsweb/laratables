@@ -60,7 +60,7 @@ class ColumnManager
     protected function setColumnProperties()
     {
         // First of all, add the id (or any other primary key), if not available
-        if (!$this->requestedColumns->contains('name', $this->primaryColumn)) {
+        if (! $this->requestedColumns->contains('name', $this->primaryColumn)) {
             $this->selectColumns[] = $this->primaryColumn;
         }
 
@@ -84,7 +84,7 @@ class ColumnManager
             $this->searchColumns[] = $columnName;
         }
 
-        if ($this->isCustomColumn($columnName) && !isRelationColumn($columnName)) {
+        if ($this->isCustomColumn($columnName) && ! isRelationColumn($columnName)) {
             return;
         }
 
@@ -111,7 +111,7 @@ class ColumnManager
     public function isCustomColumn($columnName)
     {
         $columnName = str_replace('.', '_', $columnName);
-        $methodName = camel_case('laratables_custom_'.$columnName);
+        $methodName = camel_case('laratables_custom_' . $columnName);
 
         if (method_exists($this->model, $methodName)) {
             return $methodName;
@@ -145,7 +145,7 @@ class ColumnManager
         $orderColumn = $this->getOrderColumn();
         $selectedColumnNames = $this->getSelectColumns();
 
-        if (!in_array($orderColumn, $selectedColumnNames)) {
+        if (! in_array($orderColumn, $selectedColumnNames)) {
             throw IncorrectOrderColumn::name($orderColumn);
         }
 
@@ -183,7 +183,7 @@ class ColumnManager
      */
     public function hasCustomOrdering($orderColumn)
     {
-        $methodName = camel_case('laratables_order_'.$orderColumn);
+        $methodName = camel_case('laratables_order_' . $orderColumn);
 
         if (method_exists($this->model, $methodName)) {
             return $methodName;
