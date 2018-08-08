@@ -17,4 +17,17 @@ class LaratablesServiceProvider extends ServiceProvider
             __DIR__.'/config/laratables.php' => config_path('laratables.php'),
         ], 'laratables_config');
     }
+
+    /**
+     * Make config publishment optional by merging the config from the package.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        $this->mergeConfigFrom(
+            __DIR__ . '/config/laratables.php',
+            'laratables'
+        );
+    }
 }
