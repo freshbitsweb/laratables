@@ -114,7 +114,7 @@ class RecordsTransformer
     {
         list($relationName, $relationColumnName) = getRelationDetails($columnName);
 
-        if ($methodName = $this->customisesColumnValue($relationName.$relationColumnName)) {
+        if ($methodName = $this->customisesColumnValue($relationName . '_' . $relationColumnName)) {
             return $record->$methodName();
         }
 
