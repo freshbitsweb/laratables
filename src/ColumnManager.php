@@ -111,7 +111,7 @@ class ColumnManager
     public function isCustomColumn($columnName)
     {
         $columnName = str_replace('.', '_', $columnName);
-        $methodName = camel_case('laratables_custom_' . $columnName);
+        $methodName = camel_case('laratables_custom_'.$columnName);
 
         if (method_exists($this->model, $methodName)) {
             return $methodName;
@@ -183,7 +183,7 @@ class ColumnManager
      */
     public function hasCustomOrdering($orderColumn)
     {
-        $methodName = camel_case('laratables_order_' . $orderColumn);
+        $methodName = camel_case('laratables_order_'.$orderColumn);
 
         if (method_exists($this->model, $methodName)) {
             return $methodName;
