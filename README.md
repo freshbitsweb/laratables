@@ -30,7 +30,7 @@ This package helps with simple requirements of displaying data from eloquent mod
 The basic approach is that you can specify the Datatable configuration and columns on the client side just like you would without any major change and call a single method on the server side to handle ajax calls. The package will create necessary queries to fetch the data and make the search and ordering functionality work automatically. If needed, You can step-in and customize query/data/logic at various stages by adding methods in your Eloquent model.
 
 ### Client side
-```
+```js
 $('#users-table').DataTable({
     serverSide: true,
     ajax: "{{ route('admin.users.datatables') }}",
@@ -46,7 +46,7 @@ $('#users-table').DataTable({
 ```
 
 ### Server side
-```
+```php
 use App\User;
 use Freshbitsweb\Laratables\Laratables;
 ...
@@ -57,12 +57,12 @@ Check the Customization section below to see how you can customize query/data/lo
 
 ## Installation
 Install the package by running this command in your terminal/cmd:
-```
+```bash
 composer require freshbitsweb/laratables
 ```
 
 Optionally, you can import config file by running this command in your terminal/cmd:
-```
+```bash
 php artisan vendor:publish --tag=laratables_config
 ```
 
