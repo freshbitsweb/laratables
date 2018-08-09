@@ -14,6 +14,14 @@ A Laravel package to handle server side ajax of [Datatables](https://datatables.
 * [Installation](#installation)
 * [Customization](#customization)
     * [Custom columns](#custom-columns)
+    * [Relationship columns](#relationship-columns)
+    * [Customizing column values](#customizing-column-values)
+    * [Controlling the query](#controlling-the-query)
+    * [Searching](#searching)
+    * [Ordering (Sorting)](#ordering-sorting)
+    * [Selecting additional columns](#selecting-additional-columns)
+    * [Date format for Carbon instances](#date-format-for-carbon-instances)
+    * [Extra data- Datatables attributes](#extra-data--datatables-attributes)
 
 ## Introduction
 This package helps with simple requirements of displaying data from eloquent models into datatables with ajax support. Plus, using simple relationships and customizing column values.
