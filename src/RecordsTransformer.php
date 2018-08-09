@@ -93,7 +93,7 @@ class RecordsTransformer
      */
     protected function customisesColumnValue($columnName)
     {
-        $methodName = camel_case('laratables_' . $columnName);
+        $methodName = camel_case('laratables_'.$columnName);
 
         if (method_exists($this->model, $methodName)) {
             return $methodName;
@@ -114,7 +114,7 @@ class RecordsTransformer
     {
         list($relationName, $relationColumnName) = getRelationDetails($columnName);
 
-        if ($methodName = $this->customisesColumnValue($relationName . '_' . $relationColumnName)) {
+        if ($methodName = $this->customisesColumnValue($relationName.'_'.$relationColumnName)) {
             return $record->$methodName();
         }
 
@@ -149,7 +149,7 @@ class RecordsTransformer
     public function getDatatableParameters($record)
     {
         $datatableParameters = [
-            'DT_RowId' => config('laratables.row_id_prefix') . $record->{$record->getKeyName()},
+            'DT_RowId' => config('laratables.row_id_prefix').$record->{$record->getKeyName()},
         ];
 
         if (method_exists($this->model, 'laratablesRowClass')) {
