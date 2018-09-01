@@ -30,9 +30,15 @@ class RecordsTransformer
      */
     public function transformRecords($records)
     {
-        return $records->transform(function ($item) {
+        $records->transform(function ($item) {
             return $this->transformRecord($item);
         });
+
+        if (method_exists($this->model, 'laratablesModifyCollection')) {
+            return $this->model::laratablesModifyCollection($records);
+        }
+
+        return $records;
     }
 
     /**

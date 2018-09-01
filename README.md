@@ -21,6 +21,7 @@ A Laravel package to handle server side ajax of [Datatables](https://datatables.
     * [Ordering (Sorting)](#ordering-sorting)
     * [Selecting additional columns](#selecting-additional-columns)
     * [Date format for Carbon instances](#date-format-for-carbon-instances)
+    * [Modify fetched records](#modify-fetched-records)
     * [Extra data- Datatables attributes](#extra-data--datatables-attributes)
 
 ## Introduction
@@ -203,6 +204,26 @@ public static function laratablesAdditionalColumns()
 
 ### Date format for Carbon instances
 By default, Laravel treats *created_at* and *updated_at* as Carbon instances and you can also treat any other column of your table as a Carbon instance as well. This package has a config option `date_format` to specify the format in which the dates should be returned for Datatables. Default format is 'Y-m-d H:i:s'.
+
+### Modify fetched records
+Sometimes, we need to work with the records after they are already fetched. You can add `laratablesModifyCollection()` static method to your model to play with the collection and return the updated one.
+
+```php
+/**
+ * Set user full name on the collection.
+ *
+ * @param \Illuminate\Support\Collection
+ * @param \Illuminate\Support\Collection
+ */
+public static function laratablesModifyCollection($users)
+{
+    return $users->map(function ($user) {
+        $user->full_name = $user->first_name . ' '. $user->last_name;
+
+        return $user;
+    });
+}
+```
 
 ### Extra `data-` Datatables attributes
 Datatables [accepts](https://datatables.net/manual/server-side#Returned-data) extra *data-* attributes with each of the record. Following are supported with the package:
