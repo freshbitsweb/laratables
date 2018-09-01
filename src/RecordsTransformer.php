@@ -31,7 +31,7 @@ class RecordsTransformer
     public function transformRecords($records)
     {
         if (method_exists($this->model, 'laratablesModifyCollection')) {
-            $records = $this->model::laratablesModifyCollection($records);
+            $records = $this->model::laratablesModifyCollection($records)->values();
         }
 
         return $records->map(function ($item) {
