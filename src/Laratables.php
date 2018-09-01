@@ -84,7 +84,7 @@ class Laratables
         return [
             'draw'            => request('draw') + 1,
             'recordsTotal'    => $this->queryHandler->getRecordsCount(),
-            'recordsFiltered' => $this->queryHandler->getFilteredCount(),
+            'recordsFiltered' => $records->count(),
             'data'            => $records->toArray(),
         ];
     }

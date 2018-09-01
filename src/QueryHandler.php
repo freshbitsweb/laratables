@@ -8,8 +8,6 @@ class QueryHandler
 
     protected $recordsCount;
 
-    protected $filteredCount;
-
     /**
      * Initialize properties.
      *
@@ -20,7 +18,7 @@ class QueryHandler
     public function __construct($model)
     {
         $this->setQuery($model);
-        $this->recordsCount = $this->filteredCount = $this->query->count();
+        $this->recordsCount = $this->query->count();
     }
 
     /**
@@ -50,7 +48,6 @@ class QueryHandler
     public function applyFilters($searchColumns, $searchValue)
     {
         $this->query = FilterAgent::applyFiltersTo($this->query, $searchColumns, $searchValue);
-        $this->filteredCount = $this->query->count();
     }
 
     /**
@@ -71,15 +68,5 @@ class QueryHandler
     public function getRecordsCount()
     {
         return $this->recordsCount;
-    }
-
-    /**
-     * Returns total records of the table.
-     *
-     * @return int
-     */
-    public function getFilteredCount()
-    {
-        return $this->filteredCount;
     }
 }
