@@ -206,7 +206,7 @@ public static function laratablesAdditionalColumns()
 By default, Laravel treats *created_at* and *updated_at* as Carbon instances and you can also treat any other column of your table as a Carbon instance as well. This package has a config option `date_format` to specify the format in which the dates should be returned for Datatables. Default format is 'Y-m-d H:i:s'.
 
 ### Modify fetched records
-Sometimes, we need to work with the records after they are already fetched. You can add `laratablesModifyCollection()` static method to your model to play with the collection and return the updated one.
+Sometimes, we need to work with the records after they are already fetched. You can add `laratablesModifyCollection()` static method to your model to play with the collection and return the updated one. Note that if you add/remove any items from the collection Datatables count will have a mismatch.
 
 ```php
 /**
