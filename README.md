@@ -11,6 +11,7 @@ A Laravel package to handle server side ajax of [Datatables](https://datatables.
 * [How to use](#how-to-use)
     * [Client side](#client-side)
     * [Server side](#server-side)
+* [Online Demo](#online-demo)
 * [Installation](#installation)
 * [Customization](#customization)
     * [Custom columns](#custom-columns)
@@ -53,6 +54,10 @@ use Freshbitsweb\Laratables\Laratables;
 ...
 return Laratables::recordsOf(User::class);
 ```
+
+## Online Demo
+
+The demo of the package can be found at - https://laratables.freshbits.in
 
 Check the Customization section below to see how you can customize query/data/logic, etc.
 
