@@ -27,6 +27,9 @@ class Laratables
     /**
      * Accepts datatables ajax request or Laratables instance and returns table data.
      *
+     * @param Model to query for OR Laratables instance
+     * @param (optional) Closure which Accepts and returns Eloquent query
+     * 
      * @return array Table data
      */
     public static function recordsOf($model, $query = null)
