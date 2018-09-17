@@ -29,19 +29,19 @@ class Laratables
      *
      * @param Model to query for OR Laratables instance
      * @param (optional) Closure which Accepts and returns Eloquent query
-     * 
+     *
      * @return array Table data
      */
     public static function recordsOf($model, $query = null)
     {
-        if($model instanceof self) {
+        if ($model instanceof self) {
             $instance = $model;
         }
         else {
             $instance = new static($model);
         }
 
-        if($query instanceof \Closure) {
+        if ($query instanceof \Closure) {
             $instance->modify($query);
         }
 
