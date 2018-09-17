@@ -17,7 +17,7 @@ class Laratables
      *
      * @return void
      */
-    protected function __construct($model)
+    public function __construct($model)
     {
         $this->queryHandler = new QueryHandler($model);
         $this->columnManager = new ColumnManager($model);
@@ -29,28 +29,24 @@ class Laratables
      *
      * @return array Table data
      */
-    public static function recordsOf($model)
+    public static function recordsOf($model, $query = null)
     {
-        if(!($model instanceof static))
-            $instance = static::forModel($model);
-        else $instance = $model;
+        if($model instanceof self) {
+            $instance = $model;
+        }
+        else {
+            $instance = new static($model);
+        }
 
+        if($query instanceof \Closure) {
+            $instance->modify($query);
+        }
+
+        $instance->applyFiltersTo();
         $records = $instance->fetchRecords();
         $records = $instance->recordsTransformer->transformRecords($records);
+
         return $instance->tableData($records);
-    }
-
-    /**
-     * Accepts model and returns Laratables instance.
-     *
-     * @return \Freshbitsweb\Laratables\Laratables
-     */
-    public static function forModel($model)
-    {
-        $instance = new static($model);
-        $instance->applyFiltersTo();
-
-        return $instance;
     }
 
     /**
@@ -58,12 +54,11 @@ class Laratables
      *
      * @param Closure which Accepts and returns Eloquent query
      *
-     * @return \Freshbitsweb\Laratables\Laratables
+     * @return void
      */
     public function modify($closure)
     {
         $this->queryHandler->modify($closure);
-        return $this;
     }
 
     /**
