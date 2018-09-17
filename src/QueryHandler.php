@@ -64,6 +64,19 @@ class QueryHandler
     }
 
     /**
+     * Modify the underlying query of a Laratables instance.
+     *
+     * @param Closure which Accepts and returns Eloquent query
+     *
+     * @return void
+     */
+    public function modify($closure)
+    {
+        $this->query = $closure($this->query);
+        $this->filteredCount = $this->query->count();
+    }
+
+    /**
      * Returns total records of the table.
      *
      * @return int
