@@ -32,10 +32,7 @@ class Laratables
     public static function recordsOf($model)
     {
         if(!($model instanceof static))
-        {
-            $instance = new static($model);
-            $instance->applyFiltersTo();
-        }
+            $instance = static::forModel($model);
         else $instance = $model;
 
         $records = $instance->fetchRecords();
@@ -61,11 +58,12 @@ class Laratables
      *
      * @param Closure which Accepts and returns Eloquent query
      *
-     * @return void
+     * @return \Freshbitsweb\Laratables\Laratables
      */
     public function modify($closure)
     {
         $this->queryHandler->modify($closure);
+        return $this;
     }
 
     /**
