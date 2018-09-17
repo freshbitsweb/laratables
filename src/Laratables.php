@@ -36,8 +36,7 @@ class Laratables
     {
         if ($model instanceof self) {
             $instance = $model;
-        }
-        else {
+        } else {
             $instance = new static($model);
         }
 
