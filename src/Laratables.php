@@ -25,21 +25,47 @@ class Laratables
     }
 
     /**
-     * Accepts datatables ajax request and returns table data.
+     * Accepts datatables ajax request or Laratables instance and returns table data.
      *
      * @return array Table data
      */
     public static function recordsOf($model)
     {
-        $instance = new static($model);
-
-        $instance->applyFiltersTo();
+        if(!($model instanceof static))
+        {
+            $instance = new static($model);
+            $instance->applyFiltersTo();
+        }
+        else $instance = $model;
 
         $records = $instance->fetchRecords();
-
         $records = $instance->recordsTransformer->transformRecords($records);
-
         return $instance->tableData($records);
+    }
+
+    /**
+     * Accepts model and returns Laratables instance.
+     *
+     * @return \Freshbitsweb\Laratables\Laratables
+     */
+    public static function forModel($model)
+    {
+        $instance = new static($model);
+        $instance->applyFiltersTo();
+
+        return $instance;
+    }
+
+    /**
+     * Modify the underlying query of a Laratables instance.
+     *
+     * @param Closure which Accepts and returns Eloquent query
+     *
+     * @return void
+     */
+    public function modify($closure)
+    {
+        $this->queryHandler->modify($closure);
     }
 
     /**
