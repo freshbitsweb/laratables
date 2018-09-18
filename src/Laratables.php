@@ -28,7 +28,7 @@ class Laratables
      * Accepts datatables ajax request and returns table data.
      *
      * @param Model to query for
-     * @param (optional) Closure which accepts and returns the Eloquent query builder
+     * @param (optional) Closure accepts and returns the Eloquent query builder
      *
      * @return array Table data
      */
