@@ -41,7 +41,9 @@ class Laratables
         }
 
         $instance->applyFiltersTo();
+        
         $records = $instance->fetchRecords();
+        
         $records = $instance->recordsTransformer->transformRecords($records);
 
         return $instance->tableData($records);
