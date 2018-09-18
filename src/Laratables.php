@@ -17,7 +17,7 @@ class Laratables
      *
      * @return void
      */
-    public function __construct($model)
+    protected function __construct($model)
     {
         $this->queryHandler = new QueryHandler($model);
         $this->columnManager = new ColumnManager($model);
@@ -27,21 +27,17 @@ class Laratables
     /**
      * Accepts datatables ajax request or Laratables instance and returns table data.
      *
-     * @param Model to query for or existing Laratables instance
+     * @param Model to query for
      * @param (optional) Closure which accepts and returns the Eloquent query builder
      *
      * @return array Table data
      */
     public static function recordsOf($model, $query = null)
     {
-        if ($model instanceof self) {
-            $instance = $model;
-        } else {
-            $instance = new static($model);
-        }
+        $instance = new static($model);
 
         if ($query instanceof \Closure) {
-            $instance->modify($query);
+            $this->queryHandler->modify($query);
         }
 
         $instance->applyFiltersTo();
@@ -50,19 +46,7 @@ class Laratables
 
         return $instance->tableData($records);
     }
-
-    /**
-     * Modify the underlying query of a Laratables instance.
-     *
-     * @param Closure which Accepts and returns Eloquent query
-     *
-     * @return void
-     */
-    public function modify($closure)
-    {
-        $this->queryHandler->modify($closure);
-    }
-
+    
     /**
      * Applies conditions to the query if search is performed in datatables.
      *
