@@ -37,7 +37,7 @@ class Laratables
         $instance = new static($model);
 
         if ($query instanceof \Closure) {
-            $this->queryHandler->modify($query);
+            $instance->queryHandler->modify($query);
         }
 
         $instance->applyFiltersTo();
