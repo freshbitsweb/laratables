@@ -17,9 +17,9 @@ class Laratables
      *
      * @return void
      */
-    protected function __construct($model)
+    protected function __construct($model, $query = null)
     {
-        $this->queryHandler = new QueryHandler($model);
+        $this->queryHandler = new QueryHandler($model, $query);
         $this->columnManager = new ColumnManager($model);
         $this->recordsTransformer = new RecordsTransformer($model, $this->columnManager);
     }
@@ -34,11 +34,7 @@ class Laratables
      */
     public static function recordsOf($model, $query = null)
     {
-        $instance = new static($model);
-
-        if ($query instanceof \Closure) {
-            $instance->queryHandler->modify($query);
-        }
+        $instance = new static($model, $query);
 
         $instance->applyFiltersTo();
 
