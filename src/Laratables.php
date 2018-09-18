@@ -46,7 +46,7 @@ class Laratables
 
         return $instance->tableData($records);
     }
-    
+
     /**
      * Applies conditions to the query if search is performed in datatables.
      *
