@@ -17,9 +17,14 @@ class QueryHandler
      *
      * @return void
      */
-    public function __construct($model)
+    public function __construct($model, $query = null)
     {
         $this->setQuery($model);
+        
+        if ($query instanceof \Closure) {
+            $this->query = $query($this->query);
+        }
+
         $this->recordsCount = $this->filteredCount = $this->query->count();
     }
 
@@ -61,19 +66,6 @@ class QueryHandler
     public function getQuery()
     {
         return $this->query;
-    }
-
-    /**
-     * Modify the underlying query of a Laratables instance.
-     *
-     * @param Closure which Accepts and returns Eloquent query
-     *
-     * @return void
-     */
-    public function modify($closure)
-    {
-        $this->query = $closure($this->query);
-        $this->recordsCount = $this->filteredCount = $this->query->count();
     }
 
     /**
