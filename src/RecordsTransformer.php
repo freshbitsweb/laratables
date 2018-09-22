@@ -132,14 +132,17 @@ class RecordsTransformer
     /**
      * Decides whether provided column value is a carbon date instance.
      *
-     * @param mmixed Column value
+     * @param mixed Column value
      *
      * @return bool
      */
     protected function isCarbonInstance($columnValue)
     {
         return is_object($columnValue) &&
-            $columnValue instanceof \Illuminate\Support\Carbon
+            (
+                $columnValue instanceof \Carbon\Carbon ||
+                $columnValue instanceof \Illuminate\Support\Carbon
+            )
         ;
     }
 
