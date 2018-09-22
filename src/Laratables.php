@@ -66,8 +66,8 @@ class Laratables
         $query = $this->queryHandler->getQuery();
 
         return $query->with($this->columnManager->getRelations())
-            ->offset(request('start'))
-            ->limit(request('length'))
+            ->offset((int) request('start'))
+            ->limit((int) request('length'))
             ->orderBy(...$this->columnManager->getOrderBy())
             ->get($this->columnManager->getSelectColumns());
     }
