@@ -45,7 +45,7 @@ class QueryHandler
      * @param array Columns to be searched
      * @param string Search value
      *
-     * @return \Illuminate\Database\Query\Builder Query object
+     * @return void
      */
     public function applyFilters($searchColumns, $searchValue)
     {
@@ -56,7 +56,7 @@ class QueryHandler
     /**
      * Returns the query object.
      *
-     * @return int
+     * @return \Illuminate\Database\Query\Builder Query object
      */
     public function getQuery()
     {
