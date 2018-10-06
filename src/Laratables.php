@@ -14,12 +14,13 @@ class Laratables
      * Declare objects.
      *
      * @param \Illuminate\Database\Eloquent\Model The model to work on
+     * @param callable A closure to customize the query (optional)
      *
      * @return void
      */
-    protected function __construct($model, $query = null)
+    protected function __construct($model, $callable = null)
     {
-        $this->queryHandler = new QueryHandler($model, $query);
+        $this->queryHandler = new QueryHandler($model, $callable);
         $this->columnManager = new ColumnManager($model);
         $this->recordsTransformer = new RecordsTransformer($model, $this->columnManager);
     }
@@ -28,13 +29,13 @@ class Laratables
      * Accepts datatables ajax request and returns table data.
      *
      * @param Model to query for
-     * @param (optional) Closure accepts and returns the Eloquent query builder
+     * @param callable A closure to customize the query (optional)
      *
      * @return array Table data
      */
-    public static function recordsOf($model, $query = null)
+    public static function recordsOf($model, $callable = null)
     {
-        $instance = new static($model, $query);
+        $instance = new static($model, $callable);
 
         $instance->applyFiltersTo();
 
