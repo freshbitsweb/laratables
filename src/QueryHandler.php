@@ -14,16 +14,16 @@ class QueryHandler
      * Initialize properties.
      *
      * @param \Illuminate\Database\Eloquent\Model The model to work on
-     * @param (optional) Closure accepts and returns the Eloquent query builder
+     * @param callable A closure to customize the query (optional)
      *
      * @return void
      */
-    public function __construct($model, $query = null)
+    public function __construct($model, $callable = null)
     {
         $this->setQuery($model);
 
-        if ($query instanceof \Closure) {
-            $this->query = $query($this->query);
+        if ($callable instanceof \Closure) {
+            $this->query = $callable($this->query);
         }
 
         $this->recordsCount = $this->filteredCount = $this->query->count();

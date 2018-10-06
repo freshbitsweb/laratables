@@ -54,7 +54,7 @@ use Freshbitsweb\Laratables\Laratables;
 ...
 return Laratables::recordsOf(User::class);
 ```
-Optionally, you can pass a closure as a second parameter to refine the query:
+Optionally, you can pass a closure as a second parameter to refine the query. It should accept the underlying query as a parameter and return it after applying conditionals:
 ```php
 use App\User;
 use Freshbitsweb\Laratables\Laratables;
@@ -113,6 +113,8 @@ columns: [
 ],
 ```
 
+`Note` - The package does not support [nested relationships](https://github.com/freshbitsweb/laratables/issues/6) yet. You can utilize the custom column feature to get the nested relationship data but make sure that you [eager load](https://github.com/freshbitsweb/laratables#controlling-the-query) the relationship records.
+
 ### Customizing column values
 Sometimes, you may need to customize the value of a table column before displaying it in the datatables. Just add a method `laratables[ColumnName]()` in your eloquent model to play with that:
 
@@ -132,7 +134,9 @@ Relationship columns can also be customized by adding a method in this format `l
 These methods are called on the eloquent model object giving you full power of `$this`.
 
 ### Controlling the query
-You may want to apply additional where conditions to the query or load additional relationships. `laratablesQueryConditions()` static method to the rescue.
+You may want to apply additional where conditions to the query or load additional relationships. There are 2 ways to achive that:
+1. As you have seen in the [Server side](#server-side) section above, you can pass a closure to `recordsOf()` method.
+2. If you wish to apply conditions everytime a model is used to display a Laratable, add `laratablesQueryConditions()` static method to the model.
 
 ```php
 /**
