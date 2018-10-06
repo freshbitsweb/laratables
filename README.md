@@ -54,6 +54,16 @@ use Freshbitsweb\Laratables\Laratables;
 ...
 return Laratables::recordsOf(User::class);
 ```
+Optionally, you can pass a closure as a second parameter to refine the query:
+```php
+use App\User;
+use Freshbitsweb\Laratables\Laratables;
+...
+return Laratables::recordsOf(User::class, function($query)
+{
+    return $query->where('active', true);
+});
+```
 
 ## Online Demo
 

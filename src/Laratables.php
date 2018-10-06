@@ -17,9 +17,9 @@ class Laratables
      *
      * @return void
      */
-    protected function __construct($model)
+    protected function __construct($model, $query = null)
     {
-        $this->queryHandler = new QueryHandler($model);
+        $this->queryHandler = new QueryHandler($model, $query);
         $this->columnManager = new ColumnManager($model);
         $this->recordsTransformer = new RecordsTransformer($model, $this->columnManager);
     }
@@ -27,11 +27,14 @@ class Laratables
     /**
      * Accepts datatables ajax request and returns table data.
      *
+     * @param Model to query for
+     * @param (optional) Closure accepts and returns the Eloquent query builder
+     *
      * @return array Table data
      */
-    public static function recordsOf($model)
+    public static function recordsOf($model, $query = null)
     {
-        $instance = new static($model);
+        $instance = new static($model, $query);
 
         $instance->applyFiltersTo();
 
