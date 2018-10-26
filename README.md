@@ -21,6 +21,7 @@ A Laravel package to handle server side ajax of [Datatables](https://datatables.
     * [Searching](#searching)
     * [Ordering (Sorting)](#ordering-sorting)
     * [Selecting additional columns](#selecting-additional-columns)
+    * [Specifying additional searchable columns](#specifying-additional-searchable-columns)
     * [Date format for Carbon instances](#date-format-for-carbon-instances)
     * [Modify fetched records](#modify-fetched-records)
     * [Extra data- Datatables attributes](#extra-data--datatables-attributes)
@@ -223,7 +224,7 @@ public static function laratablesOrderName()
 **[⬆ back to top](#table-of-contents)**
 
 ### Selecting additional columns
-We have coded the package in a way where the query selects only required columns from the database table. If you need values of additional column when you are customizing column values or searching in other columns, you may specify them in an array inside `laratablesAdditionalColumns()` static method. For example, if you have *first_name* and *surname* in the table and you're just using a custom column *name* instead, you can add:
+We have coded the package in a way where the query selects only required columns from the database table. If you need values of additional column when you are customizing column values, you may specify them in an array inside `laratablesAdditionalColumns()` static method. For example, if you have *first_name* and *surname* in the table and you're just using a custom column *name* instead, you can add:
 
 ```php
 /**
@@ -232,6 +233,23 @@ We have coded the package in a way where the query selects only required columns
  * @return array
  */
 public static function laratablesAdditionalColumns()
+{
+    return ['first_name', 'surname'];
+}
+```
+
+**[⬆ back to top](#table-of-contents)**
+
+### Specifying additional searchable columns
+If you need to search for values in columns of the table which aren't displayed in the Datatables, you may specify them in an array inside `laratablesSearchableColumns()` static method. For example, if you have *first_name* and *surname* in the table and you want users to be able to search by those columns even if they are not displayed in the Datatables, you can add:
+
+```php
+/**
+ * Additional searchable columns to be used for datatables.
+ *
+ * @return array
+ */
+public static function laratablesSearchableColumns()
 {
     return ['first_name', 'surname'];
 }

@@ -11,6 +11,7 @@ use Freshbitsweb\Laratables\Tests\Stubs\Models\UserCountryQuery;
 use Freshbitsweb\Laratables\Tests\Stubs\Models\UserCustomSearch;
 use Freshbitsweb\Laratables\Tests\Stubs\Models\UserAdditionalColumn;
 use Freshbitsweb\Laratables\Tests\Stubs\Models\UserModifyCollection;
+use Freshbitsweb\Laratables\Tests\Stubs\Models\UserSearchableColumns;
 
 class DatatablesController
 {
@@ -104,5 +105,15 @@ class DatatablesController
     public function modifyCollection()
     {
         return Laratables::recordsOf(UserModifyCollection::class);
+    }
+
+    /**
+     * Datatables return with an searchable column query.
+     *
+     * @return json
+     */
+    public function searchableColumns()
+    {
+        return Laratables::recordsOf(UserSearchableColumns::class);
     }
 }

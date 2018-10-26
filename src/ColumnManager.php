@@ -33,6 +33,7 @@ class ColumnManager
         $this->relationshipsManager = new RelationshipsManager($model, $this->modelObject);
         $this->setColumnProperties();
         $this->addAdditionalColumns();
+        $this->addSearchableColumns();
     }
 
     /**
@@ -121,7 +122,7 @@ class ColumnManager
     }
 
     /**
-     * Adds additional select and search columns to the array from the model, if any.
+     * Adds additional select columns to the array from the model, if any.
      *
      * @return void
      */
@@ -129,7 +130,18 @@ class ColumnManager
     {
         if (method_exists($this->model, 'laratablesAdditionalColumns')) {
             array_push($this->selectColumns, ...$this->model::laratablesAdditionalColumns());
-            array_push($this->searchColumns, ...$this->model::laratablesAdditionalColumns());
+        }
+    }
+
+    /**
+     * Adds additional search columns to the array from the model, if any.
+     *
+     * @return void
+     */
+    protected function addSearchableColumns()
+    {
+        if (method_exists($this->model, 'laratablesSearchableColumns')) {
+            array_push($this->searchColumns, ...$this->model::laratablesSearchableColumns());
         }
     }
 
