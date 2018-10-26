@@ -7,16 +7,17 @@ trait PreparesDatatablesUrl
     /**
      * Prepares and returns the datatables fetch url.
      *
+     * @param string Search value
      * @return array
      */
-    protected function getDatatablesUrlParameters()
+    protected function getDatatablesUrlParameters($searchValue = '')
     {
         $parameters = [
             'draw' => 1,
             'start' => 0,
             'length' => 10,
             'search' => [
-                'value' => '',
+                'value' => $searchValue,
             ],
         ];
 
