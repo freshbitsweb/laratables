@@ -39,4 +39,22 @@ class ColumnTest extends TestCase
             ]],
         ]);
     }
+
+    /** @test */
+    public function it_loads_additonal_columns()
+    {
+        $users = $this->createUsers();
+
+        $response = $this->json('GET', '/datatables-additional-column', $this->getDatatablesUrlParameters());
+
+        $response->assertJson([
+            'recordsTotal' => 1,
+            'data' => [[
+                "0" => 1,
+                "1" => $users->first()->remember_token,
+                "2" => $users->first()->email,
+                "3" => "<a>1</a>",
+            ]],
+        ]);
+    }
 }

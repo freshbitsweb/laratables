@@ -9,6 +9,7 @@ use Freshbitsweb\Laratables\Tests\Stubs\Models\UserCustomOrder;
 use Freshbitsweb\Laratables\Tests\Stubs\Models\UserCustomQuery;
 use Freshbitsweb\Laratables\Tests\Stubs\Models\UserCountryQuery;
 use Freshbitsweb\Laratables\Tests\Stubs\Models\UserCustomSearch;
+use Freshbitsweb\Laratables\Tests\Stubs\Models\UserAdditionalColumn;
 
 class DatatablesController
 {
@@ -82,5 +83,15 @@ class DatatablesController
     public function customOrder()
     {
         return Laratables::recordsOf(UserCustomOrder::class);
+    }
+
+    /**
+     * Datatables return with an additional column query.
+     *
+     * @return json
+     */
+    public function additionalColumn()
+    {
+        return Laratables::recordsOf(UserAdditionalColumn::class);
     }
 }
