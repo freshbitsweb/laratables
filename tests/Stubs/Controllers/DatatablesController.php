@@ -4,6 +4,7 @@ namespace Freshbitsweb\Laratables\Tests\Stubs\Controllers;
 
 use Freshbitsweb\Laratables\Laratables;
 use Freshbitsweb\Laratables\Tests\Stubs\Models\User;
+use Freshbitsweb\Laratables\Tests\Stubs\Models\UserCustomName;
 
 class DatatablesController
 {
@@ -27,5 +28,15 @@ class DatatablesController
         return Laratables::recordsOf(User::class, function($query) {
             return $query->where('id', 1);
         });
+    }
+
+    /**
+     * Datatables return with a customized column.
+     *
+     * @return json
+     */
+    public function customizeColumn()
+    {
+        return Laratables::recordsOf(UserCustomName::class);
     }
 }
