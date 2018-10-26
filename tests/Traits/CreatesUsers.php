@@ -7,9 +7,15 @@ use Freshbitsweb\Laratables\Tests\Stubs\Models\Country;
 
 trait CreatesUsers
 {
-    public function createUsers($count = 1)
+    /**
+     * Seeds user(s) in the database.
+     *
+     * @return mixed
+     */
+    protected function createUsers($count = 1)
     {
         factory(Country::class)->create();
-        factory(User::class, $count)->create();
+
+        return factory(User::class, $count)->create();
     }
 }
