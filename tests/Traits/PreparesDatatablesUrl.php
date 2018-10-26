@@ -34,10 +34,14 @@ trait PreparesDatatablesUrl
      */
     private function getColumns()
     {
-        $columns = collect(['id', 'name', 'email', 'action']);
+        $columns = collect(['id', 'name', 'email', 'action', 'country.name']);
 
         return $columns->map(function($column, $index) {
-            $searchable = $orderable = $column == 'action' ? false : true;
+            $searchable = $orderable = true;
+
+            if (in_array($column, ['action', 'country.name'])) {
+                $searchable = $orderable = false;
+            }
 
             return [
                 'data' => $index,
