@@ -24,4 +24,26 @@ class User extends Model
     {
         return "<a>{$user->id}</a>";
     }
+
+    /**
+     * Specify row class name for datatables.
+     *
+     * @return string
+     */
+    public function laratablesRowClass()
+    {
+        return $this->id == 1 ? 'text-success' : 'text-warning';
+    }
+
+    /**
+     * Returns the data attribute for url to the edit page of the user.
+     *
+     * @return array
+     */
+    public function laratablesRowData()
+    {
+        return [
+            'id' => $this->id,
+        ];
+    }
 }
