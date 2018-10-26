@@ -37,4 +37,21 @@ class DataFetchTest extends TestCase
             ]],
         ]);
     }
+
+    /** @test */
+    public function it_applies_the_custom_query_conditions()
+    {
+        $users = $this->createUsers(2);
+
+        $response = $this->json('GET', '/datatables-custom-query', $this->getDatatablesUrlParameters());
+
+        $response->assertJson([
+            'recordsTotal' => 1,
+            'data' => [[
+                "0" => 1,
+                "1" => $users->first()->name,
+                "2" => $users->first()->email,
+            ]],
+        ]);
+    }
 }

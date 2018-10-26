@@ -5,6 +5,7 @@ namespace Freshbitsweb\Laratables\Tests\Stubs\Controllers;
 use Freshbitsweb\Laratables\Laratables;
 use Freshbitsweb\Laratables\Tests\Stubs\Models\User;
 use Freshbitsweb\Laratables\Tests\Stubs\Models\UserCustomName;
+use Freshbitsweb\Laratables\Tests\Stubs\Models\UserCustomQuery;
 
 class DatatablesController
 {
@@ -19,7 +20,7 @@ class DatatablesController
     }
 
     /**
-     * Satatables return with closure.
+     * Datatables return with closure.
      *
      * @return json
      */
@@ -38,5 +39,15 @@ class DatatablesController
     public function customizeColumn()
     {
         return Laratables::recordsOf(UserCustomName::class);
+    }
+
+    /**
+     * Datatables return with a custom query.
+     *
+     * @return json
+     */
+    public function customQuery()
+    {
+        return Laratables::recordsOf(UserCustomQuery::class);
     }
 }
