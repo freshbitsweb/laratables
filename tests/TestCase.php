@@ -42,7 +42,8 @@ abstract class TestCase extends BaseTestCase
         Route::middleware('web')
             ->namespace('Freshbitsweb\Laratables\Tests\Stubs\Controllers')
             ->group(function () {
-                Route::get('/datatables-test', 'DatatablesController');
+                Route::get('/datatables-simple', 'DatatablesController@simple');
+                Route::get('/datatables-records-of-closure', 'DatatablesController@recordsOfClosure');
             })
         ;
     }

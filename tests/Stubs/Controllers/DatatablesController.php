@@ -8,12 +8,24 @@ use Freshbitsweb\Laratables\Tests\Stubs\Models\User;
 class DatatablesController
 {
     /**
-     * Default method of the controller.
+     * Simple datatables return.
      *
      * @return json
      */
-    public function __invoke()
+    public function simple()
     {
         return Laratables::recordsOf(User::class);
+    }
+
+    /**
+     * Satatables return with closure.
+     *
+     * @return json
+     */
+    public function recordsOfClosure()
+    {
+        return Laratables::recordsOf(User::class, function($query) {
+            return $query->where('id', 1);
+        });
     }
 }
