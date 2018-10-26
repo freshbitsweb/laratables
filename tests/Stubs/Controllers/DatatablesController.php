@@ -6,6 +6,7 @@ use Freshbitsweb\Laratables\Laratables;
 use Freshbitsweb\Laratables\Tests\Stubs\Models\User;
 use Freshbitsweb\Laratables\Tests\Stubs\Models\UserCustomName;
 use Freshbitsweb\Laratables\Tests\Stubs\Models\UserCustomQuery;
+use Freshbitsweb\Laratables\Tests\Stubs\Models\UserCountryQuery;
 
 class DatatablesController
 {
@@ -49,5 +50,15 @@ class DatatablesController
     public function customQuery()
     {
         return Laratables::recordsOf(UserCustomQuery::class);
+    }
+
+    /**
+     * Datatables return with a custom relation query.
+     *
+     * @return json
+     */
+    public function customRelationQuery()
+    {
+        return Laratables::recordsOf(UserCountryQuery::class);
     }
 }
