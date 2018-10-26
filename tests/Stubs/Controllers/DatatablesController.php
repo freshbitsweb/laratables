@@ -10,6 +10,7 @@ use Freshbitsweb\Laratables\Tests\Stubs\Models\UserCustomQuery;
 use Freshbitsweb\Laratables\Tests\Stubs\Models\UserCountryQuery;
 use Freshbitsweb\Laratables\Tests\Stubs\Models\UserCustomSearch;
 use Freshbitsweb\Laratables\Tests\Stubs\Models\UserAdditionalColumn;
+use Freshbitsweb\Laratables\Tests\Stubs\Models\UserModifyCollection;
 
 class DatatablesController
 {
@@ -93,5 +94,15 @@ class DatatablesController
     public function additionalColumn()
     {
         return Laratables::recordsOf(UserAdditionalColumn::class);
+    }
+
+    /**
+     * Datatables return with an additional column query.
+     *
+     * @return json
+     */
+    public function modifyCollection()
+    {
+        return Laratables::recordsOf(UserModifyCollection::class);
     }
 }

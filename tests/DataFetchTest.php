@@ -54,4 +54,21 @@ class DataFetchTest extends TestCase
             ]],
         ]);
     }
+
+    /** @test */
+    public function it_works_on_the_collection_after_fetching_data()
+    {
+        $users = $this->createUsers();
+
+        $response = $this->json('GET', '/datatables-modify-collection', $this->getDatatablesUrlParameters());
+
+        $response->assertJson([
+            'recordsTotal' => 1,
+            'data' => [[
+                "0" => 1,
+                "1" => $users->first()->email,
+                "2" => $users->first()->email,
+            ]],
+        ]);
+    }
 }
