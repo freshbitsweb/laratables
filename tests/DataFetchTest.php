@@ -2,19 +2,23 @@
 
 namespace Freshbitsweb\Laratables\Tests;
 
-use Freshbitsweb\Laratables\Tests\Traits\CreatesUsers;
-
 class DataFetchTest extends TestCase
 {
-    use CreatesUsers;
 
     /** @test */
-    public function check()
+    public function it_returns_the_data_as_expected()
     {
-        $this->createUsers();
+        $users = $this->createUsers();
 
-        $this->assertDatabaseHas('users', [
-            'id' => 1,
+        $response = $this->json('GET', '/datatables-test', $this->getDatatablesUrlParameters());
+
+        $response->assertJson([
+            'recordsTotal' => 1,
+            'data' => [[
+                "0" => 1,
+                "1" => $users->first()->name,
+                "2" => $users->first()->email,
+            ]],
         ]);
     }
 }
