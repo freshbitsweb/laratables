@@ -5,6 +5,7 @@ namespace Freshbitsweb\Laratables\Tests\Stubs\Controllers;
 use Freshbitsweb\Laratables\Laratables;
 use Freshbitsweb\Laratables\Tests\Stubs\Models\User;
 use Freshbitsweb\Laratables\Tests\Stubs\Models\UserCustomName;
+use Freshbitsweb\Laratables\Tests\Stubs\Models\UserCustomOrder;
 use Freshbitsweb\Laratables\Tests\Stubs\Models\UserCustomQuery;
 use Freshbitsweb\Laratables\Tests\Stubs\Models\UserCountryQuery;
 use Freshbitsweb\Laratables\Tests\Stubs\Models\UserCustomSearch;
@@ -71,5 +72,15 @@ class DatatablesController
     public function customSearch()
     {
         return Laratables::recordsOf(UserCustomSearch::class);
+    }
+
+    /**
+     * Datatables return with a custom order query.
+     *
+     * @return json
+     */
+    public function customOrder()
+    {
+        return Laratables::recordsOf(UserCustomOrder::class);
     }
 }
