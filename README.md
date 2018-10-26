@@ -65,6 +65,8 @@ return Laratables::recordsOf(User::class, function($query)
 });
 ```
 
+**[⬆ back to top](#table-of-contents)**
+
 ## Online Demo
 
 The demo of the package can be found at - https://laratables.freshbits.in
@@ -81,6 +83,8 @@ Optionally, you can import config file by running this command in your terminal/
 ```bash
 php artisan vendor:publish --tag=laratables_config
 ```
+
+**[⬆ back to top](#table-of-contents)**
 
 ## Customization
 Following the steps of How to use section should get you up and running with a simple datatables example in a minute. However, many datatables require customization ability. Here are the the options:
@@ -102,6 +106,8 @@ public static function laratablesCustomAction($user)
 ```
 As you may have observed, you receive an eloquent object of the record as a parameter to use the record details in your method.
 
+**[⬆ back to top](#table-of-contents)**
+
 ### Relationship columns
 We also need to display data from related models, right? And it's super easy here. No need to do anything on server side for simple relationships. Just specify the name of the relation and the name of the column on the client side inside columns array.
 
@@ -114,6 +120,8 @@ columns: [
 ```
 
 `Note` - The package does not support [nested relationships](https://github.com/freshbitsweb/laratables/issues/6) yet. You can utilize the custom column feature to get the nested relationship data but make sure that you [eager load](https://github.com/freshbitsweb/laratables#controlling-the-query) the relationship records.
+
+**[⬆ back to top](#table-of-contents)**
 
 ### Customizing column values
 Sometimes, you may need to customize the value of a table column before displaying it in the datatables. Just add a method `laratables[ColumnName]()` in your eloquent model to play with that:
@@ -132,6 +140,8 @@ public function laratablesName()
 Relationship columns can also be customized by adding a method in this format `laratables[RelationName][ColumnName]()`.
 
 These methods are called on the eloquent model object giving you full power of `$this`.
+
+**[⬆ back to top](#table-of-contents)**
 
 ### Controlling the query
 You may want to apply additional where conditions to the query or load additional relationships. There are 2 ways to achive that:
@@ -168,6 +178,8 @@ public static function laratablesRoleRelationQuery()
 }
 ```
 
+**[⬆ back to top](#table-of-contents)**
+
 ### Searching
 Datatables provides searching functionality to filter out results based on any of the displayed columns values. While this package automatically applies *orWhere* conditions with like operator, you can put your own conditions for any column. We provide static method `laratablesSearch[ColumnName]()` for the same.
 
@@ -191,6 +203,8 @@ If any of the columns is a relationship column, the package is smart enough to a
 
 **Note** - You can add `searchable: false` to any of the columns in Datatables configuration to prevent searching operation for that column.
 
+**[⬆ back to top](#table-of-contents)**
+
 ### Ordering (Sorting)
 Ordering for regular table columns works by default. For relationship columns or custom columns, you should either add `orderable: false` to Datatables column configuration or add a static method `laratablesOrder[ColumnName]()` and return the name of table column that should be used for ordering the records instead. For example, if your table contains *first_name* and Datatables has just *name*, you can add:
 
@@ -205,6 +219,8 @@ public static function laratablesOrderName()
     return 'first_name';
 }
 ```
+
+**[⬆ back to top](#table-of-contents)**
 
 ### Selecting additional columns
 We have coded the package in a way where the query selects only required columns from the database table. If you need values of additional column when you are customizing column values or searching in other columns, you may specify them in an array inside `laratablesAdditionalColumns()` static method. For example, if you have *first_name* and *surname* in the table and you're just using a custom column *name* instead, you can add:
@@ -221,11 +237,13 @@ public static function laratablesAdditionalColumns()
 }
 ```
 
+**[⬆ back to top](#table-of-contents)**
+
 ### Date format for Carbon instances
 By default, Laravel treats *created_at* and *updated_at* as Carbon instances and you can also treat any other column of your table as a Carbon instance as well. This package has a config option `date_format` to specify the format in which the dates should be returned for Datatables. Default format is 'Y-m-d H:i:s'.
 
 ### Modify fetched records
-Sometimes, we need to work with the records after they are already fetched. You can add `laratablesModifyCollection()` static method to your model to play with the collection and return the updated one. Note that if you add/remove any items from the collection Datatables count will have a mismatch.
+Sometimes, we need to work with the records after they are already fetched. You can add `laratablesModifyCollection()` static method to your model to play with the collection and return the updated one. Note that if you add/remove any items from the collection, the Datatables count will have a mismatch.
 
 ```php
 /**
@@ -243,6 +261,8 @@ public static function laratablesModifyCollection($users)
     });
 }
 ```
+
+**[⬆ back to top](#table-of-contents)**
 
 ### Extra `data-` Datatables attributes
 Datatables [accepts](https://datatables.net/manual/server-side#Returned-data) extra *data-* attributes with each of the record. Following are supported with the package:
