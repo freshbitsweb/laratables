@@ -4,16 +4,26 @@ namespace Freshbitsweb\Laratables;
 
 class RelationshipsManager
 {
+    /**
+     * @var string Class with laratables methods
+     */
     protected $class;
 
+    /**
+     * @var Eloquent Model object
+     */
     protected $modelObject;
 
+    /**
+     * @var array Relations to be eager loaded
+     */
     protected $relations = [];
 
     /**
      * Initialize properties.
      *
      * @param Class to customize query/data/logic
+     * @param Eloquent Model object
      *
      * @return void
      */

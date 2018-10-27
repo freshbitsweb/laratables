@@ -4,8 +4,14 @@ namespace Freshbitsweb\Laratables;
 
 class RecordsTransformer
 {
+    /**
+     * @var string Class with laratables methods
+     */
     protected $class;
 
+    /**
+     * @var ColumnManager object
+     */
     protected $columnManager;
 
     /**

@@ -6,18 +6,39 @@ use Freshbitsweb\Laratables\Exceptions\IncorrectOrderColumn;
 
 class ColumnManager
 {
+    /**
+     * @var string Class with laratables methods
+     */
     protected $class;
 
+    /**
+     * @var Eloquent Model object
+     */
     protected $modelObject;
 
+    /**
+     * @var string Primary column of the model
+     */
     protected $primaryColumn;
 
+    /**
+     * @var \Illuminate\Support\Collection Requested columns
+     */
     protected $requestedColumns;
 
+    /**
+     * @var array Columns to be selected
+     */
     protected $selectColumns;
 
+    /**
+     * @var array Columns to search for
+     */
     protected $searchColumns;
 
+    /**
+     * @var RelationshipsManager object
+     */
     protected $relationshipsManager;
 
     /**

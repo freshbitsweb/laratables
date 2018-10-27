@@ -4,10 +4,19 @@ namespace Freshbitsweb\Laratables;
 
 class Laratables
 {
+    /**
+     * @var QueryHandler object
+     */
     protected $queryHandler;
 
+    /**
+     * @var ColumnManager object
+     */
     protected $columnManager;
 
+    /**
+     * @var RecordsTransformer object
+     */
     protected $recordsTransformer;
 
     /**

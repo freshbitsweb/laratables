@@ -4,6 +4,9 @@ namespace Freshbitsweb\Laratables;
 
 class FilterAgent
 {
+    /**
+     * @var string Class with laratables methods
+     */
     private static $class;
 
     /**

@@ -4,12 +4,24 @@ namespace Freshbitsweb\Laratables;
 
 class QueryHandler
 {
+    /**
+     * @var string Class with laratables methods
+     */
     protected $class;
 
+    /**
+     * @var Eloquent model object query
+     */
     protected $query;
 
+    /**
+     * @var int Count of the total records available
+     */
     protected $recordsCount;
 
+    /**
+     * @var int Count of the records after applying search filter
+     */
     protected $filteredCount;
 
     /**
