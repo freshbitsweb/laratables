@@ -4,6 +4,8 @@ namespace Freshbitsweb\Laratables;
 
 class QueryHandler
 {
+    protected $class;
+
     protected $query;
 
     protected $recordsCount;
@@ -14,15 +16,18 @@ class QueryHandler
      * Initialize properties.
      *
      * @param \Illuminate\Database\Eloquent\Model The model to work on
+     * @param Class to customize query/data/logic
      * @param callable A closure to customize the query (optional)
      *
      * @return void
      */
-    public function __construct($model, $callable = null)
+    public function __construct($model, $class, $callable)
     {
-        $this->setQuery($model);
+        $this->class = $class;
 
-        if ($callable instanceof \Closure) {
+        $this->setQuery($model, $class);
+
+        if (is_object($callable) && $callable instanceof \Closure) {
             $this->query = $callable($this->query);
         }
 
@@ -33,15 +38,16 @@ class QueryHandler
      * Initialises Query object.
      *
      * @param \Illuminate\Database\Eloquent\Model The model to work on
+     * @param Class to customize query/data/logic
      *
      * @return void
      */
-    protected function setQuery($model)
+    protected function setQuery($model, $class)
     {
         $this->query = new $model();
 
-        if (method_exists($model, 'laratablesQueryConditions')) {
-            $this->query = $model::laratablesQueryConditions($this->query);
+        if (method_exists($class, 'laratablesQueryConditions')) {
+            $this->query = $class::laratablesQueryConditions($this->query);
         }
     }
 
@@ -55,7 +61,7 @@ class QueryHandler
      */
     public function applyFilters($searchColumns, $searchValue)
     {
-        $this->query = FilterAgent::applyFiltersTo($this->query, $searchColumns, $searchValue);
+        $this->query = FilterAgent::applyFiltersTo($this->class, $this->query, $searchColumns, $searchValue);
         $this->filteredCount = $this->query->count();
     }
 

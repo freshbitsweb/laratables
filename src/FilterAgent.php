@@ -4,22 +4,21 @@ namespace Freshbitsweb\Laratables;
 
 class FilterAgent
 {
-    private static $model;
+    private static $class;
 
     /**
      * Applies where conditions to the query according to search value.
      *
+     * @param Class to customize query/data/logic
      * @param \Illuminate\Database\Query\Builder Query object
      * @param array Columns to be searched
      * @param string Search value
      *
      * @return \Illuminate\Database\Query\Builder Query object
      */
-    public static function applyFiltersTo($query, $searchColumns, $searchValue)
+    public static function applyFiltersTo($class, $query, $searchColumns, $searchValue)
     {
-        // We may receive custom model or Illuminate\Database\Query\Builder object
-        // use newQuery() to make it Builder object and then get custom model using getModel() method
-        self::$model = get_class($query->newQuery()->getModel());
+        self::$class = $class;
 
         return $query->where(function ($query) use ($searchColumns, $searchValue) {
             foreach ($searchColumns as $columnName) {
@@ -40,7 +39,7 @@ class FilterAgent
     protected static function applyFilter($query, $column, $searchValue)
     {
         if ($methodName = self::hasCustomSearch($column)) {
-            return self::$model::$methodName($query, $searchValue);
+            return self::$class::$methodName($query, $searchValue);
         }
 
         if (isRelationColumn($column)) {
@@ -63,7 +62,7 @@ class FilterAgent
     {
         $methodName = camel_case('laratables_search_'.$columnName);
 
-        if (method_exists(self::$model, $methodName)) {
+        if (method_exists(self::$class, $methodName)) {
             return $methodName;
         }
 
@@ -82,7 +81,7 @@ class FilterAgent
     protected static function applyRelationFilter($query, $column, $searchValue)
     {
         if ($methodName = self::hasCustomSearch(str_replace('.', '_', $column))) {
-            return self::$model::$methodName($query, $searchValue);
+            return self::$class::$methodName($query, $searchValue);
         }
 
         list($relationName, $relationColumnName) = getRelationDetails($column);

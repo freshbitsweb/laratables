@@ -6,7 +6,7 @@ use Freshbitsweb\Laratables\Exceptions\IncorrectOrderColumn;
 
 class ColumnManager
 {
-    protected $model;
+    protected $class;
 
     protected $modelObject;
 
@@ -24,13 +24,14 @@ class ColumnManager
      * Initialize properties.
      *
      * @param \Illuminate\Database\Eloquent\Model The model to work on
+     * @param Class to customize query/data/logic
      *
      * @return void
      */
-    public function __construct($model)
+    public function __construct($model, $class)
     {
-        $this->initializeProperties($model);
-        $this->relationshipsManager = new RelationshipsManager($model, $this->modelObject);
+        $this->initializeProperties($model, $class);
+        $this->relationshipsManager = new RelationshipsManager($class, $this->modelObject);
         $this->setColumnProperties();
         $this->addAdditionalColumns();
         $this->addSearchableColumns();
@@ -40,12 +41,13 @@ class ColumnManager
      * Initializes class properties.
      *
      * @param \Illuminate\Database\Eloquent\Model The model to work on
+     * @param Class to customize query/data/logic
      *
      * @return void
      */
-    protected function initializeProperties($model)
+    protected function initializeProperties($model, $class)
     {
-        $this->model = $model;
+        $this->class = $class;
         $this->modelObject = new $model();
         $this->primaryColumn = $this->modelObject->getKeyName();
 
@@ -114,7 +116,7 @@ class ColumnManager
         $columnName = str_replace('.', '_', $columnName);
         $methodName = camel_case('laratables_custom_'.$columnName);
 
-        if (method_exists($this->model, $methodName)) {
+        if (method_exists($this->class, $methodName)) {
             return $methodName;
         }
 
@@ -122,26 +124,26 @@ class ColumnManager
     }
 
     /**
-     * Adds additional select columns to the array from the model, if any.
+     * Adds additional select columns to the array from the class, if any.
      *
      * @return void
      */
     protected function addAdditionalColumns()
     {
-        if (method_exists($this->model, 'laratablesAdditionalColumns')) {
-            array_push($this->selectColumns, ...$this->model::laratablesAdditionalColumns());
+        if (method_exists($this->class, 'laratablesAdditionalColumns')) {
+            array_push($this->selectColumns, ...$this->class::laratablesAdditionalColumns());
         }
     }
 
     /**
-     * Adds additional search columns to the array from the model, if any.
+     * Adds additional search columns to the array from the class, if any.
      *
      * @return void
      */
     protected function addSearchableColumns()
     {
-        if (method_exists($this->model, 'laratablesSearchableColumns')) {
-            array_push($this->searchColumns, ...$this->model::laratablesSearchableColumns());
+        if (method_exists($this->class, 'laratablesSearchableColumns')) {
+            array_push($this->searchColumns, ...$this->class::laratablesSearchableColumns());
         }
     }
 
@@ -180,7 +182,7 @@ class ColumnManager
         $orderColumn = $requestedColumnNames[$order[0]['column']];
 
         if ($methodName = $this->hasCustomOrdering($orderColumn)) {
-            $orderColumn = $this->model::$methodName($orderColumn);
+            $orderColumn = $this->class::$methodName($orderColumn);
         }
 
         return $orderColumn;
@@ -197,7 +199,7 @@ class ColumnManager
     {
         $methodName = camel_case('laratables_order_'.$orderColumn);
 
-        if (method_exists($this->model, $methodName)) {
+        if (method_exists($this->class, $methodName)) {
             return $methodName;
         }
 

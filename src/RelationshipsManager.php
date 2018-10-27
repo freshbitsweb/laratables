@@ -4,7 +4,7 @@ namespace Freshbitsweb\Laratables;
 
 class RelationshipsManager
 {
-    protected $model;
+    protected $class;
 
     protected $modelObject;
 
@@ -13,13 +13,13 @@ class RelationshipsManager
     /**
      * Initialize properties.
      *
-     * @param \Illuminate\Database\Eloquent\Model The model object to work on
+     * @param Class to customize query/data/logic
      *
      * @return void
      */
-    public function __construct($model, $modelObject)
+    public function __construct($class, $modelObject)
     {
-        $this->model = $model;
+        $this->class = $class;
         $this->modelObject = $modelObject;
     }
 
@@ -39,8 +39,8 @@ class RelationshipsManager
             ! in_array($relationName, $this->relations)
         ) {
             $methodName = camel_case('laratables_'.$relationName.'relation_query');
-            if (method_exists($this->model, $methodName)) {
-                $this->relations[$relationName] = $this->model::$methodName();
+            if (method_exists($this->class, $methodName)) {
+                $this->relations[$relationName] = $this->class::$methodName();
 
                 return;
             }

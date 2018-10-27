@@ -14,28 +14,29 @@ class Laratables
      * Declare objects.
      *
      * @param \Illuminate\Database\Eloquent\Model The model to work on
+     * @param Class to customize query/data/logic
      * @param callable A closure to customize the query (optional)
      *
      * @return void
      */
-    protected function __construct($model, $callable = null)
+    protected function __construct($model, $class, $callable)
     {
-        $this->queryHandler = new QueryHandler($model, $callable);
-        $this->columnManager = new ColumnManager($model);
-        $this->recordsTransformer = new RecordsTransformer($model, $this->columnManager);
+        $this->queryHandler = new QueryHandler($model, $class, $callable);
+        $this->columnManager = new ColumnManager($model, $class);
+        $this->recordsTransformer = new RecordsTransformer($class, $this->columnManager);
     }
 
     /**
      * Accepts datatables ajax request and returns table data.
      *
      * @param Model to query for
-     * @param callable A closure to customize the query (optional)
+     * @param mixed Class/Callable to customize query/data/logic (optional)
      *
      * @return array Table data
      */
-    public static function recordsOf($model, $callable = null)
+    public static function recordsOf($model, $classOrCallable = null)
     {
-        $instance = new static($model, $callable);
+        $instance = new static(...self::prepareProperties($model, $classOrCallable));
 
         $instance->applyFiltersTo();
 
@@ -44,6 +45,28 @@ class Laratables
         $records = $instance->recordsTransformer->transformRecords($records);
 
         return $instance->tableData($records);
+    }
+
+    /**
+     * Prepares the model, class, and callable for the instance.
+     *
+     * @param Model to query for
+     * @param mixed Class/Callable to customize query/data/logic (optional)
+     *
+     * @return array Model, class, and callable
+     */
+    private static function prepareProperties($model, $classOrCallable)
+    {
+        $callable = null;
+        $class = $model;
+
+        if (is_object($classOrCallable) && $classOrCallable instanceof \Closure) {
+            $callable = $classOrCallable;
+        } else if (is_string($classOrCallable)) {
+            $class = $classOrCallable;
+        }
+
+        return [$model, $class, $callable];
     }
 
     /**

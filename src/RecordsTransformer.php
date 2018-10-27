@@ -4,20 +4,20 @@ namespace Freshbitsweb\Laratables;
 
 class RecordsTransformer
 {
-    protected $model;
+    protected $class;
 
     protected $columnManager;
 
     /**
      * Initialize properties.
      *
-     * @param \Illuminate\Database\Eloquent\Model The model to work on
+     * @param Class to customize query/data/logic
      *
      * @return void
      */
-    public function __construct($model, $columnManager)
+    public function __construct($class, $columnManager)
     {
-        $this->model = $model;
+        $this->class = $class;
         $this->columnManager = $columnManager;
     }
 
@@ -30,8 +30,8 @@ class RecordsTransformer
      */
     public function transformRecords($records)
     {
-        if (method_exists($this->model, 'laratablesModifyCollection')) {
-            $records = $this->model::laratablesModifyCollection($records)->values();
+        if (method_exists($this->class, 'laratablesModifyCollection')) {
+            $records = $this->class::laratablesModifyCollection($records)->values();
         }
 
         return $records->map(function ($item) {
@@ -68,9 +68,9 @@ class RecordsTransformer
      */
     protected function getColumnValue($columnName, $record)
     {
-        // Set custom column value from the model static method
+        // Set custom column value from the class static method
         if ($methodName = $this->columnManager->isCustomColumn($columnName)) {
-            return $this->model::$methodName($record);
+            return $this->class::$methodName($record);
         }
 
         if ($methodName = $this->customisesColumnValue($columnName)) {
@@ -99,7 +99,7 @@ class RecordsTransformer
     {
         $methodName = camel_case('laratables_'.$columnName);
 
-        if (method_exists($this->model, $methodName)) {
+        if (method_exists($this->class, $methodName)) {
             return $methodName;
         }
 
@@ -159,11 +159,11 @@ class RecordsTransformer
             'DT_RowId' => config('laratables.row_id_prefix').$record->{$record->getKeyName()},
         ];
 
-        if (method_exists($this->model, 'laratablesRowClass')) {
+        if (method_exists($this->class, 'laratablesRowClass')) {
             $datatableParameters['DT_RowClass'] = $record->laratablesRowClass();
         }
 
-        if (method_exists($this->model, 'laratablesRowData')) {
+        if (method_exists($this->class, 'laratablesRowData')) {
             $datatableParameters['DT_RowData'] = $record->laratablesRowData();
         }
 
