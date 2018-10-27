@@ -2,6 +2,7 @@
 [![Total Downloads](https://poser.pugx.org/freshbitsweb/laratables/downloads)](https://packagist.org/packages/freshbitsweb/laratables)
 [![License](https://poser.pugx.org/freshbitsweb/laratables/license)](https://packagist.org/packages/freshbitsweb/laratables)
 [![StyleCI](https://styleci.io/repos/108421119/shield?branch=master)](https://styleci.io/repos/108421119)
+[![Build Status](https://travis-ci.com/freshbitsweb/laratables.svg?branch=master)](https://travis-ci.com/freshbitsweb/laratables)
 
 # Laratables (Laravel 5.5+)
 A Laravel package to handle server side ajax of [Datatables](https://datatables.net).
