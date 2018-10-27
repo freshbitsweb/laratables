@@ -14,9 +14,9 @@ class DataFetchTest extends TestCase
         $response->assertJson([
             'recordsTotal' => 1,
             'data' => [[
-                "0" => 1,
-                "1" => $users->first()->name,
-                "2" => $users->first()->email,
+                '0' => 1,
+                '1' => $users->first()->name,
+                '2' => $users->first()->email,
             ]],
         ]);
     }
@@ -31,9 +31,9 @@ class DataFetchTest extends TestCase
         $response->assertJson([
             'recordsTotal' => 1,
             'data' => [[
-                "0" => 1,
-                "1" => $users->first()->name,
-                "2" => $users->first()->email,
+                '0' => 1,
+                '1' => $users->first()->name,
+                '2' => $users->first()->email,
             ]],
         ]);
     }
@@ -48,10 +48,10 @@ class DataFetchTest extends TestCase
         $response->assertJson([
             'recordsTotal' => 1,
             'data' => [[
-                "0" => 1,
-                "1" => $users->first()->name,
-                "2" => $users->first()->email,
-                "3" => "<span>1</span>",
+                '0' => 1,
+                '1' => $users->first()->name,
+                '2' => $users->first()->email,
+                '3' => '<span>1</span>',
             ]],
         ]);
     }
@@ -66,9 +66,9 @@ class DataFetchTest extends TestCase
         $response->assertJson([
             'recordsTotal' => 1,
             'data' => [[
-                "0" => 1,
-                "1" => $users->first()->name,
-                "2" => $users->first()->email,
+                '0' => 1,
+                '1' => $users->first()->name,
+                '2' => $users->first()->email,
             ]],
         ]);
     }
@@ -83,9 +83,9 @@ class DataFetchTest extends TestCase
         $response->assertJson([
             'recordsTotal' => 1,
             'data' => [[
-                "0" => 1,
-                "1" => $users->first()->email,
-                "2" => $users->first()->email,
+                '0' => 1,
+                '1' => $users->first()->email,
+                '2' => $users->first()->email,
             ]],
         ]);
     }
