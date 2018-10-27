@@ -14,10 +14,10 @@ A Laravel package to handle server side ajax of [Datatables](https://datatables.
 * [Online Demo](#online-demo)
 * [Installation](#installation)
 * [Customization](#customization)
+    * [Controlling the query](#controlling-the-query)
     * [Custom columns](#custom-columns)
     * [Relationship columns](#relationship-columns)
     * [Customizing column values](#customizing-column-values)
-    * [Controlling the query](#controlling-the-query)
     * [Searching](#searching)
     * [Ordering (Sorting)](#ordering-sorting)
     * [Selecting additional columns](#selecting-additional-columns)
@@ -30,7 +30,7 @@ A Laravel package to handle server side ajax of [Datatables](https://datatables.
 This package helps with simple requirements of displaying data from eloquent models into datatables with ajax support. Plus, using simple relationships and customizing column values.
 
 ## How to use
-The basic approach is that you can specify the Datatable configuration and columns on the client side just like you would without any major change and call a single method on the server side to handle ajax calls. The package will create necessary queries to fetch the data and make the search and ordering functionality work automatically. If needed, You can step-in and customize query/data/logic at various stages by adding methods in your Eloquent model.
+The basic approach is that you can specify the Datatable configuration and columns on the client side just like you would without any major change and call a single method on the server side to handle ajax calls. The package will create necessary queries to fetch the data and make the search and ordering functionality work automatically. If needed, You can step-in and customize query/data/logic at various stages by adding methods in your Eloquent model or a custom class.
 
 ### Client side
 ```js
@@ -81,6 +81,53 @@ php artisan vendor:publish --tag=laratables_config
 
 ## Customization
 Following the steps of How to use section should get you up and running with a simple datatables example in a minute. However, many datatables require customization ability. Here are the the options:
+
+### Controlling the query
+You may want to apply additional where conditions to the query or load additional relationships. There are 2 ways to achive that:
+1. You can pass a closure/callable as a second parameter to `recordsOf()` method. It should accept the underlying query as a parameter and return it after applying conditionals:
+```php
+use App\User;
+use Freshbitsweb\Laratables\Laratables;
+...
+return Laratables::recordsOf(User::class, function($query)
+{
+    return $query->where('active', true);
+});
+```
+
+2. If you wish to apply conditions everytime a model is used to display a Laratable, add `laratablesQueryConditions()` static method to the model.
+
+```php
+/**
+ * Fetch only active users in the datatables.
+ *
+ * @param \Illuminate\Database\Eloquent\Builder
+ * @param \Illuminate\Database\Eloquent\Builder
+ */
+public static function laratablesQueryConditions($query)
+{
+    return $query->where('active', true);
+}
+```
+This method accepts and returns a `$query` object.
+
+You can also control the relationship query by defining a closure which can be used while eager loading the relationship records. The static method name format is `laratables[RelationName]RelationQuery`.
+
+```php
+/**
+ * Eager load media items of the role for displaying in the datatables.
+ *
+ * @return callable
+ */
+public static function laratablesRoleRelationQuery()
+{
+    return function ($query) {
+        $query->with('media');
+    };
+}
+```
+
+**[⬆ back to top](#table-of-contents)**
 
 ### Custom columns
 Generally, we need one or more columns that are not present in the database table. The most common example is 'Action' column to provide options to edit or delete the record. You can add a static method `laratablesCustom[ColumnName]()` to your model file to specify the custom column value. As per our example, it could be:
@@ -133,53 +180,6 @@ public function laratablesName()
 Relationship columns can also be customized by adding a method in this format `laratables[RelationName][ColumnName]()`.
 
 These methods are called on the eloquent model object giving you full power of `$this`.
-
-**[⬆ back to top](#table-of-contents)**
-
-### Controlling the query
-You may want to apply additional where conditions to the query or load additional relationships. There are 2 ways to achive that:
-1. You can pass a closure/callable as a second parameter to `recordsOf()` method. It should accept the underlying query as a parameter and return it after applying conditionals:
-```php
-use App\User;
-use Freshbitsweb\Laratables\Laratables;
-...
-return Laratables::recordsOf(User::class, function($query)
-{
-    return $query->where('active', true);
-});
-```
-
-2. If you wish to apply conditions everytime a model is used to display a Laratable, add `laratablesQueryConditions()` static method to the model.
-
-```php
-/**
- * Fetch only active users in the datatables.
- *
- * @param \Illuminate\Database\Eloquent\Builder
- * @param \Illuminate\Database\Eloquent\Builder
- */
-public static function laratablesQueryConditions($query)
-{
-    return $query->where('active', true);
-}
-```
-This method accepts and returns a `$query` object.
-
-You can also control the relationship query by defining a closure which can be used while eager loading the relationship records. The static method name format is `laratables[RelationName]RelationQuery`.
-
-```php
-/**
- * Eager load media items of the role for displaying in the datatables.
- *
- * @return callable
- */
-public static function laratablesRoleRelationQuery()
-{
-    return function ($query) {
-        $query->with('media');
-    };
-}
-```
 
 **[⬆ back to top](#table-of-contents)**
 
