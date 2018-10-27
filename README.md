@@ -55,16 +55,8 @@ use Freshbitsweb\Laratables\Laratables;
 ...
 return Laratables::recordsOf(User::class);
 ```
-Optionally, you can pass a closure as a second parameter to refine the query. It should accept the underlying query as a parameter and return it after applying conditionals:
-```php
-use App\User;
-use Freshbitsweb\Laratables\Laratables;
-...
-return Laratables::recordsOf(User::class, function($query)
-{
-    return $query->where('active', true);
-});
-```
+
+There are multiple ways to customize query/data/logic. Check [Customization](#customization) section below for details.
 
 **[⬆ back to top](#table-of-contents)**
 
@@ -146,7 +138,17 @@ These methods are called on the eloquent model object giving you full power of `
 
 ### Controlling the query
 You may want to apply additional where conditions to the query or load additional relationships. There are 2 ways to achive that:
-1. As you have seen in the [Server side](#server-side) section above, you can pass a closure to `recordsOf()` method.
+1. You can pass a closure/callable as a second parameter to `recordsOf()` method. It should accept the underlying query as a parameter and return it after applying conditionals:
+```php
+use App\User;
+use Freshbitsweb\Laratables\Laratables;
+...
+return Laratables::recordsOf(User::class, function($query)
+{
+    return $query->where('active', true);
+});
+```
+
 2. If you wish to apply conditions everytime a model is used to display a Laratable, add `laratablesQueryConditions()` static method to the model.
 
 ```php
