@@ -33,7 +33,7 @@ class DatatablesController
      */
     public function recordsOfClosure()
     {
-        return Laratables::recordsOf(User::class, function($query) {
+        return Laratables::recordsOf(User::class, function ($query) {
             return $query->where('id', 1);
         });
     }

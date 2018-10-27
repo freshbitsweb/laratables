@@ -14,11 +14,11 @@ class RelationshipTest extends TestCase
         $response->assertJson([
             'recordsTotal' => 1,
             'data' => [[
-                "0" => 1,
-                "1" => $users->first()->name,
-                "2" => $users->first()->email,
-                "3" => "<a>1</a>",
-                "4" => $users->first()->country->name,
+                '0' => 1,
+                '1' => $users->first()->name,
+                '2' => $users->first()->email,
+                '3' => '<a>1</a>',
+                '4' => $users->first()->country->name,
             ]],
         ]);
     }
@@ -33,11 +33,11 @@ class RelationshipTest extends TestCase
         $response->assertJson([
             'recordsTotal' => 1,
             'data' => [[
-                "0" => 1,
-                "1" => $users->first()->name,
-                "2" => $users->first()->email,
-                "3" => "<a>1</a>",
-                "4" => $users->first()->country->code,
+                '0' => 1,
+                '1' => $users->first()->name,
+                '2' => $users->first()->email,
+                '3' => '<a>1</a>',
+                '4' => $users->first()->country->code,
             ]],
         ]);
     }

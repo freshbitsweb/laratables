@@ -37,7 +37,7 @@ trait PreparesDatatablesUrl
     {
         $columns = collect(['id', 'name', 'email', 'action', 'country.name', 'created_at']);
 
-        return $columns->map(function($column, $index) {
+        return $columns->map(function ($column, $index) {
             $searchable = $orderable = true;
 
             if (in_array($column, ['action', 'country.name'])) {
