@@ -64,8 +64,6 @@ There are multiple ways to customize query/data/logic. Check [Customization](#cu
 
 The demo of the package can be found at - https://laratables.freshbits.in
 
-Check the Customization section below to see how you can customize query/data/logic, etc.
-
 ## Installation
 Install the package by running this command in your terminal/cmd:
 ```bash
@@ -80,11 +78,9 @@ php artisan vendor:publish --tag=laratables_config
 **[⬆ back to top](#table-of-contents)**
 
 ## Customization
-Following the steps of How to use section should get you up and running with a simple datatables example in a minute. However, many datatables require customization ability. Here are the the options:
+Following the steps of How to use section should get you up and running with a simple datatables example in a minute. However, many datatables require customization ability. First use case is about applying additional where conditions to the query or load additional relationships.
 
-### Controlling the query
-You may want to apply additional where conditions to the query or load additional relationships. There are 2 ways to achive that:
-1. You can pass a closure/callable as a second parameter to `recordsOf()` method. It should accept the underlying query as a parameter and return it after applying conditionals:
+To achieve that, you can simply pass a closure/callable as a second parameter to `recordsOf()` method. It should accept the underlying query as a parameter and return it after applying conditionals:
 ```php
 use App\User;
 use Freshbitsweb\Laratables\Laratables;
@@ -95,7 +91,21 @@ return Laratables::recordsOf(User::class, function($query)
 });
 ```
 
-2. If you wish to apply conditions everytime a model is used to display a Laratable, add `laratablesQueryConditions()` static method to the model.
+There are many more options to customize query/data/logic. You can add any of the following methods (they start with `laratables` word) in your **model or a custom class** to keep your model neat and clean. Specify the name of the custom class as the second argument to the `recordsOf()` method if you wish to use one:
+
+```php
+use App\User;
+use Freshbitsweb\Laratables\Laratables;
+use App\Laratables\User as UserLaratables;
+...
+return Laratables::recordsOf(User::class, UserLaratables::class);
+```
+
+**[⬆ back to top](#table-of-contents)**
+
+### Controlling the query
+
+If you wish to apply conditions everytime a model is used to display a Laratable, add `laratablesQueryConditions()` static method to the model/custom class.
 
 ```php
 /**
@@ -130,7 +140,7 @@ public static function laratablesRoleRelationQuery()
 **[⬆ back to top](#table-of-contents)**
 
 ### Custom columns
-Generally, we need one or more columns that are not present in the database table. The most common example is 'Action' column to provide options to edit or delete the record. You can add a static method `laratablesCustom[ColumnName]()` to your model file to specify the custom column value. As per our example, it could be:
+Generally, we need one or more columns that are not present in the database table. The most common example is 'Action' column to provide options to edit or delete the record. You can add a static method `laratablesCustom[ColumnName]()` to your model/custom class to specify the custom column value. As per our example, it could be:
 
 ```php
 /**
@@ -164,7 +174,7 @@ columns: [
 **[⬆ back to top](#table-of-contents)**
 
 ### Customizing column values
-Sometimes, you may need to customize the value of a table column before displaying it in the datatables. Just add a method `laratables[ColumnName]()` in your eloquent model to play with that:
+Sometimes, you may need to customize the value of a table column before displaying it in the datatables. Just add a method `laratables[ColumnName]()` in your eloquent model/custom class to play with that:
 
 ```php
 /**
@@ -179,7 +189,7 @@ public function laratablesName()
 ```
 Relationship columns can also be customized by adding a method in this format `laratables[RelationName][ColumnName]()`.
 
-These methods are called on the eloquent model object giving you full power of `$this`.
+These methods are called on the eloquent model/custom class object giving you full power of `$this`.
 
 **[⬆ back to top](#table-of-contents)**
 
@@ -202,7 +212,7 @@ public static function laratablesSearchName($query, $searchValue)
 }
 ```
 
-If any of the columns is a relationship column, the package is smart enough to apply `orWhereHas` query with necessary closure to filter out the records accordingly. And you can override that behaviour by adding `laratablesSearch[RelationName][ColumnName]()` static method to your eloquent model.
+If any of the columns is a relationship column, the package is smart enough to apply `orWhereHas` query with necessary closure to filter out the records accordingly. And you can override that behaviour by adding `laratablesSearch[RelationName][ColumnName]()` static method to your eloquent model/custom class.
 
 **Note** - You can add `searchable: false` to any of the columns in Datatables configuration to prevent searching operation for that column.
 
@@ -263,7 +273,7 @@ public static function laratablesSearchableColumns()
 By default, Laravel treats *created_at* and *updated_at* as Carbon instances and you can also treat any other column of your table as a Carbon instance as well. This package has a config option `date_format` to specify the format in which the dates should be returned for Datatables. Default format is 'Y-m-d H:i:s'.
 
 ### Modify fetched records
-Sometimes, we need to work with the records after they are already fetched. You can add `laratablesModifyCollection()` static method to your model to play with the collection and return the updated one. Note that if you add/remove any items from the collection, the Datatables count will have a mismatch.
+Sometimes, we need to work with the records after they are already fetched. You can add `laratablesModifyCollection()` static method to your model/custom class to play with the collection and return the updated one. Note that if you add/remove any items from the collection, the Datatables count will have a mismatch.
 
 ```php
 /**
@@ -289,7 +299,7 @@ Datatables [accepts](https://datatables.net/manual/server-side#Returned-data) ex
 
 1. **DT_RowId**: This data attribute is added to each of the record by default. You can update `row_id_prefix` config option to set the prefix to that record id.
 
-2. **DT_RowClass**: You can add `laratablesRowClass()` method to your model and return a class name. Example:
+2. **DT_RowClass**: You can add `laratablesRowClass()` method to your /custom class and return an html class name. Example:
 
 ```php
 /**
@@ -303,7 +313,7 @@ public function laratablesRowClass()
 }
 ```
 
-3. **DT_RowData**: You can add `laratablesRowData()` method to your model and return an array with key as the attribute name and its corresponding value. Example:
+3. **DT_RowData**: You can add `laratablesRowData()` method to your model/custom class and return an array with key as the attribute name and its corresponding value. Example:
 
 ```php
 /**
