@@ -44,6 +44,7 @@ abstract class TestCase extends BaseTestCase
             ->group(function () {
                 Route::get('/datatables-simple', 'DatatablesController@simple');
                 Route::get('/datatables-records-of-closure', 'DatatablesController@recordsOfClosure');
+                Route::get('/datatables-records-of-class', 'DatatablesController@recordsOfClass');
                 Route::get('/datatables-customized-column', 'DatatablesController@customizeColumn');
                 Route::get('/datatables-custom-query', 'DatatablesController@customQuery');
                 Route::get('/datatables-custom-relation-query', 'DatatablesController@customRelationQuery');

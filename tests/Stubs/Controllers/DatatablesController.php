@@ -5,6 +5,7 @@ namespace Freshbitsweb\Laratables\Tests\Stubs\Controllers;
 use Freshbitsweb\Laratables\Laratables;
 use Freshbitsweb\Laratables\Tests\Stubs\Models\User;
 use Freshbitsweb\Laratables\Tests\Stubs\Models\UserCustomName;
+use Freshbitsweb\Laratables\Tests\Stubs\Models\UserLaratables;
 use Freshbitsweb\Laratables\Tests\Stubs\Models\UserCustomOrder;
 use Freshbitsweb\Laratables\Tests\Stubs\Models\UserCustomQuery;
 use Freshbitsweb\Laratables\Tests\Stubs\Models\UserCountryQuery;
@@ -35,6 +36,16 @@ class DatatablesController
         return Laratables::recordsOf(User::class, function($query) {
             return $query->where('id', 1);
         });
+    }
+
+    /**
+     * Datatables return with a separate class.
+     *
+     * @return json
+     */
+    public function recordsOfClass()
+    {
+        return Laratables::recordsOf(User::class, UserLaratables::class);
     }
 
     /**
