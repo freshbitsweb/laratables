@@ -71,7 +71,7 @@ class Laratables
 
         if (is_object($classOrCallable) && $classOrCallable instanceof \Closure) {
             $callable = $classOrCallable;
-        } else if (is_string($classOrCallable)) {
+        } elseif (is_string($classOrCallable)) {
             $class = $classOrCallable;
         }
 

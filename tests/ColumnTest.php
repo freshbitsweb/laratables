@@ -14,10 +14,10 @@ class ColumnTest extends TestCase
         $response->assertJson([
             'recordsTotal' => 1,
             'data' => [[
-                "0" => 1,
-                "1" => $users->first()->name,
-                "2" => $users->first()->email,
-                "3" => "<a>1</a>",
+                '0' => 1,
+                '1' => $users->first()->name,
+                '2' => $users->first()->email,
+                '3' => '<a>1</a>',
             ]],
         ]);
     }
@@ -32,10 +32,10 @@ class ColumnTest extends TestCase
         $response->assertJson([
             'recordsTotal' => 1,
             'data' => [[
-                "0" => 1,
-                "1" => str_limit($users->first()->name, 5),
-                "2" => $users->first()->email,
-                "3" => "<a>1</a>",
+                '0' => 1,
+                '1' => str_limit($users->first()->name, 5),
+                '2' => $users->first()->email,
+                '3' => '<a>1</a>',
             ]],
         ]);
     }
@@ -50,10 +50,10 @@ class ColumnTest extends TestCase
         $response->assertJson([
             'recordsTotal' => 1,
             'data' => [[
-                "0" => 1,
-                "1" => $users->first()->remember_token,
-                "2" => $users->first()->email,
-                "3" => "<a>1</a>",
+                '0' => 1,
+                '1' => $users->first()->remember_token,
+                '2' => $users->first()->email,
+                '3' => '<a>1</a>',
             ]],
         ]);
     }
@@ -68,12 +68,12 @@ class ColumnTest extends TestCase
         $response->assertJson([
             'recordsTotal' => 1,
             'data' => [[
-                "0" => 1,
-                "1" => $users->first()->name,
-                "2" => $users->first()->email,
-                "3" => "<a>1</a>",
-                "4" => $users->first()->country->name,
-                "5" => $users->first()->created_at->format(config('laratables.date_format')),
+                '0' => 1,
+                '1' => $users->first()->name,
+                '2' => $users->first()->email,
+                '3' => '<a>1</a>',
+                '4' => $users->first()->country->name,
+                '5' => $users->first()->created_at->format(config('laratables.date_format')),
             ]],
         ]);
     }

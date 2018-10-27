@@ -14,9 +14,9 @@ class DatatableAttributesTest extends TestCase
         $response->assertJson([
             'recordsTotal' => 1,
             'data' => [[
-                "DT_RowId" => config('laratables.row_id_prefix') . "1",
-                "DT_RowClass" => "text-success",
-                "DT_RowData" => ["id" => 1],
+                'DT_RowId' => config('laratables.row_id_prefix').'1',
+                'DT_RowClass' => 'text-success',
+                'DT_RowData' => ['id' => 1],
             ]],
         ]);
     }

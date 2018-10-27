@@ -12,7 +12,7 @@ class SearchTest extends TestCase
         $users = $this->createUsers(
             $count = 1,
             $parameters = [
-                'remember_token' => $randomString
+                'remember_token' => $randomString,
             ]
         );
 
@@ -25,11 +25,11 @@ class SearchTest extends TestCase
         $response->assertJson([
             'recordsTotal' => 1,
             'data' => [[
-                "0" => 1,
-                "1" => $users->first()->name,
-                "2" => $users->first()->email,
-                "3" => "<a>1</a>",
-                "4" => $users->first()->country->name,
+                '0' => 1,
+                '1' => $users->first()->name,
+                '2' => $users->first()->email,
+                '3' => '<a>1</a>',
+                '4' => $users->first()->country->name,
             ]],
         ]);
     }
@@ -42,7 +42,7 @@ class SearchTest extends TestCase
         $users = $this->createUsers(
             $count = 1,
             $parameters = [
-                'remember_token' => $randomString
+                'remember_token' => $randomString,
             ]
         );
 
@@ -55,10 +55,10 @@ class SearchTest extends TestCase
         $response->assertJson([
             'recordsTotal' => 1,
             'data' => [[
-                "0" => 1,
-                "1" => $users->first()->name,
-                "2" => $users->first()->email,
-                "3" => "<a>1</a>",
+                '0' => 1,
+                '1' => $users->first()->name,
+                '2' => $users->first()->email,
+                '3' => '<a>1</a>',
             ]],
         ]);
     }

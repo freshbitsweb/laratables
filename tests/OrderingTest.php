@@ -10,14 +10,14 @@ class OrderingTest extends TestCase
         $user1 = $this->createUsers(
             $count = 1,
             $parameters = [
-                'name' => 'Z'
+                'name' => 'Z',
             ]
         )->first();
 
         $user2 = $this->createUsers(
             $count = 1,
             $parameters = [
-                'name' => 'A'
+                'name' => 'A',
             ]
         )->first();
 
@@ -31,12 +31,12 @@ class OrderingTest extends TestCase
             'recordsTotal' => 2,
             'data' => [
                 [
-                    "0" => 2,
-                    "1" => $user2->name,
+                    '0' => 2,
+                    '1' => $user2->name,
                 ],
                 [
-                    "0" => 1,
-                    "1" => $user1->name,
+                    '0' => 1,
+                    '1' => $user1->name,
                 ],
             ],
         ]);

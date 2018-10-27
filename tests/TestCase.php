@@ -1,4 +1,5 @@
 <?php
+
 namespace Freshbitsweb\Laratables\Tests;
 
 use Illuminate\Support\Facades\Route;
@@ -17,7 +18,7 @@ abstract class TestCase extends BaseTestCase
     {
         parent::setUp();
 
-        $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
+        $this->loadMigrationsFrom(__DIR__.'/database/migrations');
 
         $this->withFactories(__DIR__.'/database/factories');
 
