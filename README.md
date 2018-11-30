@@ -215,7 +215,7 @@ public static function laratablesSearchName($query, $searchValue)
 
 If any of the columns is a relationship column, the package is smart enough to apply `orWhereHas` query with necessary closure to filter out the records accordingly. And you can override that behaviour by adding `laratablesSearch[RelationName][ColumnName]()` static method to your eloquent model/custom class.
 
-**Note** - You can add `searchable: false` to any of the columns in Datatables configuration to prevent searching operation for that column.
+**Note** - You can add `searchable: false` to any of the columns in Datatables configuration (client side) to prevent searching operation for that column. Or you can also add the name of the to the `non_searchable_columns` array in the config file.
 
 **[⬆ back to top](#table-of-contents)**
 
