@@ -62,4 +62,22 @@ class SearchTest extends TestCase
             ]],
         ]);
     }
+
+    /** @test */
+    public function it_skips_non_searchable_columns_during_the_search()
+    {
+        $users = $this->createUsers();
+
+        $response = $this->json(
+            'GET',
+            '/datatables-non-searchable-columns',
+            $this->getDatatablesUrlParameters($searchValue = $users->first()->name)
+        );
+
+        $response->assertJson([
+            'recordsTotal' => 1,
+            'recordsFiltered' => 0,
+            'data' => [],
+        ]);
+    }
 }

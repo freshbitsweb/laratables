@@ -104,7 +104,7 @@ class ColumnManager
     {
         $columnName = $column['name'];
 
-        if ($column['searchable'] == 'true') {
+        if ($column['searchable'] == 'true' && ! in_array($columnName, config('laratables.non_searchable_columns'))) {
             $this->searchColumns[] = $columnName;
         }
 

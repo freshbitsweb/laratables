@@ -127,4 +127,16 @@ class DatatablesController
     {
         return Laratables::recordsOf(UserSearchableColumns::class);
     }
+
+    /**
+     * Datatables return with non-searchable columns.
+     *
+     * @return json
+     */
+    public function nonSearchableColumns()
+    {
+        config(['laratables.non_searchable_columns' => ['name']]);
+
+        return Laratables::recordsOf(User::class);
+    }
 }

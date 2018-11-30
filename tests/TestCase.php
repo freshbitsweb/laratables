@@ -54,6 +54,7 @@ abstract class TestCase extends BaseTestCase
                 Route::get('/datatables-additional-column', 'DatatablesController@additionalColumn');
                 Route::get('/datatables-modify-collection', 'DatatablesController@modifyCollection');
                 Route::get('/datatables-searchable-columns', 'DatatablesController@searchableColumns');
+                Route::get('/datatables-non-searchable-columns', 'DatatablesController@nonSearchableColumns');
             })
         ;
     }

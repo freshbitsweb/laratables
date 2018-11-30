@@ -6,4 +6,7 @@ return [
 
     // Display format of dates (carbon instances) of the table.
     'date_format' => 'Y-m-d H:i:s',
+
+    // Name of the columns that should not be searched for values in the datatables.
+    'non_searchable_columns' => [],
 ];
