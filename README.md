@@ -42,7 +42,7 @@ $('#users-table').DataTable({
         { name: 'id' },
         { name: 'name' },
         { name: 'email' },
-        { name: 'role.name' },
+        { name: 'role.name', orderable: false },
         { name: 'action', orderable: false, searchable: false }
     ],
     ...
@@ -165,10 +165,12 @@ We also need to display data from related models, right? And it's super easy her
 ```js
 columns: [
     ...
-    { name: 'role.name' },
+    { name: 'role.name', orderable: false },
     ...
 ],
 ```
+
+Ordering records by a relationship column is not supported in Laravel as main table records are fetched first and another query is fired to fetch related table records. Therefore, you should always keep your relationship table columns to be `orderable: false`.
 
 `Note` - The package does not support [nested relationships](https://github.com/freshbitsweb/laratables/issues/6) yet. You can utilize the custom column feature to get the nested relationship data but make sure that you [eager load](https://github.com/freshbitsweb/laratables#controlling-the-query) the relationship records.
 
@@ -215,12 +217,12 @@ public static function laratablesSearchName($query, $searchValue)
 
 If any of the columns is a relationship column, the package is smart enough to apply `orWhereHas` query with necessary closure to filter out the records accordingly. And you can override that behaviour by adding `laratablesSearch[RelationName][ColumnName]()` static method to your eloquent model/custom class.
 
-**Note** - You can add `searchable: false` to any of the columns in Datatables configuration (client side) to prevent searching operation for that column. Or you can also add the name of the to the `non_searchable_columns` array in the config file.
+**Note** - You can add `searchable: false` to any of the columns in Datatables configuration (client side) to prevent searching operation for that column. Or you can also add the name of the column to the `non_searchable_columns` array in the config file.
 
 **[⬆ back to top](#table-of-contents)**
 
 ### Ordering (Sorting)
-Ordering for regular table columns works by default. For relationship columns or custom columns, you should either add `orderable: false` to Datatables column configuration or add a static method `laratablesOrder[ColumnName]()` and return the name of table column that should be used for ordering the records instead. For example, if your table contains *first_name* and Datatables has just *name*, you can add:
+Ordering for regular table columns works by default. For relationship columns or custom columns, you should either add `orderable: false` to Datatables column configuration or add a static method `laratablesOrder[ColumnName]()` and return the name of main table column that should be used for ordering the records instead. For example, if your table contains *first_name* and Datatables has just *name*, you can add:
 
 ```php
 /**
