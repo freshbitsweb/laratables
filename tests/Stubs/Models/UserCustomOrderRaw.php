@@ -12,7 +12,7 @@ class UserCustomOrderRaw extends User
     protected $table = 'users';
 
     /**
-     * name and email column should be used for sorting when id column is selected in Datatables.
+     * name and email columns should be used for sorting when id column is selected in Datatables.
      *
      * @param string Direction
      * @return string

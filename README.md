@@ -236,6 +236,20 @@ public static function laratablesOrderName()
 }
 ```
 
+You can also order rows by a raw statement by adding a static method `laratablesOrderRaw[ColumnName]()` and return the raw statement that we would put in *orderByRaw()* of the query. The function receives the `$direction` variable which will be either *asc* or *desc*.
+```php
+/**
+ * first_name and last_name columns should be used for sorting when name column is selected in Datatables.
+ *
+ * @param string Direction
+ * @return string
+ */
+public static function laratablesOrderRawName($direction)
+{
+    return 'first_name '.$direction.', last_name '.$direction;
+}
+```
+
 **[⬆ back to top](#table-of-contents)**
 
 ### Selecting additional columns

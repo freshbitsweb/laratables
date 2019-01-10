@@ -29,12 +29,12 @@ class ColumnManager
     /**
      * @var array Columns to be selected
      */
-    protected $selectColumns;
+    protected $selectColumns = [];
 
     /**
      * @var array Columns to search for
      */
-    protected $searchColumns;
+    protected $searchColumns = [];
 
     /**
      * @var RelationshipsManager object
