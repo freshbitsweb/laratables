@@ -10,6 +10,7 @@ use Freshbitsweb\Laratables\Tests\Stubs\Models\UserCustomOrder;
 use Freshbitsweb\Laratables\Tests\Stubs\Models\UserCustomQuery;
 use Freshbitsweb\Laratables\Tests\Stubs\Models\UserCountryQuery;
 use Freshbitsweb\Laratables\Tests\Stubs\Models\UserCustomSearch;
+use Freshbitsweb\Laratables\Tests\Stubs\Models\UserCustomOrderRaw;
 use Freshbitsweb\Laratables\Tests\Stubs\Models\UserAdditionalColumn;
 use Freshbitsweb\Laratables\Tests\Stubs\Models\UserModifyCollection;
 use Freshbitsweb\Laratables\Tests\Stubs\Models\UserSearchableColumns;
@@ -96,6 +97,16 @@ class DatatablesController
     public function customOrder()
     {
         return Laratables::recordsOf(UserCustomOrder::class);
+    }
+
+    /**
+     * Datatables return with a custom order raw query.
+     *
+     * @return json
+     */
+    public function customOrderRaw()
+    {
+        return Laratables::recordsOf(UserCustomOrderRaw::class);
     }
 
     /**
