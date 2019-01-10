@@ -101,10 +101,14 @@ class Laratables
     {
         $query = $this->queryHandler->getQuery();
 
+        $orderByValue = $this->columnManager->getOrderBy();
+        $orderByStatement = is_array($orderByValue) ? 'orderBy' : 'orderByRaw';
+        $orderByValue = array_wrap($orderByValue);
+
         return $query->with($this->columnManager->getRelations())
             ->offset((int) request('start'))
             ->limit((int) request('length'))
-            ->orderBy(...$this->columnManager->getOrderBy())
+            ->{$orderByStatement}(...$orderByValue)
             ->get($this->columnManager->getSelectColumns());
     }
 

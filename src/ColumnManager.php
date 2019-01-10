@@ -178,6 +178,12 @@ class ColumnManager
     public function getOrderBy()
     {
         $orderColumn = $this->getOrderColumn();
+
+        if (is_array($orderColumn)) {
+            // An order by raw statement
+            return $orderColumn[0];
+        }
+
         $selectedColumnNames = $this->getSelectColumns();
 
         if (! in_array($orderColumn, $selectedColumnNames)) {
@@ -203,7 +209,10 @@ class ColumnManager
         $orderColumn = $requestedColumnNames[$order[0]['column']];
 
         if ($methodName = $this->hasCustomOrdering($orderColumn)) {
-            $orderColumn = $this->class::$methodName($orderColumn);
+            $orderColumn = $this->class::$methodName();
+        } elseif ($methodName = $this->hasCustomRawOrdering($orderColumn)) {
+            // Convert it into an array so that parent function can return directly
+            $orderColumn = [$this->class::$methodName($order[0]['dir'])];
         }
 
         return $orderColumn;
@@ -219,6 +228,24 @@ class ColumnManager
     public function hasCustomOrdering($orderColumn)
     {
         $methodName = camel_case('laratables_order_'.$orderColumn);
+
+        if (method_exists($this->class, $methodName)) {
+            return $methodName;
+        }
+
+        return false;
+    }
+
+    /**
+     * Decides weather there is a custom raw ordering for the specified column name. Returns method name if yes.
+     *
+     * @param string Name of the column
+     *
+     * @return bool|string
+     */
+    public function hasCustomRawOrdering($orderColumn)
+    {
+        $methodName = camel_case('laratables_order_raw_'.$orderColumn);
 
         if (method_exists($this->class, $methodName)) {
             return $methodName;
