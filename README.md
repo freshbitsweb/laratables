@@ -113,7 +113,7 @@ If you wish to apply conditions everytime a model is used to display a Laratable
  * Fetch only active users in the datatables.
  *
  * @param \Illuminate\Database\Eloquent\Builder
- * @param \Illuminate\Database\Eloquent\Builder
+ * @return \Illuminate\Database\Eloquent\Builder
  */
 public static function laratablesQueryConditions($query)
 {
@@ -205,7 +205,7 @@ Datatables provides searching functionality to filter out results based on any o
  *
  * @param \Illuminate\Database\Eloquent\Builder
  * @param string search term
- * @param \Illuminate\Database\Eloquent\Builder
+ * @return \Illuminate\Database\Eloquent\Builder
  */
 public static function laratablesSearchName($query, $searchValue)
 {
@@ -297,7 +297,7 @@ Sometimes, we need to work with the records after they are already fetched. You 
  * Set user full name on the collection.
  *
  * @param \Illuminate\Support\Collection
- * @param \Illuminate\Support\Collection
+ * @return \Illuminate\Support\Collection
  */
 public static function laratablesModifyCollection($users)
 {
