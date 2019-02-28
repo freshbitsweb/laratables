@@ -10,7 +10,7 @@ if (! function_exists('isRelationColumn')) {
      */
     function isRelationColumn($columnName)
     {
-        return str_contains($columnName, '.');
+        return strpos($columnName, '.') !== false;
     }
 }
 

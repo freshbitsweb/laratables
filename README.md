@@ -4,7 +4,7 @@
 [![StyleCI](https://styleci.io/repos/108421119/shield?branch=master)](https://styleci.io/repos/108421119)
 [![Build Status](https://travis-ci.com/freshbitsweb/laratables.svg?branch=master)](https://travis-ci.com/freshbitsweb/laratables)
 
-# Laratables (Laravel 5.5+)
+# Laratables (Laravel 5.5 - Laravel 5.8)
 A Laravel package to handle server side ajax of [Datatables](https://datatables.net).
 
 ## Table of contents
@@ -187,7 +187,7 @@ Sometimes, you may need to customize the value of a table column before displayi
  */
 public function laratablesName()
 {
-    return str_limit($this->name, 15);
+    return Str::limit($this->name, 15);
 }
 ```
 Relationship columns can also be customized by adding a method in this format `laratables[RelationName][ColumnName]()`.

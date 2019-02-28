@@ -2,12 +2,14 @@
 
 namespace Freshbitsweb\Laratables\Tests;
 
+use Illuminate\Support\Str;
+
 class SearchTest extends TestCase
 {
     /** @test */
     public function it_applies_the_search_as_per_the_custom_method()
     {
-        $randomString = str_random(20);
+        $randomString = Str::random(20);
 
         $users = $this->createUsers(
             $count = 1,
@@ -37,7 +39,7 @@ class SearchTest extends TestCase
     /** @test */
     public function it_applies_the_search_to_searchable_columns()
     {
-        $randomString = str_random(20);
+        $randomString = Str::random(20);
 
         $users = $this->createUsers(
             $count = 1,

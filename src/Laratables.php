@@ -2,6 +2,8 @@
 
 namespace Freshbitsweb\Laratables;
 
+use Illuminate\Support\Arr;
+
 class Laratables
 {
     /**
@@ -103,7 +105,7 @@ class Laratables
 
         $orderByValue = $this->columnManager->getOrderBy();
         $orderByStatement = is_array($orderByValue) ? 'orderBy' : 'orderByRaw';
-        $orderByValue = array_wrap($orderByValue);
+        $orderByValue = Arr::wrap($orderByValue);
 
         return $query->with($this->columnManager->getRelations())
             ->offset((int) request('start'))

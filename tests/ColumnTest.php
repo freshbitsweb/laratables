@@ -2,6 +2,8 @@
 
 namespace Freshbitsweb\Laratables\Tests;
 
+use Illuminate\Support\Str;
+
 class ColumnTest extends TestCase
 {
     /** @test */
@@ -33,7 +35,7 @@ class ColumnTest extends TestCase
             'recordsTotal' => 1,
             'data' => [[
                 '0' => 1,
-                '1' => str_limit($users->first()->name, 5),
+                '1' => Str::limit($users->first()->name, 5),
                 '2' => $users->first()->email,
                 '3' => '<a>1</a>',
             ]],

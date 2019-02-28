@@ -2,6 +2,8 @@
 
 namespace Freshbitsweb\Laratables\Tests\Stubs\Models;
 
+use Illuminate\Support\Str;
+
 class UserCustomName extends User
 {
     /**
@@ -18,6 +20,6 @@ class UserCustomName extends User
      */
     public function laratablesName()
     {
-        return str_limit($this->name, 5);
+        return Str::limit($this->name, 5);
     }
 }
