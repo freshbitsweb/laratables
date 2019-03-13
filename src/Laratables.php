@@ -106,7 +106,7 @@ class Laratables
         $orderByValue = $this->columnManager->getOrderBy();
         $orderByStatement = is_array($orderByValue) ? 'orderBy' : 'orderByRaw';
         $orderByValue = Arr::wrap($orderByValue);
-        $hardLengthLimit = (int) config('laratables.row_id_prefix', 100);
+        $hardLengthLimit = (int) config('laratables.hard_length_limit', 100);
         $limit = (int) request('length');
 
         return $query->with($this->columnManager->getRelations())
