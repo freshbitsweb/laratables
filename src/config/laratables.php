@@ -9,7 +9,4 @@ return [
 
     // Name of the columns that should not be searched for values in the datatables.
     'non_searchable_columns' => [],
-
-    // Hard limit of maximum possible rows to show.
-    'hard_length_limit' => 100,
 ];

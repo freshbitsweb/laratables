@@ -98,6 +98,7 @@ class Laratables
      * Fetches records from the database.
      *
      * @return \Illuminate\Support\Collection Records of the table
+     * @throws Exceptions\IncorrectOrderColumn
      */
     protected function fetchRecords()
     {
@@ -106,12 +107,10 @@ class Laratables
         $orderByValue = $this->columnManager->getOrderBy();
         $orderByStatement = is_array($orderByValue) ? 'orderBy' : 'orderByRaw';
         $orderByValue = Arr::wrap($orderByValue);
-        $hardLengthLimit = (int) config('laratables.hard_length_limit', 100);
-        $limit = (int) request('length');
 
         return $query->with($this->columnManager->getRelations())
             ->offset((int) request('start'))
-            ->limit($limit > $hardLengthLimit ? $hardLengthLimit : $limit)
+            ->limit(min((int) request('length'), 100))
             ->{$orderByStatement}(...$orderByValue)
             ->get($this->columnManager->getSelectColumns());
     }
