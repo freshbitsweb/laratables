@@ -98,7 +98,6 @@ class Laratables
      * Fetches records from the database.
      *
      * @return \Illuminate\Support\Collection Records of the table
-     * @throws Exceptions\IncorrectOrderColumn
      */
     protected function fetchRecords()
     {
