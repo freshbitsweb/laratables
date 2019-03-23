@@ -109,7 +109,7 @@ class Laratables
 
         return $query->with($this->columnManager->getRelations())
             ->offset((int) request('start'))
-            ->limit((int) request('length'))
+            ->limit(min((int) request('length'), 100))
             ->{$orderByStatement}(...$orderByValue)
             ->get($this->columnManager->getSelectColumns());
     }
