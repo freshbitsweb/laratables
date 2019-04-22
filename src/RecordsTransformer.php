@@ -166,11 +166,11 @@ class RecordsTransformer
         ];
 
         if (method_exists($this->class, 'laratablesRowClass')) {
-            $datatableParameters['DT_RowClass'] = $record->laratablesRowClass();
+            $datatableParameters['DT_RowClass'] = $this->class::laratablesRowClass($record);
         }
 
         if (method_exists($this->class, 'laratablesRowData')) {
-            $datatableParameters['DT_RowData'] = $record->laratablesRowData();
+            $datatableParameters['DT_RowData'] = $this->class::laratablesRowData($record);
         }
 
         return $datatableParameters;

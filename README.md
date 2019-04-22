@@ -324,9 +324,9 @@ Datatables [accepts](https://datatables.net/manual/server-side#Returned-data) ex
  *
  * @return string
  */
-public function laratablesRowClass()
+public static function laratablesRowClass($user)
 {
-    return $this->is_active ? 'text-success' : 'text-warning';
+    return $user->is_active ? 'text-success' : 'text-warning';
 }
 ```
 
@@ -338,10 +338,10 @@ public function laratablesRowClass()
  *
  * @return array
  */
-public function laratablesRowData()
+public static function laratablesRowData($user)
 {
     return [
-        'edit-url' => route('admin.user.edit', ['user' => $this->id]),
+        'edit-url' => route('admin.user.edit', ['user' => $user->id]),
     ];
 }
 ```
