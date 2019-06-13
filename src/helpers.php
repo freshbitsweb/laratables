@@ -41,7 +41,7 @@ if (! function_exists('getRelationName')) {
      */
     function getRelationName($columnName)
     {
-        list($relationName, $relationColumnName) = getRelationDetails($columnName);
+        [$relationName, $relationColumnName] = getRelationDetails($columnName);
 
         return $relationName;
     }
