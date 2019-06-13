@@ -86,18 +86,18 @@ class RelationshipsManager
         $relationType = (new \ReflectionClass($this->modelObject->$relationName()))->getShortName();
         $selectColumns = [];
 
+        // Laravel 5.8 renamed getForeignKey() to getForeignKeyName()
+        $methodName = method_exists($this->modelObject->$relationName(), 'getForeignKeyName') ?
+            'getForeignKeyName' :
+            'getForeignKey'
+        ;
+
         switch ($relationType) {
             case 'BelongsTo':
-                // Laravel 5.8 renamed getForeignKey() to getForeignKeyName()
-                $methodName = method_exists($this->modelObject->$relationName(), 'getForeignKeyName') ?
-                    'getForeignKeyName' :
-                    'getForeignKey'
-                ;
-
                 $selectColumns[] = $this->modelObject->$relationName()->{$methodName}();
                 break;
             case 'MorphTo':
-                $selectColumns[] = $this->modelObject->$relationName()->getForeignKey();
+                $selectColumns[] = $this->modelObject->$relationName()->{$methodName}();
                 $selectColumns[] = $this->modelObject->$relationName()->getMorphType();
                 break;
         }
