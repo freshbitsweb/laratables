@@ -171,7 +171,7 @@ class RecordsTransformer
 
         if (method_exists($this->class, 'laratablesRowData')) {
             $datatableParameters['DT_RowData'] = $record->laratablesRowData();
-        } else if ($methodName = $this->columnManager->isCustomColumn($columnName)) {
+        } else if ($methodName = $this->columnManager->hasRowData($columnName)) {
             $datatableParameters['DT_RowData'] = $this->class::laratablesRowData($record);
         }
 
