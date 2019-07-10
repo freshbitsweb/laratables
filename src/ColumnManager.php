@@ -297,7 +297,8 @@ class ColumnManager
      * Tells us if there is the static laratablesRowData method in the Presenter class
      * @return boolean
      */
-    public function hasRowData() {
+    public function hasRowData() 
+    {
         return method_exists($this->class, 'laratablesRowData');
     }
 }
