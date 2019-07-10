@@ -293,8 +293,8 @@ class ColumnManager
     {
         return $this->selectColumns;
     }
-    
-    /** 
+
+    /**
      * Tells us if there is the static laratablesRowData method in the Presenter class.
      * @return bool
      */
