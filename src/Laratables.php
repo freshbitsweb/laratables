@@ -114,7 +114,8 @@ class Laratables
                 $query->limit($limit)->offset((int) request('start'));
             })
             ->{$orderByStatement}(...$orderByValue)
-            ->get($this->columnManager->getSelectColumns());
+            ->get($this->columnManager->getSelectColumns())
+        ;
     }
 
     /**

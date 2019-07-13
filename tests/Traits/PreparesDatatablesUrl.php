@@ -8,14 +8,15 @@ trait PreparesDatatablesUrl
      * Prepares and returns the datatables fetch url.
      *
      * @param string Search value
+     * @param mixed Length value
      * @return array
      */
-    protected function getDatatablesUrlParameters($searchValue = '')
+    protected function getDatatablesUrlParameters($searchValue = '', $lengthValue = 10)
     {
         $parameters = [
             'draw' => 1,
             'start' => 0,
-            'length' => 10,
+            'length' => $lengthValue,
             'search' => [
                 'value' => $searchValue,
             ],

@@ -4,7 +4,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.1.5] - 2019-06-13
+## [1.1.7] - 2019-07-13
+### Added
+- Allow support for fetching unlimited number of records ([#43](https://github.com/freshbitsweb/laratables/issues/43))
+- New config option `max_limit` to limit max number of records per query
+
+## [1.1.5 + 1.1.6] - 2019-06-13
 ### Fixed
 - Update method name as to get column for `MorphTo` relationships
 

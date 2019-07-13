@@ -150,4 +150,40 @@ class DatatablesController
 
         return Laratables::recordsOf(User::class);
     }
+
+    /**
+     * Datatables return with records limited to 1.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function limit1Record()
+    {
+        config(['laratables.max_limit' => 1]);
+
+        return Laratables::recordsOf(User::class);
+    }
+
+    /**
+     * Datatables return with unlimited records.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function noLimit()
+    {
+        config(['laratables.max_limit' => 0]);
+
+        return Laratables::recordsOf(User::class);
+    }
+
+    /**
+     * Datatables return with max 20 records.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function maxLimit20()
+    {
+        config(['laratables.max_limit' => 20]);
+
+        return Laratables::recordsOf(User::class);
+    }
 }
