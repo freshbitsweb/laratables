@@ -2,8 +2,6 @@
 
 namespace Freshbitsweb\Laratables\Tests;
 
-use Illuminate\Support\Str;
-
 class RecordsLimitTest extends TestCase
 {
     /** @test */
