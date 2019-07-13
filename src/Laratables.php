@@ -108,10 +108,28 @@ class Laratables
         $orderByValue = Arr::wrap($orderByValue);
 
         return $query->with($this->columnManager->getRelations())
-            ->offset((int) request('start'))
-            ->limit(min((int) request('length'), 100))
+            ->when($this->shouldApplyLimit(), function ($query) {
+                $limit = getRecordsLimit((int) request('length'));
+
+                $query->limit($limit)->offset((int) request('start'));
+            })
             ->{$orderByStatement}(...$orderByValue)
             ->get($this->columnManager->getSelectColumns());
+    }
+
+    /**
+     * Returns whether limit should be applied on the number of records.
+     *
+     * @return bool
+     **/
+    private function shouldApplyLimit()
+    {
+        return
+            // If max_limit is more than 0, we should apply the limit.
+            config('laratables.max_limit') > 0 ||
+            // If request has a numeric limit, we should apply it.
+            (is_numeric(request('length')) && (int) request('length') > 0)
+        ;
     }
 
     /**
