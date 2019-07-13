@@ -28,7 +28,7 @@ A Laravel package to handle server side ajax of [Datatables](https://datatables.
     * [Extra data- Datatables attributes](#extra-data--datatables-attributes)
 
 ## Introduction
-This package helps with simple requirements of displaying data from eloquent models into datatables with ajax support. Plus, using simple relationships and customizing column values.
+This package helps with simple requirements of displaying data from eloquent models into datatables with ajax support. Plus, using simple relationships and customizing column values. Laratables does not work with Datatables Editor yet.
 
 ## How to use
 The basic approach is that you can specify the Datatable configuration and columns on the client side just like you would without any major change and call a single method on the server side to handle ajax calls. The package will create necessary queries to fetch the data and make the search and ordering functionality work automatically. If needed, You can step-in and customize query/data/logic at various stages by adding methods in your Eloquent model or a custom class.
