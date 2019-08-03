@@ -316,35 +316,41 @@ Datatables [accepts](https://datatables.net/manual/server-side#Returned-data) ex
 
 1. **DT_RowId**: This data attribute is added to each of the record by default. You can update `row_id_prefix` config option to set the prefix to that record id.
 
-2. **DT_RowClass**: You can add `laratablesRowClass()` method to your /custom class and return an html class name. Example:
+2. **DT_RowClass**: You can add `laratablesRowClass()` static method to your model/custom class and return an html class name. Example:
 
 ```php
 /**
  * Specify row class name for datatables.
  *
+ * @param \App\User
  * @return string
  */
-public function laratablesRowClass()
+public static function laratablesRowClass($user)
 {
-    return $this->is_active ? 'text-success' : 'text-warning';
+    return $user->is_active ? 'text-success' : 'text-warning';
 }
 ```
 
-3. **DT_RowData**: You can add `laratablesRowData()` method to your model/custom class and return an array with key as the attribute name and its corresponding value. Example:
+**Note** - This method was a regular method in v1.\*.\*
+
+3. **DT_RowData**: You can add `laratablesRowData()` static method to your model/custom class and return an array with key as the attribute name and its corresponding value. Example:
 
 ```php
 /**
  * Returns the data attribute for url to the edit page of the user.
  *
+ * @param \App\User
  * @return array
  */
-public function laratablesRowData()
+public function laratablesRowData($user)
 {
     return [
-        'edit-url' => route('admin.user.edit', ['user' => $this->id]),
+        'edit-url' => route('admin.user.edit', ['user' => $user->id]),
     ];
 }
 ```
+
+**Note** - This method was a regular method in v1.\*.\*
 
 ## Authors
 

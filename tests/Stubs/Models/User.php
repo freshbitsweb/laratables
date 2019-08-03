@@ -28,22 +28,24 @@ class User extends Model
     /**
      * Specify row class name for datatables.
      *
+     * @param \App\User
      * @return string
      */
-    public function laratablesRowClass()
+    public static function laratablesRowClass($user)
     {
-        return $this->id == 1 ? 'text-success' : 'text-warning';
+        return $user->id == 1 ? 'text-success' : 'text-warning';
     }
 
     /**
      * Returns the data attribute for url to the edit page of the user.
      *
+     * @param \App\User
      * @return array
      */
-    public function laratablesRowData()
+    public static function laratablesRowData($user)
     {
         return [
-            'id' => $this->id,
+            'id' => $user->id,
         ];
     }
 }
