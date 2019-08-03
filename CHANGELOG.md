@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.0] - 2019-08-03
+** IMP -  ** If you're upgrading from v1.\*.\* to v2, please make the following method calls static and accept the eloquent object of the record as a parameter:
+1) laratablesRowClass()
+2) laratablesRowData()
+3) All the methods which [customize column values](https://github.com/freshbitsweb/laratables#customizing-column-values) in your datatables.
+
+### Fixed
+- Issue with a few static methods when using custom class to specify Laratables methods [#42](https://github.com/freshbitsweb/laratables/issues/42) ([@CJau777](https://github.com/CJau777))
+
 ## [1.1.7] - 2019-07-13
 ### Added
 - Allow support for fetching unlimited number of records ([#43](https://github.com/freshbitsweb/laratables/issues/43))

@@ -195,6 +195,8 @@ Relationship columns can also be customized by adding a static method in this fo
 
 These static methods are called on the eloquent model/custom class with the eloquent object of the record as a parameter.
 
+**Note** - These methods were regular methods in v1.\*.\*
+
 **[⬆ back to top](#table-of-contents)**
 
 ### Searching
