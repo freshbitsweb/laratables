@@ -87,7 +87,7 @@ class FilterAgent
             return self::$class::$methodName($query, $searchValue);
         }
 
-        list($relationName, $relationColumnName) = getRelationDetails($column);
+        [$relationName, $relationColumnName] = getRelationDetails($column);
         $searchValue = '%'.$searchValue.'%';
 
         return $query->orWhereHas($relationName, function ($query) use ($relationColumnName, $searchValue) {
