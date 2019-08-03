@@ -177,22 +177,23 @@ Ordering records by a relationship column is not supported in Laravel as main ta
 **[⬆ back to top](#table-of-contents)**
 
 ### Customizing column values
-Sometimes, you may need to customize the value of a table column before displaying it in the datatables. Just add a method `laratables[ColumnName]()` in your eloquent model/custom class to play with that:
+Sometimes, you may need to customize the value of a table column before displaying it in the datatables. Just add a static method `laratables[ColumnName]()` in your eloquent model/custom class to play with that:
 
 ```php
 /**
  * Returns truncated name for the datatables.
  *
+ * @param \App\User
  * @return string
  */
-public function laratablesName()
+public static function laratablesName($user)
 {
-    return Str::limit($this->name, 15);
+    return Str::limit($user->name, 15);
 }
 ```
-Relationship columns can also be customized by adding a method in this format `laratables[RelationName][ColumnName]()`.
+Relationship columns can also be customized by adding a static method in this format `laratables[RelationName][ColumnName]()`.
 
-These methods are called on the eloquent model/custom class object giving you full power of `$this`.
+These static methods are called on the eloquent model/custom class with the eloquent object of the record as a parameter.
 
 **[⬆ back to top](#table-of-contents)**
 

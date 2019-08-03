@@ -43,7 +43,7 @@ class ColumnTest extends TestCase
     }
 
     /** @test */
-    public function it_loads_additonal_columns()
+    public function it_loads_additional_columns()
     {
         $users = $this->createUsers();
 

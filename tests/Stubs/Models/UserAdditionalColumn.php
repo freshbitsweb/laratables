@@ -14,11 +14,12 @@ class UserAdditionalColumn extends User
     /**
      * Returns remember_token instead of name for the datatables.
      *
+     * @param \App\Param
      * @return string
      */
-    public function laratablesName()
+    public static function laratablesName($user)
     {
-        return $this->remember_token;
+        return $user->remember_token;
     }
 
     /**

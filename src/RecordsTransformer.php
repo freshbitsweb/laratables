@@ -80,7 +80,7 @@ class RecordsTransformer
         }
 
         if ($methodName = $this->customisesColumnValue($columnName)) {
-            return $record->$methodName();
+            return $this->class::$methodName($record);
         }
 
         if (isRelationColumn($columnName)) {
@@ -125,7 +125,7 @@ class RecordsTransformer
         list($relationName, $relationColumnName) = getRelationDetails($columnName);
 
         if ($methodName = $this->customisesColumnValue($relationName.'_'.$relationColumnName)) {
-            return $record->$methodName();
+            return $this->class::$methodName($record);
         }
 
         if ($record->$relationName) {

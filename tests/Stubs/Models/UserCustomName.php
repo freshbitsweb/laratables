@@ -16,10 +16,11 @@ class UserCustomName extends User
     /**
      * Returns truncated name for the datatables.
      *
+     * @param \App\User
      * @return string
      */
-    public function laratablesName()
+    public static function laratablesName($user)
     {
-        return Str::limit($this->name, 5);
+        return Str::limit($user->name, 5);
     }
 }
