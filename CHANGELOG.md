@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - Issue with a few static methods when using custom class to specify Laratables methods [#42](https://github.com/freshbitsweb/laratables/issues/42) ([@CJau777](https://github.com/CJau777))
+- Replace array destructuring shorthand with list() method to support version before PHP 7.1 [#61](https://github.com/freshbitsweb/laratables/issues/61)
 
 ## [1.1.7] - 2019-07-13
 ### Added
