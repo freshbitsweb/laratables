@@ -122,7 +122,7 @@ class RecordsTransformer
      */
     protected function getRelationColumnValue($columnName, $record)
     {
-        [$relationName, $relationColumnName] = getRelationDetails($columnName);
+        list($relationName, $relationColumnName) = getRelationDetails($columnName);
 
         if ($methodName = $this->customisesColumnValue($relationName.'_'.$relationColumnName)) {
             return $record->$methodName();
