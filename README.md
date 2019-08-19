@@ -345,7 +345,7 @@ public static function laratablesRowClass($user)
  * @param \App\User
  * @return array
  */
-public function laratablesRowData($user)
+public static function laratablesRowData($user)
 {
     return [
         'edit-url' => route('admin.user.edit', ['user' => $user->id]),
