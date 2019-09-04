@@ -2,6 +2,8 @@
 
 namespace Freshbitsweb\Laratables;
 
+use Illuminate\Support\Str;
+
 class RecordsTransformer
 {
     /**
@@ -103,7 +105,7 @@ class RecordsTransformer
      */
     protected function customisesColumnValue($columnName)
     {
-        $methodName = camel_case('laratables_'.$columnName);
+        $methodName = Str::camel('laratables_'.$columnName);
 
         if (method_exists($this->class, $methodName)) {
             return $methodName;

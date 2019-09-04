@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.0] - 2019-09-04
+### Added
+- Support for Laravel 6.0
+
 ## [2.0.0] - 2019-08-03
 ** IMP -  ** If you're upgrading from v1.\*.\* to v2, please make the following method calls static and accept the eloquent object of the record as a parameter:
 1) laratablesRowClass()

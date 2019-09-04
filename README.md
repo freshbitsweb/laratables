@@ -4,7 +4,7 @@
 [![StyleCI](https://styleci.io/repos/108421119/shield?branch=master)](https://styleci.io/repos/108421119)
 [![Build Status](https://travis-ci.com/freshbitsweb/laratables.svg?branch=master)](https://travis-ci.com/freshbitsweb/laratables)
 
-# Laratables (Laravel 5.5 - Laravel 5.8)
+# Laratables (Laravel 5.5 - Laravel 6.0)
 A Laravel package to handle server side ajax of [Datatables](https://datatables.net).
 
 ## Table of contents
@@ -64,6 +64,14 @@ There are multiple ways to customize query/data/logic. Check [Customization](#cu
 ## Online Demo
 
 The demo of the package can be found at - https://laratables.freshbits.in
+
+## Requirements
+
+* PHP 7.2+
+* Laravel 5.5+
+
+**Notes**:
+- If you are still using PHP 7.1 with Laravel 5.\*, you may use v2.0.* of this package.
 
 ## Installation
 Install the package by running this command in your terminal/cmd:

@@ -2,6 +2,7 @@
 
 namespace Freshbitsweb\Laratables;
 
+use Illuminate\Support\Str;
 use Freshbitsweb\Laratables\Exceptions\IncorrectOrderColumn;
 
 class ColumnManager
@@ -135,7 +136,7 @@ class ColumnManager
     public function isCustomColumn($columnName)
     {
         $columnName = str_replace('.', '_', $columnName);
-        $methodName = camel_case('laratables_custom_'.$columnName);
+        $methodName = Str::camel('laratables_custom_'.$columnName);
 
         if (method_exists($this->class, $methodName)) {
             return $methodName;
@@ -227,7 +228,7 @@ class ColumnManager
      */
     public function hasCustomOrdering($orderColumn)
     {
-        $methodName = camel_case('laratables_order_'.$orderColumn);
+        $methodName = Str::camel('laratables_order_'.$orderColumn);
 
         if (method_exists($this->class, $methodName)) {
             return $methodName;
@@ -245,7 +246,7 @@ class ColumnManager
      */
     public function hasCustomRawOrdering($orderColumn)
     {
-        $methodName = camel_case('laratables_order_raw_'.$orderColumn);
+        $methodName = Str::camel('laratables_order_raw_'.$orderColumn);
 
         if (method_exists($this->class, $methodName)) {
             return $methodName;

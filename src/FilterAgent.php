@@ -2,6 +2,8 @@
 
 namespace Freshbitsweb\Laratables;
 
+use Illuminate\Support\Str;
+
 class FilterAgent
 {
     /**
@@ -63,7 +65,7 @@ class FilterAgent
      */
     protected static function hasCustomSearch($columnName)
     {
-        $methodName = camel_case('laratables_search_'.$columnName);
+        $methodName = Str::camel('laratables_search_'.$columnName);
 
         if (method_exists(self::$class, $methodName)) {
             return $methodName;
