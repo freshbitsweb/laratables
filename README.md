@@ -180,7 +180,7 @@ columns: [
 
 Ordering records by a relationship column is not supported in Laravel as main table records are fetched first and another query is fired to fetch related table records. Therefore, you should always keep your relationship table columns to be `orderable: false`.
 
-`Note` - The package does not support [nested relationships](https://github.com/freshbitsweb/laratables/issues/6) yet. You can utilize the custom column feature to get the nested relationship data but make sure that you [eager load](https://github.com/freshbitsweb/laratables#controlling-the-query) the relationship records.
+**Note** - The package does not support [nested relationships](https://github.com/freshbitsweb/laratables/issues/6) yet. You can utilize the custom column feature to get the nested relationship data but make sure that you [eager load](https://github.com/freshbitsweb/laratables#controlling-the-query) the relationship records.
 
 **[⬆ back to top](#table-of-contents)**
 
