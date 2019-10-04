@@ -157,14 +157,14 @@ The `laratablesQueryConditions()` method can also be used to add joins on the ba
 ```php
 /**
  * Join roles to base users table.
- * Assumes users -> roles is a one-to-many relationship
+ * Assumes roles -> users is a one-to-many relationship
  *
  * @param \Illuminate\Database\Eloquent\Builder
  * @return \Illuminate\Database\Eloquent\Builder
  */
 public static function laratablesQueryConditions($query)
 {
-    return $query->join('roles', 'roles.user_id', 'users.id');
+    return $query->join('roles', 'roles.id', 'users.role_id');
 }
 ```
 
