@@ -16,6 +16,8 @@ A Laravel package to handle server side ajax of [Datatables](https://datatables.
 * [Installation](#installation)
 * [Customization](#customization)
     * [Controlling the query](#controlling-the-query)
+        * [Controlling the relationship query](#controlling-the-relationship-query)
+        * [Joining related tables to the query](#joining-related-tables-to-the-query)
     * [Custom columns](#custom-columns)
     * [Relationship columns](#relationship-columns)
     * [Customizing column values](#customizing-column-values)
@@ -130,6 +132,8 @@ public static function laratablesQueryConditions($query)
 ```
 This method accepts and returns a `$query` object.
 
+#### Controlling the relationship query
+
 You can also control the relationship query by defining a closure which can be used while eager loading the relationship records. The static method name format is `laratables[RelationName]RelationQuery`.
 
 ```php
@@ -145,6 +149,29 @@ public static function laratablesRoleRelationQuery()
     };
 }
 ```
+
+#### Joining related tables to the query
+
+The `laratablesQueryConditions()` method can also be used to add joins on the base table.  This is particularly useful if you need to define custom searching and sorting based on related models, for example:
+
+```php
+/**
+ * Join roles to base users table.
+ * Assumes roles -> users is a one-to-many relationship
+ *
+ * @param \Illuminate\Database\Eloquent\Builder
+ * @return \Illuminate\Database\Eloquent\Builder
+ */
+public static function laratablesQueryConditions($query)
+{
+    return $query->join('roles', 'roles.id', 'users.role_id');
+}
+```
+
+***Note*** - If searching/filtering by columns from the joined table, you will need to also ensure they are included in the selected columns.  A couple of options for how to do this include:
+
+* Chaining a `->select()` method above - e.g. `$query->join(...)->select(['roles.name as role_name'])`, or
+* Using the `laratablesAdditionalColumns()` method as described in [Selecting additional columns](#selecting-additional-columns) below.
 
 **[⬆ back to top](#table-of-contents)**
 
@@ -180,7 +207,7 @@ columns: [
 
 Ordering records by a relationship column is not supported in Laravel as main table records are fetched first and another query is fired to fetch related table records. Therefore, you should always keep your relationship table columns to be `orderable: false`.
 
-`Note` - The package does not support [nested relationships](https://github.com/freshbitsweb/laratables/issues/6) yet. You can utilize the custom column feature to get the nested relationship data but make sure that you [eager load](https://github.com/freshbitsweb/laratables#controlling-the-query) the relationship records.
+**Note** - The package does not support [nested relationships](https://github.com/freshbitsweb/laratables/issues/6) yet. You can utilize the custom column feature to get the nested relationship data but make sure that you [eager load](https://github.com/freshbitsweb/laratables#controlling-the-query) the relationship records.
 
 **[⬆ back to top](#table-of-contents)**
 
