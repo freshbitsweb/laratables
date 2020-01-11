@@ -3,7 +3,7 @@
 [![License](https://poser.pugx.org/freshbitsweb/laratables/license)](https://packagist.org/packages/freshbitsweb/laratables)
 [![StyleCI](https://styleci.io/repos/108421119/shield?branch=master)](https://styleci.io/repos/108421119)
 [![Build Status](https://travis-ci.com/freshbitsweb/laratables.svg?branch=master)](https://travis-ci.com/freshbitsweb/laratables)
-[![Buy us a tree](https://img.shields.io/badge/Buy%20me%20a%20tree-%F0%9F%8C%B3-lightgreen?style=for-the-badge)](https://offset.earth/treeware?gift-trees)
+[![Buy us a tree](https://img.shields.io/badge/Buy%20me%20a%20tree-%F0%9F%8C%B3-lightgreen?style=flat-square)](https://offset.earth/treeware?gift-trees)
 
 # Laratables (Laravel 5.5 - Laravel 6.0)
 A Laravel package to handle server side ajax of [Datatables](https://datatables.net).
