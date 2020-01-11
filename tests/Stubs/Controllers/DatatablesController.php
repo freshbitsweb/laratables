@@ -4,14 +4,14 @@ namespace Freshbitsweb\Laratables\Tests\Stubs\Controllers;
 
 use Freshbitsweb\Laratables\Laratables;
 use Freshbitsweb\Laratables\Tests\Stubs\Models\User;
-use Freshbitsweb\Laratables\Tests\Stubs\Models\UserCustomName;
-use Freshbitsweb\Laratables\Tests\Stubs\Models\UserLaratables;
-use Freshbitsweb\Laratables\Tests\Stubs\Models\UserCustomOrder;
-use Freshbitsweb\Laratables\Tests\Stubs\Models\UserCustomQuery;
-use Freshbitsweb\Laratables\Tests\Stubs\Models\UserCountryQuery;
-use Freshbitsweb\Laratables\Tests\Stubs\Models\UserCustomSearch;
-use Freshbitsweb\Laratables\Tests\Stubs\Models\UserCustomOrderRaw;
 use Freshbitsweb\Laratables\Tests\Stubs\Models\UserAdditionalColumn;
+use Freshbitsweb\Laratables\Tests\Stubs\Models\UserCountryQuery;
+use Freshbitsweb\Laratables\Tests\Stubs\Models\UserCustomName;
+use Freshbitsweb\Laratables\Tests\Stubs\Models\UserCustomOrder;
+use Freshbitsweb\Laratables\Tests\Stubs\Models\UserCustomOrderRaw;
+use Freshbitsweb\Laratables\Tests\Stubs\Models\UserCustomQuery;
+use Freshbitsweb\Laratables\Tests\Stubs\Models\UserCustomSearch;
+use Freshbitsweb\Laratables\Tests\Stubs\Models\UserLaratables;
 use Freshbitsweb\Laratables\Tests\Stubs\Models\UserModifyCollection;
 use Freshbitsweb\Laratables\Tests\Stubs\Models\UserSearchableColumns;
 
