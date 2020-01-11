@@ -2,8 +2,8 @@
 
 namespace Freshbitsweb\Laratables;
 
-use Illuminate\Support\Str;
 use Freshbitsweb\Laratables\Exceptions\IncorrectOrderColumn;
+use Illuminate\Support\Str;
 
 class ColumnManager
 {
