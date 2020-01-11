@@ -2,10 +2,10 @@
 
 namespace Freshbitsweb\Laratables\Tests;
 
-use Illuminate\Support\Facades\Route;
-use Orchestra\Testbench\TestCase as BaseTestCase;
 use Freshbitsweb\Laratables\Tests\Traits\CreatesUsers;
 use Freshbitsweb\Laratables\Tests\Traits\PreparesDatatablesUrl;
+use Illuminate\Support\Facades\Route;
+use Orchestra\Testbench\TestCase as BaseTestCase;
 
 abstract class TestCase extends BaseTestCase
 {

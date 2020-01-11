@@ -1,9 +1,9 @@
 <?php
 
-use Illuminate\Support\Str;
 use Faker\Generator as Faker;
-use Freshbitsweb\Laratables\Tests\Stubs\Models\User;
 use Freshbitsweb\Laratables\Tests\Stubs\Models\Country;
+use Freshbitsweb\Laratables\Tests\Stubs\Models\User;
+use Illuminate\Support\Str;
 
 $factory->define(User::class, function (Faker $faker) {
     return [

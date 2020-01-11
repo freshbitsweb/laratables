@@ -2,8 +2,8 @@
 
 namespace Freshbitsweb\Laratables\Tests\Traits;
 
-use Freshbitsweb\Laratables\Tests\Stubs\Models\User;
 use Freshbitsweb\Laratables\Tests\Stubs\Models\Country;
+use Freshbitsweb\Laratables\Tests\Stubs\Models\User;
 
 trait CreatesUsers
 {
