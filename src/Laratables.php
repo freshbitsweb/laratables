@@ -2,8 +2,6 @@
 
 namespace Freshbitsweb\Laratables;
 
-use Illuminate\Support\Arr;
-
 class Laratables
 {
     /**
