@@ -198,7 +198,7 @@ class ColumnManager
     /**
      * Returns the name of the column for ordering.
      *
-     * @return string
+     * @return \Illuminate\Support\Collection
      */
     public function getOrderColumns()
     {
