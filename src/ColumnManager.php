@@ -203,9 +203,9 @@ class ColumnManager
     public function getOrderColumns()
     {
         $requestedColumnNames = $this->getRequestedColumnNames()->toArray();
-        
+
         $order = request('order');
-        
+
         return collect($order)
             ->map(function ($item) use ($requestedColumnNames) {
                 $orderColumn = $requestedColumnNames[$item['column']];
