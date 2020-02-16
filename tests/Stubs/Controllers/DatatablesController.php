@@ -110,6 +110,16 @@ class DatatablesController
     }
 
     /**
+     * Datatables return with a multi-column order query.
+     *
+     * @return json
+     */
+    public function multiColumnOrder()
+    {
+        return Laratables::recordsOf(User::class);
+    }
+
+    /**
      * Datatables return with an additional column query.
      *
      * @return json
