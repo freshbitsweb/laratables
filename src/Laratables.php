@@ -110,15 +110,15 @@ class Laratables
                 $query->limit($limit)->offset((int) request('start'));
             });
 
-        $orderByValue = $this->columnManager->getOrderBy();
-
-        foreach ($orderByValue as $order) {
-            if (is_string($order)) {
-                $query = $query->orderByRaw($order);
-            } else {
-                $query = $query->orderBy(...$order);
-            }
-        }
+        $this->columnManager
+            ->getOrderBy()
+            ->each(function ($order) use ($query) {
+                if (is_string($order)) {
+                    $query = $query->orderByRaw($order);
+                } else {
+                    $query = $query->orderBy(...$order);
+                }
+            });
 
         return $query->get($this->columnManager->getSelectColumns());
     }

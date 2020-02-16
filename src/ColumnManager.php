@@ -174,7 +174,7 @@ class ColumnManager
      *
      * @throws IncorrectOrderColumn
      *
-     * @return array
+     * @return \Illuminate\Support\Collection
      */
     public function getOrderBy()
     {
@@ -192,7 +192,7 @@ class ColumnManager
                 $column,
                 $order[$index]['dir'],
             ];
-        })->all();
+        });
     }
 
     /**
