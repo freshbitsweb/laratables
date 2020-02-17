@@ -170,33 +170,9 @@ class ColumnManager
     }
 
     /**
-     * Returns the values for order by clause of the query.
+     * Returns the names of the columns with direction for ordering.
      *
      * @throws IncorrectOrderColumn
-     *
-     * @return \Illuminate\Support\Collection
-     */
-    public function getOrderBy()
-    {
-        $orderColumns = $this->getOrderColumns();
-
-        $order = request('order');
-
-        return $orderColumns->map(function ($column, $index) use ($order) {
-            if (is_array($column)) {
-                // An order by raw statement
-                return $column[0];
-            }
-
-            return [
-                $column,
-                $order[$index]['dir'],
-            ];
-        });
-    }
-
-    /**
-     * Returns the name of the column for ordering.
      *
      * @return \Illuminate\Support\Collection
      */
@@ -215,16 +191,20 @@ class ColumnManager
                 }
 
                 if ($methodName = $this->hasCustomOrdering($orderColumn)) {
-                    return $this->class::$methodName();
-                }
-
-                if ($methodName = $this->hasCustomRawOrdering($orderColumn)) {
                     return [
-                        $this->class::$methodName($item['dir']),
+                        $this->class::$methodName(),
+                        $item['dir'],
                     ];
                 }
 
-                return $orderColumn;
+                if ($methodName = $this->hasCustomRawOrdering($orderColumn)) {
+                    return $this->class::$methodName($item['dir']);
+                }
+
+                return [
+                    $orderColumn,
+                    $item['dir'],
+                ];
             });
     }
 

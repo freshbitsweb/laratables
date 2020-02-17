@@ -109,7 +109,7 @@ class Laratables
             });
 
         $this->columnManager
-            ->getOrderBy()
+            ->getOrderColumns()
             ->each(function ($order) use ($query) {
                 if (is_string($order)) {
                     $query = $query->orderByRaw($order);
