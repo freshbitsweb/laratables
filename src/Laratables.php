@@ -2,8 +2,6 @@
 
 namespace Freshbitsweb\Laratables;
 
-use Illuminate\Support\Arr;
-
 class Laratables
 {
     /**
@@ -103,19 +101,26 @@ class Laratables
     {
         $query = $this->queryHandler->getQuery();
 
-        $orderByValue = $this->columnManager->getOrderBy();
-        $orderByStatement = is_array($orderByValue) ? 'orderBy' : 'orderByRaw';
-        $orderByValue = Arr::wrap($orderByValue);
-
-        return $query->with($this->columnManager->getRelations())
+        $query = $query->with($this->columnManager->getRelations())
             ->when($this->shouldApplyLimit(), function ($query) {
                 $limit = getRecordsLimit((int) request('length'));
 
                 $query->limit($limit)->offset((int) request('start'));
             })
-            ->{$orderByStatement}(...$orderByValue)
-            ->get($this->columnManager->getSelectColumns())
         ;
+
+        $this->columnManager
+            ->getOrderColumns()
+            ->each(function ($order) use ($query) {
+                if (is_string($order)) {
+                    $query = $query->orderByRaw($order);
+                } else {
+                    $query = $query->orderBy(...$order);
+                }
+            })
+        ;
+
+        return $query->get($this->columnManager->getSelectColumns());
     }
 
     /**

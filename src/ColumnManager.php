@@ -170,53 +170,43 @@ class ColumnManager
     }
 
     /**
-     * Returns the values for order by clause of the query.
+     * Returns the names of the columns with direction for ordering.
      *
      * @throws IncorrectOrderColumn
      *
-     * @return array
+     * @return \Illuminate\Support\Collection
      */
-    public function getOrderBy()
-    {
-        $orderColumn = $this->getOrderColumn();
-
-        if (is_array($orderColumn)) {
-            // An order by raw statement
-            return $orderColumn[0];
-        }
-
-        $selectedColumnNames = $this->getSelectColumns();
-
-        if (! in_array($orderColumn, $selectedColumnNames)) {
-            throw IncorrectOrderColumn::name($orderColumn);
-        }
-
-        $order = request('order');
-
-        return [$orderColumn, $order[0]['dir']];
-    }
-
-    /**
-     * Returns the name of the column for ordering.
-     *
-     * @return string
-     */
-    public function getOrderColumn()
+    public function getOrderColumns()
     {
         $requestedColumnNames = $this->getRequestedColumnNames()->toArray();
 
         $order = request('order');
 
-        $orderColumn = $requestedColumnNames[$order[0]['column']];
+        return collect($order)
+            ->map(function ($item) use ($requestedColumnNames) {
+                $orderColumn = $requestedColumnNames[$item['column']];
 
-        if ($methodName = $this->hasCustomOrdering($orderColumn)) {
-            $orderColumn = $this->class::$methodName();
-        } elseif ($methodName = $this->hasCustomRawOrdering($orderColumn)) {
-            // Convert it into an array so that parent function can return directly
-            $orderColumn = [$this->class::$methodName($order[0]['dir'])];
-        }
+                if (in_array($orderColumn, $this->getSelectColumns()) === false) {
+                    throw IncorrectOrderColumn::name($orderColumn);
+                }
 
-        return $orderColumn;
+                if ($methodName = $this->hasCustomOrdering($orderColumn)) {
+                    return [
+                        $this->class::$methodName(),
+                        $item['dir'],
+                    ];
+                }
+
+                if ($methodName = $this->hasCustomRawOrdering($orderColumn)) {
+                    return $this->class::$methodName($item['dir']);
+                }
+
+                return [
+                    $orderColumn,
+                    $item['dir'],
+                ];
+            })
+        ;
     }
 
     /**

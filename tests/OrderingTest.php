@@ -93,4 +93,67 @@ class OrderingTest extends TestCase
             ],
         ]);
     }
+
+    /** @test */
+    public function it_orders_the_records_by_multi_column_order()
+    {
+        $user1 = $this->createUsers(
+            $count = 1,
+            $parameters = [
+                'name' => 'B',
+                'email' => 'z@test.com',
+            ]
+        )->first();
+
+        $user2 = $this->createUsers(
+            $count = 1,
+            $parameters = [
+                'name' => 'A',
+                'email' => 'a@test.com',
+            ]
+        )->first();
+
+        $user3 = $this->createUsers(
+            $count = 1,
+            $parameters = [
+                'name' => 'A',
+                'email' => 'b@test.com',
+            ]
+        )->first();
+
+        $order = [
+            [
+                'column' => 1,
+                'dir' => 'asc',
+            ],
+            [
+                'column' => 2,
+                'dir' => 'desc',
+            ],
+        ];
+
+        $response = $this->json(
+            'GET',
+            '/datatables-multi-colunm-order',
+            $this->getDatatablesUrlParameters($searchValue = '', $lengthValue = 10, $order)
+        );
+
+        $response->assertJson([
+            'recordsTotal' => 3,
+            'data' => [
+                [
+                    '0' => $user3->id,
+                    '1' => $user3->name,
+                ],
+                [
+                    '0' => $user2->id,
+                    '1' => $user2->name,
+                ],
+                [
+                    '0' => $user1->id,
+                    '1' => $user1->name,
+                ],
+            ],
+        ]);
+    }
 }

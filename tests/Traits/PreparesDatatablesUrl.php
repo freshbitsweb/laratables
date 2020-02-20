@@ -11,7 +11,7 @@ trait PreparesDatatablesUrl
      * @param mixed Length value
      * @return array
      */
-    protected function getDatatablesUrlParameters($searchValue = '', $lengthValue = 10)
+    protected function getDatatablesUrlParameters($searchValue = '', $lengthValue = 10, $order = [])
     {
         $parameters = [
             'draw' => 1,
@@ -24,7 +24,7 @@ trait PreparesDatatablesUrl
 
         $parameters['columns'] = $this->getColumns();
 
-        $parameters['order'] = $this->getOrdering();
+        $parameters['order'] = $order ?: $this->getOrdering();
 
         return $parameters;
     }
