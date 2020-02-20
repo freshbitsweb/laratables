@@ -106,7 +106,8 @@ class Laratables
                 $limit = getRecordsLimit((int) request('length'));
 
                 $query->limit($limit)->offset((int) request('start'));
-            });
+            })
+        ;
 
         $this->columnManager
             ->getOrderColumns()
@@ -116,7 +117,8 @@ class Laratables
                 } else {
                     $query = $query->orderBy(...$order);
                 }
-            });
+            })
+        ;
 
         return $query->get($this->columnManager->getSelectColumns());
     }
