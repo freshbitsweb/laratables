@@ -261,7 +261,7 @@ If any of the columns is a relationship column, the package is smart enough to a
 **[⬆ back to top](#table-of-contents)**
 
 ### Ordering (Sorting)
-Ordering for regular table columns works by default. For relationship columns or custom columns, you should either add `orderable: false` to Datatables column configuration or add a static method `laratablesOrder[ColumnName]()` and return the name of main table column that should be used for ordering the records instead. For example, if your table contains *first_name* and Datatables has just *name*, you can add:
+Ordering for regular table columns works by default. Multi-column sorting is also supported. For relationship columns or custom columns, you should either add `orderable: false` to Datatables column configuration or add a static method `laratablesOrder[ColumnName]()` and return the name of main table column that should be used for ordering the records instead. For example, if your table contains *first_name* and Datatables has just *name*, you can add:
 
 ```php
 /**
