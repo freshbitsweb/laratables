@@ -74,8 +74,8 @@ The demo of the package can be found at - https://laratables.freshbits.in
 * Laravel 5.5+
 
 **Notes**:
-- If you are still using PHP <7.2.5 with Laravel 6.x, you may use v2.2.* of this package.
-- If you are still using PHP 7.1 with Laravel 5.\*, you may use v2.0.0 of this package.
+- If you are still using PHP <7.2.5 with Laravel 6.x, you may use v2.2.0 of this package.
+- If you are still using PHP 7.1 with Laravel 5.\*, you may use v2.0.* of this package.
 
 ## Installation
 Install the package by running this command in your terminal/cmd:
