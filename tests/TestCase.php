@@ -50,6 +50,7 @@ abstract class TestCase extends BaseTestCase
                 Route::get('/datatables-custom-query', 'DatatablesController@customQuery');
                 Route::get('/datatables-custom-relation-query', 'DatatablesController@customRelationQuery');
                 Route::get('/datatables-custom-search', 'DatatablesController@customSearch');
+                Route::get('/datatables-order', 'DatatablesController@order');
                 Route::get('/datatables-custom-order', 'DatatablesController@customOrder');
                 Route::get('/datatables-custom-order-raw', 'DatatablesController@customOrderRaw');
                 Route::get('/datatables-multi-colunm-order', 'DatatablesController@multiColumnOrder');

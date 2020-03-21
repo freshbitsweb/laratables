@@ -11,12 +11,12 @@ class UserCustomOrder extends User
      */
     protected $table = 'users';
 
-    /**
-     * name column should be used for sorting when id column is selected in Datatables.
-     *
-     * @return string
-     */
-    public static function laratablesOrderId()
+    public static function laratablesCustomUsername($user): string
+    {
+        return $user->name;
+    }
+
+    public static function laratablesOrderUsername(): string
     {
         return 'name';
     }

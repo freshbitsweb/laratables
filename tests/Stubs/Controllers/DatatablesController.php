@@ -89,6 +89,11 @@ class DatatablesController
         return Laratables::recordsOf(UserCustomSearch::class);
     }
 
+    public function order(): array
+    {
+        return Laratables::recordsOf(User::class);
+    }
+
     /**
      * Datatables return with a custom order query.
      *

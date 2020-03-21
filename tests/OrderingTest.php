@@ -23,8 +23,58 @@ class OrderingTest extends TestCase
 
         $response = $this->json(
             'GET',
-            '/datatables-custom-order',
+            '/datatables-order',
             $this->getDatatablesUrlParameters()
+        );
+
+        $response->assertJson([
+            'recordsTotal' => 2,
+            'data' => [
+                [
+                    '0' => 1,
+                    '1' => $user1->name,
+                ],
+                [
+                    '0' => 2,
+                    '1' => $user2->name,
+                ],
+            ],
+        ]);
+    }
+
+    /** @test */
+    public function it_orders_the_records_as_per_custom_ordering()
+    {
+        $user1 = $this->createUsers(
+            $count = 1,
+            $parameters = [
+                'name' => 'Z',
+            ]
+        )->first();
+
+        $user2 = $this->createUsers(
+            $count = 1,
+            $parameters = [
+                'name' => 'A',
+            ]
+        )->first();
+
+        $order = [
+            [
+                'column' => 6,
+                'dir' => 'asc',
+            ],
+        ];
+
+        $response = $this->json(
+            'GET',
+            '/datatables-custom-order',
+            $this->getDatatablesUrlParameters(
+                $searchValue = '',
+                $lengthValue = 10,
+                $order,
+                $extraColumns = ['username']
+            )
         );
 
         $response->assertJson([

@@ -4,14 +4,7 @@ namespace Freshbitsweb\Laratables\Tests\Traits;
 
 trait PreparesDatatablesUrl
 {
-    /**
-     * Prepares and returns the datatables fetch url.
-     *
-     * @param string Search value
-     * @param mixed Length value
-     * @return array
-     */
-    protected function getDatatablesUrlParameters($searchValue = '', $lengthValue = 10, $order = [])
+    protected function getDatatablesUrlParameters(string $searchValue = '', int $lengthValue = 10, array $order = [], array $extraColumns = []): array
     {
         $parameters = [
             'draw' => 1,
@@ -22,26 +15,23 @@ trait PreparesDatatablesUrl
             ],
         ];
 
-        $parameters['columns'] = $this->getColumns();
+        $parameters['columns'] = $this->getColumns($extraColumns);
 
         $parameters['order'] = $order ?: $this->getOrdering();
 
         return $parameters;
     }
 
-    /**
-     * Returns columns for the parameters.
-     *
-     * @return array
-     */
-    private function getColumns()
+    private function getColumns(array $extraColumns): array
     {
-        $columns = collect(['id', 'name', 'email', 'action', 'country.name', 'created_at']);
+        $columns = collect(array_merge(['id', 'name', 'email', 'action', 'country.name', 'created_at'], $extraColumns));
 
-        return $columns->map(function ($column, $index) {
+        return $columns->map(function ($column, $index) use ($extraColumns) {
             $searchable = $orderable = true;
 
-            if (in_array($column, ['action', 'country.name'])) {
+            $extraColumns = array_merge($extraColumns, ['action', 'country.name']);
+
+            if (in_array($column, $extraColumns)) {
                 $searchable = $orderable = false;
             }
 
