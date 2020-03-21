@@ -186,10 +186,6 @@ class ColumnManager
             ->map(function ($item) use ($requestedColumnNames) {
                 $orderColumn = $requestedColumnNames[$item['column']];
 
-                if (in_array($orderColumn, $this->getSelectColumns()) === false) {
-                    throw IncorrectOrderColumn::name($orderColumn);
-                }
-
                 if ($methodName = $this->hasCustomOrdering($orderColumn)) {
                     return [
                         $this->class::$methodName(),
@@ -199,6 +195,10 @@ class ColumnManager
 
                 if ($methodName = $this->hasCustomRawOrdering($orderColumn)) {
                     return $this->class::$methodName($item['dir']);
+                }
+
+                if (in_array($orderColumn, $this->getSelectColumns()) === false) {
+                    throw IncorrectOrderColumn::name($orderColumn);
                 }
 
                 return [
