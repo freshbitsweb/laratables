@@ -3,7 +3,7 @@
 [![License](https://poser.pugx.org/freshbitsweb/laratables/license)](https://packagist.org/packages/freshbitsweb/laratables)
 [![StyleCI](https://styleci.io/repos/108421119/shield?branch=master)](https://styleci.io/repos/108421119)
 [![Build Status](https://travis-ci.com/freshbitsweb/laratables.svg?branch=master)](https://travis-ci.com/freshbitsweb/laratables)
-[![Buy us a tree](https://img.shields.io/badge/Buy%20me%20a%20tree-%F0%9F%8C%B3-lightgreen?style=flat-square)](https://offset.earth/treeware?gift-trees)
+[![Buy us a tree](https://img.shields.io/badge/Buy%20me%20a%20tree-%F0%9F%8C%B3-lightgreen?style=flat-square)](https://plant.treeware.earth/freshbitsweb/laratables)
 
 # Laratables (Laravel 5.5+)
 A Laravel package to handle server side ajax of [Datatables](https://datatables.net).
@@ -408,7 +408,7 @@ You're free to use this package, but if it makes it to your production environme
 
 It’s now common knowledge that one of the best tools to tackle the climate crisis and keep our temperatures from rising above 1.5C is to <a href="https://www.bbc.co.uk/news/science-environment-48870920">plant trees</a>. If you contribute to our forest you’ll be creating employment for local families and restoring wildlife habitats.
 
-You can buy trees at for our forest here [offset.earth/treeware](https://offset.earth/treeware?gift-trees)
+You can buy trees at for our forest here [offset.earth/treeware](https://plant.treeware.earth/freshbitsweb/laratables)
 
 Read more about Treeware at [treeware.earth](http://treeware.earth)
 
