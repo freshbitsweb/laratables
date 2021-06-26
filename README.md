@@ -12,7 +12,7 @@ A Laravel package to handle server side ajax of [Datatables](https://datatables.
 * [How to use](#how-to-use)
     * [Client side](#client-side)
     * [Server side](#server-side)
-* [Online Demo](#online-demo)
+* [Demo Repositories](#demo-repositories)
 * [Installation](#installation)
 * [Customization](#customization)
     * [Controlling the query](#controlling-the-query)
@@ -63,9 +63,15 @@ There are multiple ways to customize query/data/logic. Check [Customization](#cu
 
 **[⬆ back to top](#table-of-contents)**
 
-## Online Demo
+## Demo Repositories
 
-The demo of the package can be found at - https://laratables.freshbits.in
+1. https://github.com/freshbitsweb/laratables-demo-one-to-many
+2. https://github.com/freshbitsweb/laratables-demo-customize-column
+3. https://github.com/freshbitsweb/laratables-demo-basic
+4. https://github.com/freshbitsweb/laratables-demo-many-to-many
+5. https://github.com/freshbitsweb/laratables-demo-one-to-many-polymorphic
+6. https://github.com/freshbitsweb/laratables-demo-one-to-one
+
 
 ## Requirements
 | PHP    | Laravel | Package |
