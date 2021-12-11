@@ -30,7 +30,6 @@ class QueryHandler
      * @param \Illuminate\Database\Eloquent\Model The model to work on
      * @param Class to customize query/data/logic
      * @param callable A closure to customize the query (optional)
-     *
      * @return void
      */
     public function __construct($model, $class, $callable)
@@ -51,7 +50,6 @@ class QueryHandler
      *
      * @param \Illuminate\Database\Eloquent\Model The model to work on
      * @param Class to customize query/data/logic
-     *
      * @return void
      */
     protected function setQuery($model, $class)
@@ -68,7 +66,6 @@ class QueryHandler
      *
      * @param array Columns to be searched
      * @param string Search value
-     *
      * @return void
      */
     public function applyFilters($searchColumns, $searchValue)
