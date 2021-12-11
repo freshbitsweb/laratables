@@ -47,7 +47,6 @@ class ColumnManager
      *
      * @param \Illuminate\Database\Eloquent\Model The model to work on
      * @param Class to customize query/data/logic
-     *
      * @return void
      */
     public function __construct($model, $class)
@@ -64,7 +63,6 @@ class ColumnManager
      *
      * @param \Illuminate\Database\Eloquent\Model The model to work on
      * @param Class to customize query/data/logic
-     *
      * @return void
      */
     protected function initializeProperties($model, $class)
@@ -98,7 +96,6 @@ class ColumnManager
      * Set column properties from the specified column data.
      *
      * @param array column details
-     *
      * @return void
      */
     protected function setColumnPropertiesFor($column)
@@ -130,7 +127,6 @@ class ColumnManager
      * Decides wether specified column name is custom column. Returns method name if yes.
      *
      * @param string Name of the column
-     *
      * @return bool|string
      */
     public function isCustomColumn($columnName)
@@ -172,9 +168,9 @@ class ColumnManager
     /**
      * Returns the names of the columns with direction for ordering.
      *
-     * @throws IncorrectOrderColumn
-     *
      * @return \Illuminate\Support\Collection
+     *
+     * @throws IncorrectOrderColumn
      */
     public function getOrderColumns()
     {
@@ -213,7 +209,6 @@ class ColumnManager
      * Decides weather there is a custom ordering for the specified column name. Returns method name if yes.
      *
      * @param string Name of the column
-     *
      * @return bool|string
      */
     public function hasCustomOrdering($orderColumn)
@@ -231,7 +226,6 @@ class ColumnManager
      * Decides weather there is a custom raw ordering for the specified column name. Returns method name if yes.
      *
      * @param string Name of the column
-     *
      * @return bool|string
      */
     public function hasCustomRawOrdering($orderColumn)

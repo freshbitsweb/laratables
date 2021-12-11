@@ -18,7 +18,6 @@ class FilterAgent
      * @param \Illuminate\Database\Query\Builder Query object
      * @param array Columns to be searched
      * @param string Search value
-     *
      * @return \Illuminate\Database\Query\Builder Query object
      */
     public static function applyFiltersTo($class, $query, $searchColumns, $searchValue)
@@ -38,7 +37,6 @@ class FilterAgent
      * @param \Freshbitsweb\Laratables\QueryHandler Query object
      * @param string Column name
      * @param string Search string
-     *
      * @return \Freshbitsweb\Laratables\QueryHandler Query object
      */
     protected static function applyFilter($query, $column, $searchValue)
@@ -60,7 +58,6 @@ class FilterAgent
      * Decides whether column has custom search method defined in the model and returns method name if yes.
      *
      * @param string Name of the column
-     *
      * @return bool|string
      */
     protected static function hasCustomSearch($columnName)
@@ -80,7 +77,6 @@ class FilterAgent
      * @param \Freshbitsweb\Laratables\QueryHandler Query object
      * @param string Column name
      * @param string Search string
-     *
      * @return \Freshbitsweb\Laratables\QueryHandler Query object
      */
     protected static function applyRelationFilter($query, $column, $searchValue)

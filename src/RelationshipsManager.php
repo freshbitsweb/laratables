@@ -26,7 +26,6 @@ class RelationshipsManager
      *
      * @param Class to customize query/data/logic
      * @param Eloquent Model object
-     *
      * @return void
      */
     public function __construct($class, $modelObject)
@@ -39,7 +38,6 @@ class RelationshipsManager
      * Adds the relation to be loaded with the query.
      *
      * @param string Name of the column
-     *
      * @return void
      */
     public function addRelation($columnName)
@@ -65,7 +63,6 @@ class RelationshipsManager
      * Returns the (foreign key) column(s) to be selected for the relation table.
      *
      * @param string Name of the column
-     *
      * @return array
      */
     public function getRelationSelectColumns($columnName)
@@ -79,7 +76,6 @@ class RelationshipsManager
      * Decides the columns to be used based on the relationship.
      *
      * @param string Name of the relation
-     *
      * @return array
      */
     protected function decideRelationColumns($relationName)

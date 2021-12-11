@@ -25,7 +25,6 @@ class Laratables
      * @param \Illuminate\Database\Eloquent\Model The model to work on
      * @param Class to customize query/data/logic
      * @param callable A closure to customize the query (optional)
-     *
      * @return void
      */
     protected function __construct($model, $class, $callable)
@@ -40,7 +39,6 @@ class Laratables
      *
      * @param Model to query for
      * @param mixed Class/Callable to customize query/data/logic (optional)
-     *
      * @return array Table data
      */
     public static function recordsOf($model, $classOrCallable = null)
@@ -61,7 +59,6 @@ class Laratables
      *
      * @param Model to query for
      * @param mixed Class/Callable to customize query/data/logic (optional)
-     *
      * @return array Model, class, and callable
      */
     private static function prepareProperties($model, $classOrCallable)
@@ -142,7 +139,6 @@ class Laratables
      * Prepares and returns data for the datatables.
      *
      * @param \Illuminate\Support\Collection Records of the table
-     *
      * @return array
      */
     protected function tableData($records)

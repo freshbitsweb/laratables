@@ -20,7 +20,6 @@ class RecordsTransformer
      * Initialize properties.
      *
      * @param Class to customize query/data/logic
-     *
      * @return void
      */
     public function __construct($class, $columnManager)
@@ -33,7 +32,6 @@ class RecordsTransformer
      * Transforms each record for Datatables display.
      *
      * @param \Illuminate\Support\Collection Records of the table
-     *
      * @return \Illuminate\Support\Collection Records of the table
      */
     public function transformRecords($records)
@@ -51,7 +49,6 @@ class RecordsTransformer
      * Transform the record data for Datatables display.
      *
      * @param \Illuminate\Database\Eloquent\Model Eloquent object
-     *
      * @return \Illuminate\Database\Eloquent\Model Eloquent object
      */
     protected function transformRecord($record)
@@ -71,7 +68,6 @@ class RecordsTransformer
      *
      * @param mixed Column value from database
      * @param \Illuminate\Database\Eloquent\Model Eloquent object
-     *
      * @return string
      */
     protected function getColumnValue($columnName, $record)
@@ -100,7 +96,6 @@ class RecordsTransformer
      * Decides whether there is a custom method on the class for the specified column. Returns method name if yes.
      *
      * @param string Name of the column
-     *
      * @return bool|string
      */
     protected function customisesColumnValue($columnName)
@@ -119,7 +114,6 @@ class RecordsTransformer
      *
      * @param string Name of the column
      * @param \Illuminate\Database\Eloquent\Model Eloquent object
-     *
      * @return string
      */
     protected function getRelationColumnValue($columnName, $record)
@@ -141,7 +135,6 @@ class RecordsTransformer
      * Decides whether provided column value is a carbon date instance.
      *
      * @param mixed Column value
-     *
      * @return bool
      */
     protected function isCarbonInstance($columnValue)
@@ -158,7 +151,6 @@ class RecordsTransformer
      * Returns the datatable specific parameters for the record.
      *
      * @param \Illuminate\Database\Eloquent\Model Eloquent object
-     *
      * @return array
      */
     public function getDatatableParameters($record)
