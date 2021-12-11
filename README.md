@@ -4,6 +4,14 @@
 [![StyleCI](https://styleci.io/repos/108421119/shield?branch=master)](https://styleci.io/repos/108421119)
 [![Buy us a tree](https://img.shields.io/badge/Buy%20me%20a%20tree-%F0%9F%8C%B3-lightgreen?style=flat-square)](https://plant.treeware.earth/freshbitsweb/laratables)
 
+
+# Package Status
+This package is not under active development. We no longer plan to add new features.
+The main reason being that our company projects do not use Datatables anymore.
+
+If you wish to maintain a fork of this package, I would be more than happy to link.
+
+
 # Laratables (Laravel 5.5 to Laravel 8.x)
 A Laravel package to handle server side ajax of [Datatables](https://datatables.net).
 
