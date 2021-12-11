@@ -59,6 +59,9 @@ $('#users-table').DataTable({
 });
 ```
 
+⚠️ **IMP Note** ⚠️ - The client side code decides the columns that should be fetched. If you are showing the table on a public facing page, malicious users can modify the HTTP request to fetch data for other columns of respective table and related tables. It is highly recommend that you validate the requests before returning the data.
+
+
 ### Server side
 ```php
 use App\User;
