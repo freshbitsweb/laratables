@@ -148,7 +148,7 @@ class RecordsTransformer
     }
 
     /**
-     * Returns the data table specific parameters for the record.
+     * Returns the dataTables specific parameters for the record.
      *
      * @param \Illuminate\Database\Eloquent\Model Eloquent object
      * @return array
