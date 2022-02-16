@@ -22,7 +22,7 @@ class DataFetchTest extends TestCase
     }
 
     /** @test */
-    public function it_applies_the_clousure_condition_with_records_of_call()
+    public function it_applies_the_closure_condition_with_records_of_call()
     {
         $users = $this->createUsers(2);
 

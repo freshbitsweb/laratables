@@ -184,7 +184,7 @@ class OrderingTest extends TestCase
 
         $response = $this->json(
             'GET',
-            '/datatables-multi-colunm-order',
+            '/datatables-multi-column-order',
             $this->getDatatablesUrlParameters($searchValue = '', $lengthValue = 10, $order)
         );
 

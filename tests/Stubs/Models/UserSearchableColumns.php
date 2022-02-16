@@ -12,7 +12,7 @@ class UserSearchableColumns extends User
     protected $table = 'users';
 
     /**
-     * Additonal searchable columns to be used for datatables.
+     * Additional searchable columns to be used for datatables.
      *
      * @return array
      */

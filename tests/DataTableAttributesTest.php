@@ -2,7 +2,7 @@
 
 namespace Freshbitsweb\Laratables\Tests;
 
-class DatatableAttributesTest extends TestCase
+class DataTableAttributesTest extends TestCase
 {
     /** @test */
     public function it_returns_the_simple_data_as_expected()
