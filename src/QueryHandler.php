@@ -46,7 +46,7 @@ class QueryHandler
     }
 
     /**
-     * Initialises Query object.
+     * Initializes Query object.
      *
      * @param \Illuminate\Database\Eloquent\Model The model to work on
      * @param Class to customize query/data/logic

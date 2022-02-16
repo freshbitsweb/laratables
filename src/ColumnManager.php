@@ -3,6 +3,7 @@
 namespace Freshbitsweb\Laratables;
 
 use Freshbitsweb\Laratables\Exceptions\IncorrectOrderColumn;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
 class ColumnManager
@@ -262,7 +263,7 @@ class ColumnManager
     /**
      * Returns the list of request columns.
      *
-     * @return array
+     * @return Collection
      */
     public function getRequestedColumnNames()
     {

@@ -58,13 +58,13 @@ class RecordsTransformer
             return $this->getColumnValue($item, $record);
         });
 
-        $datatableParameters = $this->getDatatableParameters($record);
+        $dataTableParameters = $this->getDataTableParameters($record);
 
-        return array_merge($datatableParameters, $columnNames->toArray());
+        return array_merge($dataTableParameters, $columnNames->toArray());
     }
 
     /**
-     * Retuns column value to be displayed in datatables.
+     * Returns column value to be displayed in datatables.
      *
      * @param mixed Column value from database
      * @param \Illuminate\Database\Eloquent\Model Eloquent object
@@ -77,7 +77,7 @@ class RecordsTransformer
             return $this->class::$methodName($record);
         }
 
-        if ($methodName = $this->customisesColumnValue($columnName)) {
+        if ($methodName = $this->customizesColumnValue($columnName)) {
             return $this->class::$methodName($record);
         }
 
@@ -98,7 +98,7 @@ class RecordsTransformer
      * @param string Name of the column
      * @return bool|string
      */
-    protected function customisesColumnValue($columnName)
+    protected function customizesColumnValue($columnName)
     {
         $methodName = Str::camel('laratables_'.$columnName);
 
@@ -120,7 +120,7 @@ class RecordsTransformer
     {
         [$relationName, $relationColumnName] = getRelationDetails($columnName);
 
-        if ($methodName = $this->customisesColumnValue($relationName.'_'.$relationColumnName)) {
+        if ($methodName = $this->customizesColumnValue($relationName.'_'.$relationColumnName)) {
             return $this->class::$methodName($record);
         }
 
@@ -148,25 +148,25 @@ class RecordsTransformer
     }
 
     /**
-     * Returns the datatable specific parameters for the record.
+     * Returns the data table specific parameters for the record.
      *
      * @param \Illuminate\Database\Eloquent\Model Eloquent object
      * @return array
      */
-    public function getDatatableParameters($record)
+    public function getDataTableParameters($record)
     {
-        $datatableParameters = [
+        $dataTableParameters = [
             'DT_RowId' => config('laratables.row_id_prefix').$record->{$record->getKeyName()},
         ];
 
         if (method_exists($this->class, 'laratablesRowClass')) {
-            $datatableParameters['DT_RowClass'] = $this->class::laratablesRowClass($record);
+            $dataTableParameters['DT_RowClass'] = $this->class::laratablesRowClass($record);
         }
 
         if (method_exists($this->class, 'laratablesRowData')) {
-            $datatableParameters['DT_RowData'] = $this->class::laratablesRowData($record);
+            $dataTableParameters['DT_RowData'] = $this->class::laratablesRowData($record);
         }
 
-        return $datatableParameters;
+        return $dataTableParameters;
     }
 }
