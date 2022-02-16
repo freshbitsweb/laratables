@@ -3,12 +3,12 @@
     "description": "Ajax support of DataTables for Laravel 5.5+",
     "require": {
         "php": "^7.3|^7.4|^8.0",
-        "illuminate/support": "5.5.*|5.6.*|5.7.*|5.8.*|^6.0|^7.0|^8.0"
+        "illuminate/support": "5.5.*|5.6.*|5.7.*|5.8.*|^6.0|^7.0|^8.0|^9.0"
     },
     "require-dev": {
-        "orchestra/testbench": "^6.0.0",
+        "orchestra/testbench": "^6.23|^7.0.0",
         "phpunit/phpunit": "^9.3.9",
-        "laravel/legacy-factories": "^1.0.4"
+        "laravel/legacy-factories": "^1.3.0"
     },
     "license": "MIT",
     "authors": [
