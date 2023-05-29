@@ -6,13 +6,9 @@
 
 
 # Package Status
-This package is not under active development. We no longer plan to add new features.
-The main reason being that our company projects do not use Datatables anymore.
+This package now supports Laravel version 10
 
-If you wish to maintain a fork of this package, I would be more than happy to link.
-
-
-# Laratables (Laravel 5.5 to Laravel 9.x)
+# Laratables (Laravel 5.5 to Laravel 10.x)
 A Laravel package to handle server side ajax of [Datatables](https://datatables.net).
 
 ## Table of contents
