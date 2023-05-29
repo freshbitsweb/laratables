@@ -1,5 +1,5 @@
 {
-    "name": "matthaselip/laratables",
+    "name": "laratables/laratables",
     "description": "Ajax support of DataTables for Laravel 5.5+ to v10",
     "require": {
         "php": "^7.3|^7.4|^8.0|^8.1",
