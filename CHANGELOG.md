@@ -8,7 +8,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Support for Laravel 10.x
 - Support for PHP 8.2
+
+### Changed
 - Drop support EoL PHP and Laravel versions (Laravel 8.x and below, PHP 7.x and below)
+- If you are using Laravel 9.x, you will need to upgrade to v9.33 ([ref](https://github.com/freshbitsweb/laratables/pull/110#pullrequestreview-1461811259))
 
 ## [2.5.0] - 2022-02-16
 ### Added
