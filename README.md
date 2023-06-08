@@ -12,7 +12,7 @@ The main reason being that our company projects do not use Datatables anymore.
 If you wish to maintain a fork of this package, I would be more than happy to link.
 
 
-# Laratables (Laravel 5.5 to Laravel 9.x)
+# Laratables
 A Laravel package to handle server side ajax of [Datatables](https://datatables.net).
 
 ## Table of contents
@@ -87,6 +87,7 @@ There are multiple ways to customize query/data/logic. Check [Customization](#cu
 ## Requirements
 | PHP    | Laravel | Package |
 |--------|---------|---------|
+| 8.0+   | 10.x    | v3.0.0  |
 | 8.0+   | 9.x     | v2.5.0  |
 | 7.3+   | 8.x     | v2.4.0  |
 | 7.2.5+ | 7.x     | v2.3.0  |
