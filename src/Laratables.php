@@ -144,10 +144,10 @@ class Laratables
     protected function tableData($records)
     {
         return [
-            'draw'            => request('draw') + 1,
-            'recordsTotal'    => $this->queryHandler->getRecordsCount(),
+            'draw' => request('draw') + 1,
+            'recordsTotal' => $this->queryHandler->getRecordsCount(),
             'recordsFiltered' => $this->queryHandler->getFilteredCount(),
-            'data'            => $records->toArray(),
+            'data' => $records->toArray(),
         ];
     }
 }
