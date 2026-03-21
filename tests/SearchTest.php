@@ -6,8 +6,10 @@ use Illuminate\Support\Str;
 
 class SearchTest extends TestCase
 {
-    /** @test */
-    public function it_applies_the_search_as_per_the_custom_method()
+    /**
+     * @test
+     */
+    public function test_it_applies_the_search_as_per_the_custom_method()
     {
         $randomString = Str::random(20);
 
@@ -36,8 +38,10 @@ class SearchTest extends TestCase
         ]);
     }
 
-    /** @test */
-    public function it_applies_the_search_to_searchable_columns()
+    /**
+     * @test
+     */
+    public function test_it_applies_the_search_to_searchable_columns()
     {
         $randomString = Str::random(20);
 
@@ -65,8 +69,10 @@ class SearchTest extends TestCase
         ]);
     }
 
-    /** @test */
-    public function it_skips_non_searchable_columns_during_the_search()
+    /**
+     * @test
+     */
+    public function test_it_skips_non_searchable_columns_during_the_search()
     {
         $users = $this->createUsers();
 

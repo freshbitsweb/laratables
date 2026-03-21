@@ -4,8 +4,10 @@ namespace Freshbitsweb\Laratables\Tests;
 
 class DataFetchTest extends TestCase
 {
-    /** @test */
-    public function it_returns_the_simple_data_as_expected()
+    /**
+     * @test
+     */
+    public function test_it_returns_the_simple_data_as_expected()
     {
         $users = $this->createUsers();
 
@@ -21,8 +23,10 @@ class DataFetchTest extends TestCase
         ]);
     }
 
-    /** @test */
-    public function it_applies_the_closure_condition_with_records_of_call()
+    /**
+     * @test
+     */
+    public function test_it_applies_the_closure_condition_with_records_of_call()
     {
         $users = $this->createUsers(2);
 
@@ -38,8 +42,10 @@ class DataFetchTest extends TestCase
         ]);
     }
 
-    /** @test */
-    public function it_uses_the_separate_class_specified_with_records_of_call()
+    /**
+     * @test
+     */
+    public function test_it_uses_the_separate_class_specified_with_records_of_call()
     {
         $users = $this->createUsers();
 
@@ -56,8 +62,10 @@ class DataFetchTest extends TestCase
         ]);
     }
 
-    /** @test */
-    public function it_applies_the_custom_query_conditions()
+    /**
+     * @test
+     */
+    public function test_it_applies_the_custom_query_conditions()
     {
         $users = $this->createUsers(2);
 
@@ -73,8 +81,10 @@ class DataFetchTest extends TestCase
         ]);
     }
 
-    /** @test */
-    public function it_works_on_the_collection_after_fetching_data()
+    /**
+     * @test
+     */
+    public function test_it_works_on_the_collection_after_fetching_data()
     {
         $users = $this->createUsers();
 

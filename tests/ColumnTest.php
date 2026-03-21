@@ -6,8 +6,10 @@ use Illuminate\Support\Str;
 
 class ColumnTest extends TestCase
 {
-    /** @test */
-    public function it_returns_the_custom_column_value()
+    /**
+     * @test
+     */
+    public function test_it_returns_the_custom_column_value()
     {
         $users = $this->createUsers();
 
@@ -24,8 +26,10 @@ class ColumnTest extends TestCase
         ]);
     }
 
-    /** @test */
-    public function it_returns_the_customized_column_value()
+    /**
+     * @test
+     */
+    public function test_it_returns_the_customized_column_value()
     {
         $users = $this->createUsers();
 
@@ -42,8 +46,10 @@ class ColumnTest extends TestCase
         ]);
     }
 
-    /** @test */
-    public function it_loads_additional_columns()
+    /**
+     * @test
+     */
+    public function test_it_loads_additional_columns()
     {
         $users = $this->createUsers();
 
@@ -60,8 +66,10 @@ class ColumnTest extends TestCase
         ]);
     }
 
-    /** @test */
-    public function it_converts_carbon_to_dates()
+    /**
+     * @test
+     */
+    public function test_it_converts_carbon_to_dates()
     {
         $users = $this->createUsers();
 

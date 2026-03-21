@@ -4,8 +4,10 @@ namespace Freshbitsweb\Laratables\Tests;
 
 class RelationshipTest extends TestCase
 {
-    /** @test */
-    public function it_returns_the_relationship_column_value()
+    /**
+     * @test
+     */
+    public function test_it_returns_the_relationship_column_value()
     {
         $users = $this->createUsers();
 
@@ -23,8 +25,10 @@ class RelationshipTest extends TestCase
         ]);
     }
 
-    /** @test */
-    public function it_uses_the_custom_relationship_query()
+    /**
+     * @test
+     */
+    public function test_it_uses_the_custom_relationship_query()
     {
         $users = $this->createUsers();
 
