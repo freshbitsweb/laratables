@@ -4,8 +4,10 @@ namespace Freshbitsweb\Laratables\Tests;
 
 class OrderingTest extends TestCase
 {
-    /** @test */
-    public function it_orders_the_records_as_expected()
+    /**
+     * @test
+     */
+    public function test_it_orders_the_records_as_expected()
     {
         $user1 = $this->createUsers(
             $count = 1,
@@ -42,8 +44,10 @@ class OrderingTest extends TestCase
         ]);
     }
 
-    /** @test */
-    public function it_orders_the_records_as_per_custom_ordering()
+    /**
+     * @test
+     */
+    public function test_it_orders_the_records_as_per_custom_ordering()
     {
         $user1 = $this->createUsers(
             $count = 1,
@@ -92,8 +96,10 @@ class OrderingTest extends TestCase
         ]);
     }
 
-    /** @test */
-    public function it_orders_the_records_with_order_by_raw()
+    /**
+     * @test
+     */
+    public function test_it_orders_the_records_with_order_by_raw()
     {
         $user1 = $this->createUsers(
             $count = 1,
@@ -144,8 +150,10 @@ class OrderingTest extends TestCase
         ]);
     }
 
-    /** @test */
-    public function it_orders_the_records_by_multi_column_order()
+    /**
+     * @test
+     */
+    public function test_it_orders_the_records_by_multi_column_order()
     {
         $user1 = $this->createUsers(
             $count = 1,
